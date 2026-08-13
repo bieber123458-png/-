@@ -1,0 +1,2428 @@
+<!--
+  ════════════════════════════════════════════════
+  授權資訊 LICENSE INFO（賣家出貨前請務必填寫）
+  ────────────────────────────────────────────────
+  買家姓名／店名：________________
+  買家聯絡方式　：________________
+  訂單編號　　　：________________
+  出售日期　　　：________________
+  本檔案僅授權上述買家於單一工作室使用，禁止轉售、公開分享或修改後散布。
+  ════════════════════════════════════════════════
+-->
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title>美業預約 ‧ 存款計畫</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --pink:#A6916B; --soft-pink:#DED0B4; --light-pink:#F7F2E7;
+  --blue:#7A9BAD; --soft-blue:#B8CFDA; --light-blue:#E3EDF3;
+  --sage:#9AAE9B; --light-sage:#E8F0E8;
+  --cream:#FAF3EE; --bg:#FAFAF8; --dark:#37352F; --medium:#5A5248; --gray:#9B9A97;
+  --radius-lg:20px; --radius-md:14px; --radius-sm:10px;
+  --shadow-soft:0 4px 20px rgba(122,155,173,0.12);
+  --shadow-lift:0 10px 30px rgba(166,145,107,0.18);
+}
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{
+  font-family:'Noto Sans TC',sans-serif;
+  background:var(--bg);
+  color:var(--dark);
+  -webkit-font-smoothing:antialiased;
+  padding-bottom:60px;
+}
+h1,h2,h3,h4{font-weight:700;margin:0;color:var(--dark);}
+p{margin:0;}
+button{font-family:inherit;cursor:pointer;border:none;background:none;}
+input,select,textarea{font-family:inherit;}
+
+/* ===== 頂部裝飾 ===== */
+.hero{position:relative;overflow:hidden;background:linear-gradient(135deg,var(--light-pink) 0%,var(--cream) 45%,var(--light-blue) 100%);padding:28px 20px 20px;}
+.hero::before{content:"";position:absolute;top:-60px;right:-60px;width:220px;height:220px;border-radius:50%;background:radial-gradient(circle at 30% 30%, var(--soft-pink), transparent 70%);opacity:.6;}
+.hero::after{content:"";position:absolute;bottom:-80px;left:-40px;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle at 60% 40%, var(--soft-blue), transparent 70%);opacity:.5;}
+.hero-inner{position:relative;max-width:1100px;margin:0 auto;}
+.hero-eyebrow{font-size:12px;letter-spacing:.15em;font-weight:700;color:var(--pink);text-transform:uppercase;margin-bottom:6px;}
+.hero h1{font-size:26px;}
+.hero-sub{color:var(--medium);font-size:13px;margin-top:4px;}
+
+/* ===== Nav ===== */
+.tabbar{max-width:1100px;margin:16px auto 0;padding:0 20px;display:flex;gap:8px;overflow-x:auto;}
+.tab-btn{flex:0 0 auto;padding:9px 18px;border-radius:999px;font-size:14px;font-weight:700;color:var(--medium);background:#fff;border:1px solid var(--soft-blue);transition:all .18s;white-space:nowrap;}
+.tab-btn.active{background:linear-gradient(120deg,var(--soft-pink),var(--soft-blue));color:var(--dark);border-color:transparent;box-shadow:var(--shadow-soft);}
+
+main{max-width:1100px;margin:0 auto;padding:20px;}
+.view{display:none;}
+.view.active{display:block;}
+
+/* ===== 提醒橫幅 ===== */
+.reminder-banner{background:var(--light-pink);border:1px solid var(--soft-pink);border-radius:var(--radius-md);padding:14px 18px;margin-bottom:18px;display:flex;gap:12px;align-items:flex-start;}
+.reminder-banner .icon{font-size:20px;line-height:1;}
+.reminder-banner h4{font-size:14px;color:var(--pink);margin-bottom:6px;}
+.reminder-list{display:flex;flex-direction:column;gap:4px;}
+.reminder-item{font-size:13px;color:var(--medium);}
+.reminder-item b{color:var(--dark);}
+
+/* ===== 統計卡片 ===== */
+.stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:22px;}
+.stat-card{background:#fff;border-radius:var(--radius-md);padding:16px 18px;box-shadow:var(--shadow-soft);border:1px solid rgba(184,207,218,.35);}
+.stat-card .label{font-size:12px;color:var(--gray);font-weight:500;margin-bottom:6px;}
+.stat-card .value{font-size:22px;font-weight:900;color:var(--dark);}
+.stat-card .value.pink{color:var(--pink);}
+.stat-card .value.blue{color:var(--blue);}
+.stat-card .value.sage{color:var(--sage);}
+
+/* ===== Section 通用 ===== */
+.section{background:#fff;border-radius:var(--radius-lg);padding:18px;margin-bottom:18px;box-shadow:var(--shadow-soft);border:1px solid rgba(184,207,218,.3);}
+.section-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;flex-wrap:wrap;gap:8px;}
+.section-head h3{font-size:16px;}
+.section-head .hint{font-size:12px;color:var(--gray);}
+
+/* ===== 按鈕 ===== */
+.btn{padding:10px 18px;border-radius:999px;font-size:13px;font-weight:700;display:inline-flex;align-items:center;gap:6px;transition:.15s;}
+.btn-primary{background:linear-gradient(120deg,var(--soft-pink),var(--soft-blue));color:var(--dark);box-shadow:var(--shadow-soft);}
+.btn-primary:hover{filter:brightness(1.03);transform:translateY(-1px);}
+.btn-ghost{background:var(--light-blue);color:var(--blue);}
+.btn-ghost:hover{background:var(--soft-blue);color:#fff;}
+.btn-danger{background:var(--light-pink);color:#B5574A;}
+.btn-danger:hover{background:#eee1cb;}
+.btn-sage{background:var(--light-sage);color:var(--sage);}
+.btn-sage:hover{background:var(--sage);color:#fff;}
+.btn-sm{padding:6px 14px;font-size:12px;border-radius:999px;}
+.btn-xs{padding:4px 11px;font-size:11px;border-radius:999px;}
+.btn-icon{width:34px;height:34px;border-radius:999px;display:inline-flex;align-items:center;justify-content:center;}
+.btn[disabled]{opacity:.4;cursor:not-allowed;}
+
+/* ===== 選擇客戶 / 新增客戶 切換 ===== */
+.seg-toggle{display:flex;gap:8px;margin-bottom:10px;}
+.seg-btn{flex:1;padding:9px;border-radius:999px;background:var(--light-blue);color:var(--blue);font-size:12px;font-weight:700;text-align:center;cursor:pointer;}
+.seg-btn.active{background:linear-gradient(120deg,var(--soft-pink),var(--soft-blue));color:var(--dark);}
+
+/* ===== 今日時間軸 ===== */
+.timeline{display:flex;flex-direction:column;gap:8px;}
+.tl-row{display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:var(--radius-sm);}
+.tl-row.busy{background:var(--light-blue);border:1px solid var(--soft-blue);}
+.tl-row.free{background:var(--light-sage);border:1px dashed var(--sage);}
+.tl-time{font-size:12px;font-weight:700;color:var(--medium);min-width:96px;}
+.tl-content{font-size:13px;color:var(--dark);flex:1;}
+.tl-badge{font-size:11px;font-weight:700;padding:3px 9px;border-radius:999px;}
+.tl-badge.busy{background:var(--blue);color:#fff;}
+.tl-badge.free{background:var(--sage);color:#fff;}
+.settings-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px;font-size:12px;color:var(--medium);}
+.settings-row label{display:flex;align-items:center;gap:6px;}
+.settings-row input{width:78px;padding:5px 8px;border:1px solid var(--soft-blue);border-radius:8px;font-size:12px;}
+
+/* ===== 本月可預約統計 / 迷你月曆 ===== */
+.month-stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px;margin-bottom:14px;}
+.month-stat-grid .cell{background:var(--cream);border-radius:var(--radius-sm);padding:10px 12px;text-align:center;}
+.month-stat-grid .cell .num{font-size:18px;font-weight:900;color:var(--dark);}
+.month-stat-grid .cell .lb{font-size:11px;color:var(--gray);margin-top:2px;}
+.mini-cal{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;}
+.mini-cal .day{border-radius:10px;padding:6px 2px;text-align:center;font-size:11px;background:var(--light-sage);color:var(--sage);font-weight:700;cursor:pointer;border:1px solid transparent;}
+.mini-cal .day.full{background:var(--light-pink);color:#B5574A;}
+.mini-cal .day.today{border-color:var(--blue);}
+.mini-cal .day .d{font-size:12px;}
+
+/* ===== 今日預約頁 ===== */
+.date-nav{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:14px;}
+.date-nav .date-label{font-weight:700;font-size:15px;flex:1;min-width:140px;}
+.today-stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:10px;margin-bottom:16px;}
+.appt-card{background:var(--cream);border-radius:var(--radius-md);padding:14px;margin-bottom:10px;border:1px solid rgba(166,145,107,.15);}
+.appt-top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;flex-wrap:wrap;}
+.appt-time{font-size:13px;font-weight:700;color:var(--blue);}
+.appt-name{font-size:15px;font-weight:700;margin-top:2px;}
+.appt-meta{font-size:12px;color:var(--gray);margin-top:2px;}
+.appt-badges{display:flex;gap:6px;flex-wrap:wrap;}
+.pill{font-size:11px;font-weight:700;padding:3px 10px;border-radius:999px;display:inline-block;}
+.tag-new{background:var(--light-blue);color:var(--blue);}
+.tag-return{background:var(--light-sage);color:var(--sage);}
+.pay-paid{background:var(--light-sage);color:var(--sage);}
+.pay-due{background:var(--light-pink);color:#B5574A;}
+.appt-money{font-size:15px;font-weight:900;color:var(--pink);margin-top:8px;}
+.appt-actions{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px;}
+
+/* ===== 篩選列 ===== */
+.filter-bar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px;}
+.filter-bar input[type=text],.filter-bar select,.filter-bar input[type=date]{padding:9px 12px;border:1px solid var(--soft-blue);border-radius:var(--radius-sm);font-size:13px;color:var(--dark);background:#fff;}
+.filter-bar input[type=text]{flex:1;min-width:160px;}
+
+/* ===== 預約清單 ===== */
+.client-list{display:flex;flex-direction:column;gap:10px;}
+.client-card{display:grid;grid-template-columns:1.2fr 1fr 1fr 0.9fr 0.9fr auto;align-items:center;gap:10px;padding:14px;border-radius:var(--radius-md);background:var(--cream);border:1px solid rgba(166,145,107,.15);}
+.client-card .name{font-weight:700;font-size:14px;}
+.client-card .sub{font-size:12px;color:var(--gray);margin-top:2px;}
+.field-label{display:none;font-size:11px;color:var(--gray);font-weight:700;}
+.status-pill{font-size:11px;font-weight:700;padding:3px 10px;border-radius:999px;display:inline-block;}
+.card-actions{display:flex;gap:6px;justify-content:flex-end;flex-wrap:wrap;}
+.client-card.stale{border:1px solid var(--pink);background:var(--light-pink);}
+
+/* ===== 客戶清單卡片 ===== */
+.customer-card{display:grid;grid-template-columns:1.3fr 0.9fr 0.9fr 0.9fr auto;align-items:center;gap:10px;padding:14px;border-radius:var(--radius-md);background:var(--cream);border:1px solid rgba(166,145,107,.15);margin-bottom:10px;}
+.customer-card .name{font-weight:700;font-size:14px;}
+.customer-card .sub{font-size:12px;color:var(--gray);margin-top:2px;}
+.history-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--light-blue);font-size:13px;cursor:pointer;}
+.history-row:last-child{border-bottom:none;}
+.history-row:hover{background:var(--light-blue);}
+
+/* ===== 已取消樣式：劃線＋淡化 ===== */
+.client-card.is-cancelled,.appt-card.is-cancelled{opacity:.55;filter:grayscale(.35);}
+.client-card.is-cancelled .name,.client-card.is-cancelled .sub,.appt-card.is-cancelled .appt-name{text-decoration:line-through;}
+.client-card.is-cancelled .card-actions,.appt-card.is-cancelled .appt-actions{opacity:1;filter:none;}
+
+/* ===== 店家設定：主題色與項目管理 ===== */
+.theme-swatch{width:38px;height:38px;border-radius:50%;cursor:pointer;border:3px solid transparent;display:inline-flex;align-items:center;justify-content:center;font-size:14px;transition:.15s;}
+.theme-swatch.active{border-color:var(--dark);}
+.item-chip{display:inline-flex;align-items:center;gap:6px;background:var(--light-blue);color:var(--blue);font-size:12px;font-weight:700;padding:5px 8px 5px 12px;border-radius:999px;}
+.item-chip button{color:#B5574A;font-weight:900;line-height:1;padding:2px;}
+.template-card{background:var(--cream);border-radius:var(--radius-sm);padding:12px;margin-bottom:10px;border:1px solid rgba(166,145,107,.15);}
+.template-card input[type=text]{width:100%;padding:8px 10px;border:1px solid var(--soft-blue);border-radius:8px;font-size:13px;margin-bottom:6px;font-weight:700;}
+.template-card textarea{width:100%;padding:8px 10px;border:1px solid var(--soft-blue);border-radius:8px;font-size:12px;min-height:60px;margin-bottom:8px;}
+.template-card .tpl-actions{display:flex;gap:6px;justify-content:flex-end;}
+
+/* ===== 備份提醒橫幅 ===== */
+.backup-reminder{background:var(--light-blue);border:1px solid var(--soft-blue);border-radius:var(--radius-md);padding:14px 18px;margin-bottom:18px;display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;}
+.backup-reminder .msg{font-size:13px;color:var(--medium);}
+.backup-reminder .msg b{color:var(--blue);}
+.stale-tag{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:700;color:#B5574A;background:#fff;border:1px solid var(--soft-pink);padding:2px 9px;border-radius:999px;margin-top:6px;}
+.empty-state{text-align:center;padding:40px 20px;color:var(--gray);}
+.empty-state .em{font-size:32px;margin-bottom:8px;}
+
+/* ===== Modal ===== */
+.modal-overlay{position:fixed;inset:0;background:rgba(55,53,47,.4);display:none;align-items:flex-start;justify-content:center;padding:30px 16px;overflow-y:auto;z-index:100;}
+.modal-overlay.active{display:flex;}
+.modal{background:#fff;border-radius:var(--radius-lg);width:100%;max-width:560px;padding:24px;box-shadow:var(--shadow-lift);}
+.modal h3{font-size:18px;margin-bottom:16px;}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.form-field{display:flex;flex-direction:column;gap:5px;}
+.form-field.full{grid-column:1/-1;}
+.form-field label{font-size:12px;font-weight:700;color:var(--medium);}
+.form-field input,.form-field select,.form-field textarea{padding:10px 12px;border:1px solid var(--soft-blue);border-radius:var(--radius-sm);font-size:13px;color:var(--dark);}
+.form-field textarea{resize:vertical;min-height:50px;}
+.checkbox-field{flex-direction:row;align-items:center;gap:8px;}
+.checkbox-field input{width:16px;height:16px;}
+.total-preview{grid-column:1/-1;background:var(--light-blue);border-radius:var(--radius-sm);padding:10px 14px;font-size:13px;color:var(--blue);font-weight:700;display:flex;justify-content:space-between;flex-wrap:wrap;gap:4px;}
+.conflict-warning{grid-column:1/-1;background:var(--light-pink);border:1px solid var(--soft-pink);border-radius:var(--radius-sm);padding:10px 14px;font-size:12px;color:#B5574A;display:none;}
+.field-error{grid-column:1/-1;background:var(--light-pink);border:1px solid var(--soft-pink);border-radius:var(--radius-sm);padding:10px 14px;font-size:12px;color:#B5574A;display:none;}
+.modal-actions{display:flex;justify-content:flex-end;gap:10px;margin-top:18px;}
+
+/* ===== 備份頁 ===== */
+.backup-box{border:1px dashed var(--soft-pink);border-radius:var(--radius-md);padding:18px;text-align:center;}
+.backup-box p{color:var(--medium);font-size:13px;margin:8px 0 14px;}
+input[type=file]{display:none;}
+
+/* ===== Toast ===== */
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--dark);color:#fff;padding:10px 20px;border-radius:999px;font-size:13px;opacity:0;pointer-events:none;transition:.25s;z-index:200;max-width:90%;text-align:center;}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+/* ===== 報表：趨勢長條圖 / 存檔卡片 ===== */
+.trend-row{display:grid;grid-template-columns:70px 1fr 90px;gap:10px;align-items:center;padding:8px 0;font-size:12px;color:var(--medium);}
+.trend-bar-track{background:var(--light-blue);border-radius:999px;height:14px;overflow:hidden;}
+.trend-bar-fill{background:linear-gradient(120deg,var(--soft-pink),var(--soft-blue));height:100%;border-radius:999px;}
+.trend-row .val{text-align:right;font-weight:700;color:var(--dark);}
+.report-card{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;padding:14px;border-radius:var(--radius-md);background:var(--cream);border:1px solid rgba(166,145,107,.15);margin-bottom:10px;}
+.report-card .rmonth{font-weight:700;font-size:14px;}
+.report-card .rmeta{font-size:11px;color:var(--gray);margin-top:2px;}
+.growth-up{color:var(--sage);}
+.growth-down{color:#B5574A;}
+
+/* ===== 列印用月報表（只在列印/另存PDF時顯示） ===== */
+#printReportArea{display:none;}
+@media print{
+  body *{visibility:hidden;}
+  #printReportArea, #printReportArea *{visibility:visible;}
+  #printReportArea{display:block;position:absolute;top:0;left:0;width:100%;padding:24px;}
+  #printReportArea h2{font-size:20px;margin-bottom:4px;}
+  #printReportArea .p-sub{font-size:12px;color:#666;margin-bottom:16px;}
+  #printReportArea table{width:100%;border-collapse:collapse;margin-top:12px;}
+  #printReportArea td{padding:8px 6px;border-bottom:1px solid #ddd;font-size:13px;}
+  #printReportArea td.label{color:#666;}
+  #printReportArea td.val{text-align:right;font-weight:700;}
+}
+/* ===== RWD ===== */
+@media (max-width:760px){
+  .client-card,.customer-card{grid-template-columns:1fr;gap:4px;position:relative;}
+  .client-card .field-label,.customer-card .field-label{display:inline;}
+  .card-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px;}
+  .card-actions .btn{width:100%;justify-content:center;}
+  .appt-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px;}
+  .appt-actions .btn{width:100%;justify-content:center;font-size:12px;padding:9px 10px;}
+  .form-grid{grid-template-columns:1fr;}
+  .hero h1{font-size:22px;}
+  .mini-cal{grid-template-columns:repeat(7,1fr);}
+}
+</style>
+</head>
+<body>
+
+<div id="pinLockOverlay" style="display:flex;position:fixed;inset:0;z-index:500;background:linear-gradient(135deg,var(--light-pink),var(--light-blue));align-items:center;justify-content:center;padding:20px;">
+  <div style="background:#fff;border-radius:var(--radius-lg);padding:28px 24px;max-width:320px;width:100%;text-align:center;box-shadow:var(--shadow-lift);">
+    <div id="pinLockStep1">
+      <div style="font-size:32px;margin-bottom:8px;">🔒</div>
+      <h3 style="margin-bottom:16px;">請輸入 PIN 碼</h3>
+      <input type="password" id="pinInput" inputmode="numeric" maxlength="4" placeholder="4位數字" style="width:100%;text-align:center;font-size:22px;letter-spacing:8px;padding:12px;border:1px solid var(--soft-blue);border-radius:var(--radius-sm);margin-bottom:12px;">
+      <div id="pinError" style="display:none;color:#B5574A;font-size:12px;margin-bottom:10px;">PIN 碼不正確，請再試一次</div>
+      <button type="button" class="btn btn-primary" id="pinUnlockBtn" style="width:100%;justify-content:center;">解鎖</button>
+      <button type="button" id="pinForgotBtn" style="margin-top:12px;font-size:12px;color:var(--blue);text-decoration:underline;">忘記密碼？</button>
+    </div>
+    <div id="pinLockStep2" style="display:none;">
+      <div style="font-size:32px;margin-bottom:8px;">🔑</div>
+      <h3 style="margin-bottom:6px;">輸入救援密語</h3>
+      <p style="font-size:12px;color:var(--gray);margin-bottom:12px;">請輸入你設定PIN碼時，同時設定的救援密語</p>
+      <input type="text" id="recoveryInput" placeholder="救援密語" style="width:100%;text-align:center;font-size:15px;padding:12px;border:1px solid var(--soft-blue);border-radius:var(--radius-sm);margin-bottom:12px;">
+      <div id="recoveryError" style="display:none;color:#B5574A;font-size:12px;margin-bottom:10px;">密語不正確，請再試一次</div>
+      <button type="button" class="btn btn-primary" id="recoveryVerifyBtn" style="width:100%;justify-content:center;">驗證</button>
+      <button type="button" id="pinBackBtn" style="margin-top:12px;font-size:12px;color:var(--gray);text-decoration:underline;">返回輸入 PIN</button>
+    </div>
+    <div id="pinLockStep3" style="display:none;">
+      <div style="font-size:32px;margin-bottom:8px;">✅</div>
+      <h3 style="margin-bottom:12px;">設定新的 PIN 碼</h3>
+      <input type="password" id="newPinInput" inputmode="numeric" maxlength="4" placeholder="新的4位數PIN碼" style="width:100%;text-align:center;font-size:20px;letter-spacing:6px;padding:12px;border:1px solid var(--soft-blue);border-radius:var(--radius-sm);margin-bottom:10px;">
+      <div id="newPinError" style="display:none;color:#B5574A;font-size:12px;margin-bottom:10px;">請輸入 4 位數字</div>
+      <button type="button" class="btn btn-primary" id="newPinSaveBtn" style="width:100%;justify-content:center;">儲存並解鎖</button>
+    </div>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">存款計畫 · 客戶管理</div>
+    <h1 id="shopTitle">美業預約手帳</h1>
+    <p class="hero-sub">紀錄每一筆預約，自動幫你算好今日進帳、可預約空檔與明日提醒</p>
+  </div>
+</div>
+
+<div id="safariWarningBanner" style="display:none;max-width:1100px;margin:14px auto 0;padding:0 20px;">
+  <div style="background:var(--light-pink);border:1px solid var(--soft-pink);border-radius:var(--radius-md);padding:12px 16px;display:flex;gap:10px;align-items:center;justify-content:space-between;font-size:12px;color:#8A5A4A;">
+    <span>⚠️ 請務必使用 <b>Safari</b>（iPhone）或 <b>Chrome</b> 瀏覽器開啟本工具；若直接從檔案／訊息App的預覽畫面打開，下載與列印功能將無法使用。</span>
+    <button type="button" id="dismissSafariBanner" style="flex:0 0 auto;background:#fff;border-radius:999px;width:24px;height:24px;font-weight:900;color:#8A5A4A;">✕</button>
+  </div>
+</div>
+
+<nav class="tabbar">
+  <button class="tab-btn active" data-view="dashboard">總覽儀表板</button>
+  <button class="tab-btn" data-view="today">今日預約</button>
+  <button class="tab-btn" data-view="timeline">時間軸 / 空檔</button>
+  <button class="tab-btn" data-view="appts">預約清單</button>
+  <button class="tab-btn" data-view="customers">客戶</button>
+  <button class="tab-btn" data-view="reports">報表</button>
+  <button class="tab-btn" data-view="backup">備份 / 匯出</button>
+</nav>
+
+<main>
+
+  <!-- ============ 儀表板 ============ -->
+  <section class="view active" id="view-dashboard">
+    <div id="backupReminder"></div>
+    <div id="birthdayReminder"></div>
+    <div id="reminderBanner"></div>
+    <div class="stat-grid" id="statGrid"></div>
+    <div class="section">
+      <div class="section-head"><h3>本月營收概況</h3></div>
+      <div id="monthSummary" style="font-size:13px;color:var(--medium);line-height:1.9;"></div>
+    </div>
+  </section>
+
+  <!-- ============ 今日預約 ============ -->
+  <section class="view" id="view-today">
+    <div class="section">
+      <div class="date-nav">
+        <button class="btn btn-ghost btn-sm" id="prevDayBtn">‹ 前一天</button>
+        <button class="btn btn-ghost btn-sm" id="todayBtn">今天</button>
+        <button class="btn btn-ghost btn-sm" id="nextDayBtn">後一天 ›</button>
+        <div class="date-label" id="todayPageLabel"></div>
+        <input type="date" id="todayPageDatePicker">
+      </div>
+      <div class="today-stat-grid" id="todayStatGrid"></div>
+      <div id="todayList"></div>
+    </div>
+  </section>
+
+  <!-- ============ 時間軸 / 空檔 ============ -->
+  <section class="view" id="view-timeline">
+    <div class="section">
+      <div class="section-head"><h3>店家設定</h3></div>
+
+      <div class="form-field" style="margin-bottom:14px;max-width:360px;">
+        <label>店名 / 工作室名稱</label>
+        <input type="text" id="setShopName" placeholder="顯示在頁首標題">
+      </div>
+
+      <div class="form-field" style="margin-bottom:14px;">
+        <label>品牌色系</label>
+        <div id="themeSwatches" style="display:flex;gap:12px;flex-wrap:wrap;margin-top:4px;"></div>
+      </div>
+
+      <div class="form-field">
+        <label>服務 / 操作項目管理</label>
+        <div id="itemManageList" style="display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 10px;"></div>
+        <div style="display:flex;gap:8px;">
+          <input type="text" id="newItemInput" placeholder="輸入新的服務項目名稱" style="flex:1;padding:9px 12px;border:1px solid var(--soft-blue);border-radius:var(--radius-sm);font-size:13px;">
+          <button class="btn btn-ghost btn-sm" id="addItemBtn">＋ 新增項目</button>
+        </div>
+      </div>
+
+      <div class="form-field" style="margin-top:14px;">
+        <label>安全性</label>
+        <div class="checkbox-field" style="margin:6px 0;">
+          <input type="checkbox" id="setPinEnabled">
+          <label style="margin:0;">啟用 PIN 碼鎖（開啟工具需輸入密碼）</label>
+        </div>
+        <div style="max-width:280px;">
+          <input type="text" id="setPinValue" inputmode="numeric" maxlength="4" placeholder="設定4位數PIN碼" style="width:100%;padding:9px 12px;border:1px solid var(--soft-blue);border-radius:var(--radius-sm);font-size:13px;margin-bottom:8px;">
+          <input type="text" id="setPinRecovery" placeholder="設定救援密語（忘記PIN時用來重設，請自己記住）" style="width:100%;padding:9px 12px;border:1px solid var(--soft-blue);border-radius:var(--radius-sm);font-size:13px;">
+        </div>
+      </div>
+
+      <div class="form-field" style="margin-top:14px;">
+        <label>訊息模板管理</label>
+        <div id="templateManageList"></div>
+        <button class="btn btn-ghost btn-sm" id="addTemplateBtn" style="margin-top:8px;">＋ 新增模板</button>
+      </div>
+
+      <div style="margin-top:16px;">
+        <button class="btn btn-primary btn-sm" id="saveShopSettingsBtn">儲存店家設定</button>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-head">
+        <h3>今日時間軸 · 預約空檔</h3>
+        <span class="hint" id="todayLabel"></span>
+      </div>
+      <div class="timeline" id="timeline"></div>
+      <div class="settings-row">
+        <label>營業開始 <input type="time" id="setStart"></label>
+        <label>營業結束 <input type="time" id="setEnd"></label>
+        <label>單次預估時長(分) <input type="number" id="setDuration" min="15" step="5"></label>
+        <label>預約間隔(分) <input type="number" id="setInterval" min="5" step="5"></label>
+        <button class="btn btn-ghost btn-sm" id="saveSettingsBtn">儲存設定</button>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-head">
+        <h3>本月可預約統計</h3>
+        <span class="hint" id="monthAvailLabel"></span>
+      </div>
+      <div class="month-stat-grid" id="monthAvailGrid"></div>
+      <div class="hint" style="margin-bottom:8px;">點選日期可直接跳到該天的「今日預約」頁面</div>
+      <div class="mini-cal" id="miniCal"></div>
+    </div>
+  </section>
+
+  <!-- ============ 預約清單 ============ -->
+  <section class="view" id="view-appts">
+    <div class="section">
+      <div class="section-head">
+        <h3>預約清單</h3>
+        <div style="display:flex;gap:8px;">
+          <button class="btn btn-ghost btn-sm" id="exportCsvListBtn">匯出 CSV</button>
+          <button class="btn btn-primary btn-sm" id="addBtnList">＋ 新增預約</button>
+        </div>
+      </div>
+      <div class="hint" id="staleHint" style="margin-bottom:10px;"></div>
+      <div class="filter-bar">
+        <input type="text" id="searchInput" placeholder="搜尋姓名或電話">
+        <select id="statusFilter"><option value="all">全部狀態</option></select>
+        <select id="itemFilter"><option value="all">全部項目</option></select>
+        <input type="date" id="dateFromFilter">
+        <input type="date" id="dateToFilter">
+      </div>
+      <div class="client-list" id="clientList"></div>
+    </div>
+  </section>
+
+  <!-- ============ 客戶 ============ -->
+  <section class="view" id="view-customers">
+    <div class="section">
+      <div class="section-head">
+        <h3>客戶清單</h3>
+        <div style="display:flex;gap:8px;">
+          <button class="btn btn-ghost btn-sm" id="exportCsvCustBtn">匯出客戶 CSV</button>
+          <button class="btn btn-primary btn-sm" id="addCustomerBtn">＋ 新增客戶</button>
+        </div>
+      </div>
+      <div class="filter-bar">
+        <input type="text" id="customerSearchInput" placeholder="搜尋客戶姓名或電話">
+      </div>
+      <div id="customerList"></div>
+    </div>
+  </section>
+
+  <!-- ============ 報表 ============ -->
+  <section class="view" id="view-reports">
+    <div class="section">
+      <div class="section-head"><h3>本月 vs 上月</h3></div>
+      <div class="stat-grid" id="compareGrid"></div>
+    </div>
+
+    <div class="section">
+      <div class="section-head">
+        <h3>近 6 個月趨勢</h3>
+        <span class="hint">依預約時間統計，含未來已預約月份</span>
+      </div>
+      <div id="trendTable"></div>
+    </div>
+
+    <div class="section">
+      <div class="section-head"><h3>月報表存檔</h3></div>
+      <p class="hint" style="margin-bottom:10px;">存檔後的報表數字會固定下來，之後就算資料有更動也不會改變，適合對帳留底用。</p>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:16px;">
+        <input type="month" id="reportMonthPicker">
+        <button class="btn btn-primary btn-sm" id="generateReportBtn">產生此月報表存檔</button>
+      </div>
+      <div id="reportList"></div>
+    </div>
+  </section>
+
+  <!-- ============ 備份 ============ -->
+  <section class="view" id="view-backup">
+    <div class="section">
+      <div class="section-head"><h3>資料備份 / 匯出</h3></div>
+      <div class="backup-box">
+        <div style="font-size:28px;">🗂️</div>
+        <p>所有資料僅儲存在此瀏覽器中。<br><b>換裝置或清除瀏覽器資料前，請務必先匯出備份檔</b>，之後可用下方「匯入備份檔」還原。<br><span style="color:#B5574A;">⚠️ 請勿使用無痕／隱私瀏覽模式開啟本工具，關閉視窗後資料會直接消失且無法復原。</span></p>
+        <button class="btn btn-primary" id="exportBtn">匯出備份 (.json)</button>
+        <p style="margin-top:10px;font-size:11px;color:var(--gray);" id="lastBackupHint"></p>
+      </div>
+      <div class="backup-box" style="margin-top:14px;">
+        <div style="font-size:28px;">📥</div>
+        <p>匯入備份檔會<b>覆蓋</b>目前瀏覽器中的所有資料，請確認後再匯入。</p>
+        <label class="btn btn-ghost" for="importFile">選擇備份檔匯入</label>
+        <input type="file" id="importFile" accept="application/json">
+      </div>
+      <div class="backup-box" style="margin-top:14px;">
+        <div style="font-size:28px;">📊</div>
+        <p>將全部預約資料匯出成 CSV，方便在 Excel / Google 試算表開啟查看或製表。<br><span style="color:var(--gray);">（CSV 僅供查看用，無法用來匯入還原資料，還原請使用上方 .json 備份檔）</span></p>
+        <button class="btn btn-ghost" id="exportCsvAllBtn">匯出全部預約 CSV</button>
+      </div>
+      <div class="backup-box" style="margin-top:14px;border-color:var(--soft-blue);">
+        <div style="font-size:28px;">💬</div>
+        <p>使用上有任何問題、想備份/匯入資料需要協助，或想了解新版本功能，歡迎加入客服 LINE 詢問。</p>
+        <a class="btn btn-primary" id="lineSupportBtn" href="https://line.me/R/ti/p/@911lkgyr" target="_blank" rel="noopener">加入客服 LINE</a>
+        <p style="margin-top:10px;font-size:11px;color:var(--gray);">若要更換客服 LINE 帳號，可在程式碼中搜尋 id="lineSupportBtn" 修改連結。</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============ 新增/編輯 預約 Modal ============ -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal">
+    <h3 id="modalTitle">新增預約</h3>
+    <form id="clientForm">
+      <input type="hidden" id="recordId">
+
+      <div class="seg-toggle">
+        <div class="seg-btn active" id="segExisting">選擇既有客戶</div>
+        <div class="seg-btn" id="segNew">新增客戶</div>
+      </div>
+
+      <div id="custExistingWrap" style="margin-bottom:14px;">
+        <div class="form-field" style="margin-bottom:8px;">
+          <label>搜尋客戶（姓名或電話）</label>
+          <input type="text" id="custSearchInput" placeholder="輸入姓名或電話搜尋">
+        </div>
+        <div class="form-field">
+          <label>選擇客戶 *</label>
+          <select id="f_customerId"><option value="">請選擇客戶</option></select>
+        </div>
+      </div>
+
+      <div id="custNewWrap" style="display:none;margin-bottom:14px;">
+        <div class="form-grid">
+          <div class="form-field"><label>客戶姓名 *</label><input type="text" id="f_newName"></div>
+          <div class="form-field"><label>電話 *</label><input type="tel" id="f_newPhone"></div>
+          <div class="form-field"><label>LINE / IG（選填）</label><input type="text" id="f_newContact" placeholder="LINE ID 或 IG 帳號"></div>
+          <div class="form-field"><label>客人生日（選填）</label><input type="date" id="f_newBirthday"></div>
+        </div>
+      </div>
+
+      <div class="field-error" id="customerFieldError">⚠️ 請選擇既有客戶，或填寫新客戶的姓名與電話</div>
+
+      <div class="form-grid" style="margin-top:14px;">
+        <div class="form-field"><label>預約日期時間 *</label><input type="datetime-local" id="f_datetime" required></div>
+        <div class="form-field">
+          <label>預約 / 操作項目 *</label>
+          <select id="f_item">
+            <option value="美甲">美甲</option>
+            <option value="美睫">美睫</option>
+            <option value="紋繡">紋繡</option>
+            <option value="美髮">美髮</option>
+            <option value="臉部美容">臉部美容</option>
+            <option value="身體SPA">身體SPA</option>
+            <option value="其他">其他（自行輸入）</option>
+          </select>
+        </div>
+        <div class="form-field" id="itemOtherWrap" style="display:none;"><label>項目名稱</label><input type="text" id="f_itemOther" placeholder="請輸入項目名稱"></div>
+        <div class="form-field">
+          <label>付款方式</label>
+          <select id="f_payment">
+            <option value="現金">現金</option>
+            <option value="轉帳">轉帳</option>
+            <option value="信用卡">信用卡</option>
+            <option value="LINE Pay">LINE Pay</option>
+            <option value="其他">其他</option>
+          </select>
+        </div>
+        <div class="form-field">
+          <label>預約狀態</label>
+          <select id="f_status">
+            <option value="待確認">待確認</option>
+            <option value="已確認">已確認</option>
+            <option value="已付訂">已付訂</option>
+            <option value="已完成">已完成</option>
+            <option value="改期">改期</option>
+            <option value="已取消">已取消</option>
+            <option value="未到店">未到店</option>
+          </select>
+        </div>
+        <div class="form-field" id="cancelReasonWrap" style="display:none;">
+          <label>取消原因</label>
+          <select id="f_cancelReason">
+            <option value="客人取消">客人取消</option>
+            <option value="店家取消">店家取消</option>
+            <option value="改期">改期</option>
+            <option value="其他">其他</option>
+          </select>
+        </div>
+        <div class="form-field checkbox-field"><input type="checkbox" id="f_deposit"><label style="margin:0;">已匯款訂金</label></div>
+        <div class="form-field checkbox-field"><input type="checkbox" id="f_paid"><label style="margin:0;">已收全額款項</label></div>
+        <div class="form-field"><label>今日金額 (NT$)</label><input type="number" id="f_amount" min="0" step="1" value="0"></div>
+        <div class="form-field"><label>其他加項金額 (NT$)</label><input type="number" id="f_extra" min="0" step="1" value="0"></div>
+        <div class="form-field"><label>本次儲值金額 (NT$)</label><input type="number" id="f_topup" min="0" step="1" value="0"></div>
+        <div class="form-field full"><label>備註</label><textarea id="f_note" placeholder="選填，如取消細節、客人需求等"></textarea></div>
+        <div class="conflict-warning" id="conflictWarning">⚠️ 此時段已有其他預約，請確認是否要繼續</div>
+        <div class="total-preview"><span>今日總金額（自動計算）</span><span id="totalPreview">NT$ 0</span></div>
+      </div>
+      <div class="modal-actions">
+        <button type="button" class="btn btn-ghost" id="cancelFormBtn">取消編輯</button>
+        <button type="submit" class="btn btn-primary">儲存</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- ============ 新增/編輯 客戶 Modal ============ -->
+<div class="modal-overlay" id="customerModalOverlay">
+  <div class="modal">
+    <h3 id="customerModalTitle">新增客戶</h3>
+    <form id="customerForm">
+      <input type="hidden" id="cf_id">
+      <div class="form-grid">
+        <div class="form-field"><label>客戶姓名 *</label><input type="text" id="cf_name" required></div>
+        <div class="form-field"><label>電話 *</label><input type="tel" id="cf_phone" required></div>
+        <div class="form-field"><label>LINE / IG（選填）</label><input type="text" id="cf_contact"></div>
+        <div class="form-field"><label>客人生日（選填）</label><input type="date" id="cf_birthday"></div>
+        <div class="form-field full"><label>備註</label><textarea id="cf_note" placeholder="選填，如客人偏好、特殊需求等"></textarea></div>
+      </div>
+      <div class="modal-actions">
+        <button type="button" class="btn btn-ghost" id="cancelCustomerFormBtn">取消</button>
+        <button type="submit" class="btn btn-primary">儲存</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- ============ 客戶詳細頁 Modal ============ -->
+<div class="modal-overlay" id="customerDetailOverlay">
+  <div class="modal" style="max-width:640px;">
+    <div id="customerDetailBody"></div>
+    <div class="modal-actions">
+      <button type="button" class="btn btn-ghost" id="closeCustomerDetailBtn">關閉</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="pickApptOverlay">
+  <div class="modal" style="max-width:480px;">
+    <h3>選擇要取消的預約</h3>
+    <div id="pickApptBody"></div>
+    <div class="modal-actions">
+      <button type="button" class="btn btn-ghost" id="closePickApptBtn">關閉</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="pickTemplateOverlay">
+  <div class="modal" style="max-width:480px;">
+    <h3>選擇要複製的訊息</h3>
+    <div id="pickTemplateBody"></div>
+    <div class="modal-actions">
+      <button type="button" class="btn btn-ghost" id="closePickTemplateBtn">關閉</button>
+    </div>
+  </div>
+</div>
+
+<div id="printReportArea"></div>
+<div id="licenseFooter" style="text-align:center;font-size:10px;color:var(--gray);padding:16px 20px 4px;"></div>
+<div class="toast" id="toast"></div>
+
+<script>
+(function(){
+  "use strict";
+
+  var CUSTOMERS_KEY = "wutang_customers_v1";
+  var APPTS_KEY = "wutang_appointments_v1";
+  var OLD_KEY = "wutang_clients_v1"; // 舊版單一陣列格式（升級前），僅用於資料遷移
+  var SETTINGS_KEY = "wutang_settings_v1";
+  var REPORTS_KEY = "wutang_monthly_reports_v1";
+
+  // ⚠️ 賣家出貨前請填寫買家資訊，用於畫面浮水印與備份檔追溯（不影響工具功能）
+  var LICENSE_INFO = {
+    buyer: "",       // 例如："王小美美睫工作室"
+    contact: "",     // 例如："0912-345-678"
+    orderId: "",     // 例如："SHOPEE-20260812-001"
+    soldAt: ""       // 例如："2026-08-12"
+  };
+
+  var DEFAULT_SETTINGS = {
+    start:"10:00", end:"20:00", duration:60, interval:30,
+    shopName:"美業預約手帳",
+    theme:"cream",
+    items:[{name:"美甲",price:0},{name:"美睫",price:0},{name:"紋繡",price:0},{name:"美髮",price:0},{name:"臉部美容",price:0},{name:"身體SPA",price:0}],
+    lastBackupAt: null,
+    pinEnabled: false,
+    pin: "",
+    pinRecovery: "",
+    messageTemplates: [
+      { id:"reminder", name:"預約提醒", content:"{name}您好，提醒您 {date} {time} 有預約 {item}，期待您的光臨😊" },
+      { id:"aftercare", name:"術後注意事項", content:"術後保養小提醒：24小時內請避免碰水、去角質或曝曬，如有任何不適請隨時與我們聯繫喔！" },
+      { id:"thanks", name:"感謝訊息", content:"{name}謝謝您今天的光臨，期待您下次再來💕" },
+      { id:"birthday", name:"生日祝福", content:"{name}生日快樂🎂祝您天天美麗，這個月有專屬生日優惠，歡迎回來找我們喔！" }
+    ]
+  };
+  var THEMES = {
+    cream: { label:"奶白香檳", pink:"#A6916B", soft:"#DED0B4", light:"#F7F2E7" },
+    rose:  { label:"霧粉玫瑰", pink:"#C9938A", soft:"#E8C4BC", light:"#F5E6E3" },
+    dusk:  { label:"霧藍靛",   pink:"#7A8FAD", soft:"#BCC9DC", light:"#E9EEF5" },
+    sage:  { label:"鼠尾草綠", pink:"#8FA089", soft:"#C7D6C2", light:"#EEF3EC" }
+  };
+  function applyTheme(key){
+    var t = THEMES[key] || THEMES.cream;
+    var root = document.documentElement.style;
+    root.setProperty('--pink', t.pink);
+    root.setProperty('--soft-pink', t.soft);
+    root.setProperty('--light-pink', t.light);
+  }
+
+  var STATUS_LIST = ['待確認','已確認','已付訂','已完成','改期','已取消','未到店'];
+  var STATUS_META = {
+    '待確認': {bg:'#F3EEE3', fg:'#8A7B5C', occupy:true,  revenue:true},
+    '已確認': {bg:'#E3EDF3', fg:'#7A9BAD', occupy:true,  revenue:true},
+    '已付訂': {bg:'#E8F0E8', fg:'#9AAE9B', occupy:true,  revenue:true},
+    '已完成': {bg:'#EDE7DB', fg:'#6B6152', occupy:true,  revenue:true},
+    '改期':   {bg:'#EFE3EA', fg:'#9B6B84', occupy:false, revenue:false},
+    '已取消': {bg:'#EEEEEE', fg:'#9B9A97', occupy:false, revenue:false},
+    '未到店': {bg:'#F3E3E3', fg:'#B5574A', occupy:false, revenue:false}
+  };
+  var ITEM_EMOJI = {'美甲':'💅','美睫':'👁️','紋繡':'✏️','美髮':'💇','臉部美容':'🧖‍♀️','身體SPA':'🛁'};
+
+  // ---------- 基礎工具 ----------
+  function uid(){ return 'id-' + Date.now().toString(36) + '-' + Math.random().toString(36).slice(2,8); }
+  function fmtMoney(n){ n = Number(n)||0; return "NT$ " + n.toLocaleString('zh-TW'); }
+  function pad(n){ return n<10 ? '0'+n : ''+n; }
+  function toDateStr(d){ return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate()); }
+  function toTimeStr(d){ return pad(d.getHours())+':'+pad(d.getMinutes()); }
+  function parseLocal(dtStr){ return dtStr ? new Date(dtStr) : null; }
+  function fmtDateTimeDisplay(dtStr){
+    var d = parseLocal(dtStr); if(!d) return '未設定';
+    var days=['日','一','二','三','四','五','六'];
+    return (d.getMonth()+1)+'/'+d.getDate()+'（週'+days[d.getDay()]+'）'+pad(d.getHours())+':'+pad(d.getMinutes());
+  }
+  function fmtDateShort(dtStr){
+    if(!dtStr) return '—';
+    var d = parseLocal(dtStr);
+    return (d.getMonth()+1)+'/'+d.getDate();
+  }
+  function showToast(msg){
+    var t = document.getElementById('toast'); t.textContent = msg; t.classList.add('show');
+    clearTimeout(showToast._timer); showToast._timer = setTimeout(function(){ t.classList.remove('show'); }, 2400);
+  }
+  function escapeHtml(str){
+    return String(str==null?'':str).replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; });
+  }
+
+  // ---------- iOS 偵測與下載備援 ----------
+  var isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform==='MacIntel' && navigator.maxTouchPoints>1);
+  var SAFARI_BANNER_KEY = 'wutang_safari_banner_dismissed';
+  (function initSafariBanner(){
+    if(localStorage.getItem(SAFARI_BANNER_KEY)==='1') return;
+    var el = document.getElementById('safariWarningBanner');
+    el.style.display = 'block';
+    document.getElementById('dismissSafariBanner').addEventListener('click', function(){
+      el.style.display = 'none';
+      localStorage.setItem(SAFARI_BANNER_KEY, '1');
+    });
+  })();
+  // iOS 對 Blob 檔案下載限制較多，改用開新分頁＋純文字顯示，讓使用者用 Safari 分享功能自行儲存
+  function openTextInNewTab(content, filename){
+    var w = window.open('', '_blank');
+    if(!w){ alert('請允許彈出視窗，或改用瀏覽器選單中的分享功能'); return; }
+    var escaped = String(content).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    w.document.write(
+      '<!DOCTYPE html><html><head><meta charset="utf-8"><title>'+escapeHtml(filename)+'</title>' +
+      '<style>body{font-family:-apple-system,sans-serif;padding:16px;background:#FAF3EE;} .tip{background:#F7F2E7;padding:12px;border-radius:10px;margin-bottom:12px;font-size:14px;line-height:1.6;} pre{white-space:pre-wrap;word-break:break-all;background:#fff;padding:12px;border-radius:10px;border:1px solid #ddd;font-size:12px;} button{padding:10px 18px;border-radius:999px;border:none;background:#A6916B;color:#fff;font-weight:700;margin-bottom:12px;}</style>' +
+      '</head><body>' +
+      '<div class="tip">📱 請點右上角「分享」圖示（或長按下方內容）選擇「儲存到檔案」。<br>建議檔名：'+escapeHtml(filename)+'</div>' +
+      '<button onclick="navigator.clipboard.writeText(document.getElementById(\'c\').textContent).then(function(){alert(\'已複製全部內容，可貼到備忘錄或檔案App\');})">複製全部內容</button>' +
+      '<pre id="c">'+escaped+'</pre>' +
+      '</body></html>'
+    );
+    w.document.close();
+  }
+
+  // ---------- 全域錯誤自動提示：任何未預期的錯誤都會直接顯示，不會再默默失敗 ----------
+  window.addEventListener('error', function(e){
+    showToast('⚠️ 發生錯誤：'+(e && e.message ? e.message : '未知錯誤，請截圖回報'));
+  });
+
+  // ---------- 複製到剪貼簿（含備援方案） ----------
+  function copyToClipboard(text){
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(text).then(function(){
+        showToast('已複製，可直接貼到 LINE');
+      }).catch(function(){ fallbackCopy(text); });
+    }else{
+      fallbackCopy(text);
+    }
+  }
+  function fallbackCopy(text){
+    var ta = document.createElement('textarea');
+    ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
+    document.body.appendChild(ta); ta.focus(); ta.select();
+    try{ document.execCommand('copy'); showToast('已複製，可直接貼到 LINE'); }
+    catch(e){ alert('請手動複製以下內容：\n\n'+text); }
+    document.body.removeChild(ta);
+  }
+  // 將訊息模板中的變數替換成實際內容；appt 可為 null（僅預覽/無特定預約時變數留空）
+  function fillTemplate(content, appt, customerOverride){
+    var cust = customerOverride || (appt ? getCustomer(appt.customerId) : null) || {name:'',phone:''};
+    var d = appt && appt.datetime ? parseLocal(appt.datetime) : null;
+    return String(content)
+      .replace(/{name}/g, cust.name||'')
+      .replace(/{phone}/g, cust.phone||'')
+      .replace(/{item}/g, appt ? (appt.item||'') : '')
+      .replace(/{date}/g, d ? (d.getMonth()+1)+'/'+d.getDate() : '')
+      .replace(/{time}/g, d ? pad(d.getHours())+':'+pad(d.getMinutes()) : '')
+      .replace(/{shopName}/g, settings.shopName||'');
+  }
+
+  function isOccupying(status){ return !!(STATUS_META[status] && STATUS_META[status].occupy); }
+  function isRevenue(status){ return !!(STATUS_META[status] && STATUS_META[status].revenue); }
+  function statusPillHtml(status){
+    var m = STATUS_META[status] || {bg:'#eee',fg:'#999'};
+    return '<span class="status-pill" style="background:'+m.bg+';color:'+m.fg+';">'+escapeHtml(status)+'</span>';
+  }
+
+  // ---------- 儲存 / 讀取 ----------
+  function loadCustomers(){
+    try{ var raw = localStorage.getItem(CUSTOMERS_KEY); return raw ? JSON.parse(raw) : []; }catch(e){ return []; }
+  }
+  function saveCustomers(arr){ localStorage.setItem(CUSTOMERS_KEY, JSON.stringify(arr)); }
+  function loadAppointments(){
+    try{ var raw = localStorage.getItem(APPTS_KEY); return raw ? JSON.parse(raw) : []; }catch(e){ return []; }
+  }
+  function saveAppointments(arr){ localStorage.setItem(APPTS_KEY, JSON.stringify(arr)); }
+  function loadSettings(){
+    try{
+      var raw = localStorage.getItem(SETTINGS_KEY);
+      var s = raw ? Object.assign({}, DEFAULT_SETTINGS, JSON.parse(raw)) : Object.assign({}, DEFAULT_SETTINGS);
+      if(Array.isArray(s.items)){
+        s.items = s.items.map(function(it){ return (typeof it==='string') ? {name:it, price:0} : it; });
+      }
+      if(!Array.isArray(s.messageTemplates) || !s.messageTemplates.length){ s.messageTemplates = DEFAULT_SETTINGS.messageTemplates.slice(); }
+      return s;
+    }catch(e){ return Object.assign({}, DEFAULT_SETTINGS); }
+  }
+  function saveSettings(s){ localStorage.setItem(SETTINGS_KEY, JSON.stringify(s)); }
+  function loadReports(){
+    try{ var raw = localStorage.getItem(REPORTS_KEY); return raw ? JSON.parse(raw) : []; }catch(e){ return []; }
+  }
+  function saveReports(arr){ localStorage.setItem(REPORTS_KEY, JSON.stringify(arr)); }
+
+  // 把舊版「每筆預約內嵌客戶欄位」的陣列，拆成 客戶主檔 + 預約紀錄（用電話/姓名比對合併同一人）
+  function splitLegacyArray(oldList){
+    var statusMap = { upcoming:'待確認', done:'已完成', cancelled:'已取消' };
+    var custMap = {};
+    var newAppts = [];
+    (oldList||[]).forEach(function(old){
+      var key = old.phone ? ('p_'+old.phone) : ('n_'+(old.name||''));
+      var cust = custMap[key];
+      if(!cust){
+        cust = {
+          id: uid(), name: old.name||'', phone: old.phone||'',
+          contact: old.contact||'', birthday: old.birthday||'', note:'',
+          createdAt: old.createdAt || new Date().toISOString(),
+          updatedAt: new Date().toISOString()
+        };
+        custMap[key] = cust;
+      }else{
+        if(!cust.contact && old.contact) cust.contact = old.contact;
+        if(!cust.birthday && old.birthday) cust.birthday = old.birthday;
+      }
+      var status = old.status;
+      if(statusMap[status]) status = statusMap[status];
+      if(STATUS_LIST.indexOf(status)===-1) status = '待確認';
+      newAppts.push({
+        id: old.id || uid(),
+        customerId: cust.id,
+        item: old.item||'',
+        datetime: old.datetime||'',
+        payment: old.payment||'現金',
+        status: status,
+        cancelReason: old.cancelReason||'',
+        deposit: !!old.deposit,
+        paid: !!old.paid,
+        paidAt: old.paidAt||'',
+        amount: Number(old.amount)||0,
+        extra: Number(old.extra)||0,
+        total: (Number(old.amount)||0)+(Number(old.extra)||0),
+        topup: Number(old.topup)||0,
+        note: old.note||'',
+        createdAt: old.createdAt || new Date().toISOString(),
+        updatedAt: old.updatedAt || new Date().toISOString()
+      });
+    });
+    var custArr = Object.keys(custMap).map(function(k){ return custMap[k]; });
+    return { customers: custArr, appointments: newAppts };
+  }
+
+  // 首次載入：若尚未有新版資料，且偵測到舊版資料，自動搬遷
+  (function migrateIfNeeded(){
+    if(localStorage.getItem(APPTS_KEY)) return; // 已是新版格式
+    var oldRaw = localStorage.getItem(OLD_KEY);
+    if(!oldRaw) return; // 全新使用者，不用搬
+    var oldList = [];
+    try{ oldList = JSON.parse(oldRaw); }catch(e){ oldList = []; }
+    if(!Array.isArray(oldList) || !oldList.length) return;
+    var result = splitLegacyArray(oldList);
+    saveCustomers(result.customers);
+    saveAppointments(result.appointments);
+  })();
+
+  // ---------- 資料狀態 ----------
+  var customers = loadCustomers();
+  var appointments = loadAppointments();
+  var reports = loadReports();
+  var settings = loadSettings();
+  var todayPageDate = toDateStr(new Date());
+
+  // 舊版狀態值遷移保險（避免匯入舊備份時漏轉換）
+  (function fixStatuses(){
+    var map = { upcoming:'待確認', done:'已完成', cancelled:'已取消' };
+    var changed = false;
+    appointments.forEach(function(a){
+      if(map[a.status]){ a.status = map[a.status]; changed = true; }
+      if(STATUS_LIST.indexOf(a.status)===-1){ a.status = '待確認'; changed = true; }
+    });
+    if(changed) saveAppointments(appointments);
+  })();
+
+  function getCustomer(id){
+    return customers.find(function(c){ return c.id===id; }) || {id:'', name:'（客戶已刪除）', phone:'', contact:'', birthday:'', note:''};
+  }
+  function customerStats(customerId){
+    var appts = appointments.filter(function(a){ return a.customerId===customerId; });
+    var revenueAppts = appts.filter(function(a){ return isRevenue(a.status); });
+    var totalSpend = revenueAppts.reduce(function(s,a){ return s+(Number(a.amount)||0)+(Number(a.extra)||0); },0);
+    var visitCount = revenueAppts.length;
+    var cancelCount = appts.filter(function(a){return a.status==='已取消';}).length;
+    var noShowCount = appts.filter(function(a){return a.status==='未到店';}).length;
+    var lastVisit = null;
+    revenueAppts.forEach(function(a){ if(a.datetime && (!lastVisit || a.datetime>lastVisit)) lastVisit = a.datetime; });
+    var avgTicket = visitCount ? Math.round(totalSpend/visitCount) : 0;
+    return { apptCount:appts.length, visitCount:visitCount, totalSpend:totalSpend, cancelCount:cancelCount, noShowCount:noShowCount, lastVisit:lastVisit, avgTicket:avgTicket };
+  }
+  function isReturningCustomer(apptRecord){
+    return appointments.some(function(a){
+      return a.id!==apptRecord.id && a.customerId===apptRecord.customerId && a.datetime && apptRecord.datetime && a.datetime < apptRecord.datetime;
+    });
+  }
+
+  // 計算指定月份（'YYYY-MM'）的營運統計，供報表比較與月報存檔共用
+  function computeMonthStats(monthPrefix){
+    var monthAppts = appointments.filter(function(a){ return a.datetime && a.datetime.slice(0,7)===monthPrefix; });
+    var revenueAppts = monthAppts.filter(function(a){ return isRevenue(a.status); });
+    var revenue = revenueAppts.reduce(function(s,a){ return s+(Number(a.amount)||0)+(Number(a.extra)||0); },0);
+    var topUp = revenueAppts.reduce(function(s,a){ return s+(Number(a.topup)||0); },0);
+    var doneCount = monthAppts.filter(function(a){return a.status==='已完成';}).length;
+    var cancelCount = monthAppts.filter(function(a){return a.status==='已取消';}).length;
+    var noShowCount = monthAppts.filter(function(a){return a.status==='未到店';}).length;
+    var avgTicket = revenueAppts.length ? Math.round(revenue/revenueAppts.length) : 0;
+
+    var uniqueCustomerIds = {};
+    revenueAppts.forEach(function(a){ uniqueCustomerIds[a.customerId]=true; });
+    var uniqueCustomerCount = Object.keys(uniqueCustomerIds).length;
+
+    var newCustomerCount = 0;
+    Object.keys(uniqueCustomerIds).forEach(function(cid){
+      var firstDate = null;
+      appointments.forEach(function(a){
+        if(a.customerId===cid && isRevenue(a.status) && a.datetime){
+          if(!firstDate || a.datetime<firstDate) firstDate = a.datetime;
+        }
+      });
+      if(firstDate && firstDate.slice(0,7)===monthPrefix) newCustomerCount++;
+    });
+    var repeatCustomerCount = uniqueCustomerCount - newCustomerCount;
+    var repeatRate = uniqueCustomerCount ? Math.round(repeatCustomerCount/uniqueCustomerCount*100) : 0;
+
+    return {
+      month: monthPrefix, apptCount: monthAppts.length, revenue: revenue, topUp: topUp,
+      doneCount: doneCount, cancelCount: cancelCount, noShowCount: noShowCount, avgTicket: avgTicket,
+      uniqueCustomerCount: uniqueCustomerCount, newCustomerCount: newCustomerCount, repeatRate: repeatRate
+    };
+  }
+  function monthPrefixOf(offsetFromCurrent){
+    var d = new Date();
+    d.setDate(1);
+    d.setMonth(d.getMonth()+offsetFromCurrent);
+    return d.getFullYear()+'-'+pad(d.getMonth()+1);
+  }
+  function monthLabel(monthPrefix){
+    var parts = monthPrefix.split('-');
+    return parts[0]+'年'+Number(parts[1])+'月';
+  }
+
+  function getDuration(){ return Number(settings.duration)||60; }
+  function getInterval(){ return Number(settings.interval)||30; }
+  function apptEnd(datetimeStr){ return new Date(parseLocal(datetimeStr).getTime() + getDuration()*60000); }
+  function timeToMin(t){ var p=(t||'0:0').split(':'); return (parseInt(p[0],10)||0)*60+(parseInt(p[1],10)||0); }
+  function minToTime(m){ m=((m%1440)+1440)%1440; return pad(Math.floor(m/60))+':'+pad(m%60); }
+  function overlaps(aS,aE,bS,bE){ return aS < bE && bS < aE; }
+
+  function findConflict(datetimeStr, excludeId){
+    if(!datetimeStr) return null;
+    var start = parseLocal(datetimeStr);
+    var end = apptEnd(datetimeStr);
+    var dayStr = datetimeStr.slice(0,10);
+    return appointments.find(function(a){
+      if(a.id===excludeId) return false;
+      if(!isOccupying(a.status)) return false;
+      if(!a.datetime || a.datetime.slice(0,10)!==dayStr) return false;
+      var cs = parseLocal(a.datetime), ce = apptEnd(a.datetime);
+      return overlaps(start,end,cs,ce);
+    });
+  }
+
+  function computeDaySlots(dateStr){
+    var startMin = timeToMin(settings.start), endMin = timeToMin(settings.end);
+    var dur = getDuration(), interval = getInterval();
+    var dayItems = appointments.filter(function(a){ return isOccupying(a.status) && a.datetime && a.datetime.slice(0,10)===dateStr; });
+    var busyRanges = dayItems.map(function(a){
+      var s = timeToMin(toTimeStr(parseLocal(a.datetime)));
+      return [s, s+dur];
+    });
+    var freeStarts = [];
+    for(var t=startMin; t+dur<=endMin; t+=interval){
+      var conflict = busyRanges.some(function(r){ return overlaps(t,t+dur,r[0],r[1]); });
+      if(!conflict) freeStarts.push(t);
+    }
+    var totalSlots = freeStarts.length + dayItems.length;
+    return { totalSlots:totalSlots, booked:dayItems.length, remaining:freeStarts.length, freeStarts:freeStarts, items:dayItems };
+  }
+
+  // ================= 頁籤切換 =================
+  var tabBtns = document.querySelectorAll('.tab-btn');
+  function switchTo(view){
+    tabBtns.forEach(function(b){ b.classList.toggle('active', b.dataset.view===view); });
+    document.querySelectorAll('.view').forEach(function(v){ v.classList.remove('active'); });
+    document.getElementById('view-'+view).classList.add('active');
+    if(view==='appts') renderList();
+    if(view==='customers') renderCustomers();
+    if(view==='dashboard') renderDashboard();
+    if(view==='timeline'){ renderTimeline(); renderMonthAvailability(); renderShopSettings(); }
+    if(view==='today') renderTodayPage();
+    if(view==='backup') renderLastBackupHint();
+    if(view==='reports') renderReportsPage();
+  }
+  tabBtns.forEach(function(btn){ btn.addEventListener('click', function(){ switchTo(btn.dataset.view); }); });
+
+  // ================= 儀表板 =================
+  var STALE_MS = 24*60*60*1000;
+  var STALE_STATUSES = ['待確認','已確認'];
+  function computeStaleAppointments(){
+    var now = Date.now();
+    return appointments.filter(function(a){
+      if(STALE_STATUSES.indexOf(a.status)===-1) return false;
+      var last = a.updatedAt || a.createdAt;
+      if(!last) return false;
+      return (now - new Date(last).getTime()) > STALE_MS;
+    });
+  }
+
+  function renderDashboard(){
+    renderBackupReminder();
+    renderBirthdayReminder();
+    var now = new Date();
+    var todayStr = toDateStr(now);
+    var tomorrow = new Date(now.getTime()+86400000);
+    var tomorrowStr = toDateStr(tomorrow);
+
+    var tomorrowList = appointments.filter(function(a){
+      return isOccupying(a.status) && a.datetime && a.datetime.slice(0,10)===tomorrowStr;
+    }).sort(function(a,b){ return a.datetime.localeCompare(b.datetime); });
+
+    var bannerEl = document.getElementById('reminderBanner');
+    if(tomorrowList.length){
+      var items = tomorrowList.map(function(a){
+        var cust = getCustomer(a.customerId);
+        return '<div class="reminder-item">'+pad(parseLocal(a.datetime).getHours())+':'+pad(parseLocal(a.datetime).getMinutes())+
+          ' － <b>'+escapeHtml(cust.name)+'</b>（'+escapeHtml(a.item)+'）'+escapeHtml(cust.phone||'')+'</div>';
+      }).join('');
+      bannerEl.innerHTML = '<div class="reminder-banner"><div class="icon">⏰</div><div style="flex:1;"><h4>明日預約提醒（共 '+tomorrowList.length+' 筆）</h4><div class="reminder-list">'+items+'</div></div></div>';
+    }else{ bannerEl.innerHTML = ''; }
+
+    var todayItems = appointments.filter(function(a){ return a.datetime && a.datetime.slice(0,10)===todayStr && isRevenue(a.status); });
+    var todayRevenue = todayItems.reduce(function(s,a){ return s + (Number(a.amount)||0) + (Number(a.extra)||0); },0);
+    var todayTopUp = todayItems.reduce(function(s,a){ return s + (Number(a.topup)||0); },0);
+
+    var monthPrefix = todayStr.slice(0,7);
+    var monthItems = appointments.filter(function(a){ return a.datetime && a.datetime.slice(0,7)===monthPrefix && isRevenue(a.status); });
+    var monthRevenue = monthItems.reduce(function(s,a){ return s + (Number(a.amount)||0) + (Number(a.extra)||0); },0);
+    var monthTopUp = monthItems.reduce(function(s,a){ return s + (Number(a.topup)||0); },0);
+
+    var totalCustomers = customers.length;
+    var allTopUp = appointments.reduce(function(s,a){ return s + (Number(a.topup)||0); },0);
+
+    var allValid = appointments.filter(function(a){ return isRevenue(a.status); });
+    var allRevenue = allValid.reduce(function(s,a){ return s + (Number(a.amount)||0) + (Number(a.extra)||0); },0);
+    var avgTicket = allValid.length ? Math.round(allRevenue/allValid.length) : 0;
+    var byCustomer = {};
+    allValid.forEach(function(a){ byCustomer[a.customerId] = (byCustomer[a.customerId]||0)+1; });
+    var repeatCustomerCount = Object.keys(byCustomer).filter(function(k){ return byCustomer[k]>=2; }).length;
+    var repeatRate = totalCustomers ? Math.round(repeatCustomerCount/totalCustomers*100) : 0;
+
+    var staleList = computeStaleAppointments();
+
+    var grid = document.getElementById('statGrid');
+    grid.innerHTML =
+      statCard('今日預約', todayItems.length+' 筆','pink') +
+      statCard('今日份總營收', fmtMoney(todayRevenue),'pink') +
+      statCard('今日儲值進帳', fmtMoney(todayTopUp),'blue') +
+      statCard('本月總營收', fmtMoney(monthRevenue),'blue') +
+      statCard('本月儲值進帳', fmtMoney(monthTopUp),'sage') +
+      statCard('明日待處理', tomorrowList.length+' 筆','pink') +
+      statCard('累積客戶數', totalCustomers+' 位','sage') +
+      statCard('累積儲值總額', fmtMoney(allTopUp),'sage') +
+      statCard('平均客單價（美業指標）', fmtMoney(avgTicket),'blue') +
+      statCard('回客率（美業指標）', repeatRate+' %','blue') +
+      statCard('超過1天未跟進', staleList.length+' 筆','pink');
+
+    var doneCount = monthItems.filter(function(a){return a.status==='已完成';}).length;
+    var pendingCount = monthItems.filter(function(a){return a.status==='待確認'||a.status==='已確認'||a.status==='已付訂';}).length;
+    document.getElementById('monthSummary').innerHTML =
+      '本月共有 <b>'+monthItems.length+'</b> 筆有效預約，已完成 <b>'+doneCount+'</b> 筆、待處理 <b>'+pendingCount+'</b> 筆。<br>' +
+      '本月服務營收 <b>'+fmtMoney(monthRevenue)+'</b>，加上儲值進帳共 <b>'+fmtMoney(monthRevenue+monthTopUp)+'</b>。<br>' +
+      '平均客單價約 <b>'+fmtMoney(avgTicket)+'</b>，回客率約 <b>'+repeatRate+'%</b>。';
+  }
+  function statCard(label,value,color){
+    return '<div class="stat-card"><div class="label">'+label+'</div><div class="value '+color+'">'+value+'</div></div>';
+  }
+
+  // ================= 時間軸 / 空檔 =================
+  function renderTimeline(){
+    var todayStr = toDateStr(new Date());
+    document.getElementById('todayLabel').textContent = todayStr + '（今日）';
+    document.getElementById('setStart').value = settings.start;
+    document.getElementById('setEnd').value = settings.end;
+    document.getElementById('setDuration').value = settings.duration;
+    document.getElementById('setInterval').value = settings.interval;
+
+    var info = computeDaySlots(todayStr);
+    var sorted = info.items.slice().sort(function(a,b){ return a.datetime.localeCompare(b.datetime); });
+    var startMin = timeToMin(settings.start), endMin = timeToMin(settings.end), dur = getDuration();
+    var rows = [], cursor = startMin;
+    sorted.forEach(function(a){
+      var apptMin = timeToMin(toTimeStr(parseLocal(a.datetime)));
+      if(apptMin > cursor + 4) rows.push(freeRow(cursor, apptMin));
+      var apptEndMin = apptMin + dur;
+      rows.push(busyRow(apptMin, apptEndMin, a));
+      cursor = Math.max(cursor, apptEndMin);
+    });
+    if(cursor < endMin - 4) rows.push(freeRow(cursor, endMin));
+
+    var el = document.getElementById('timeline');
+    el.innerHTML = rows.length ? rows.join('') : '<div class="empty-state"><div class="em">🌤️</div>今日整天都是空檔，還沒有安排預約</div>';
+  }
+  function busyRow(startMin,endMin,a){
+    var cust = getCustomer(a.customerId);
+    return '<div class="tl-row busy"><div class="tl-time">'+minToTime(startMin)+' - '+minToTime(endMin)+'</div>' +
+      '<div class="tl-content"><b>'+escapeHtml(cust.name)+'</b> ‧ '+escapeHtml(a.item)+'</div>' +
+      '<div class="tl-badge busy">已預約</div></div>';
+  }
+  function freeRow(startMin,endMin){
+    return '<div class="tl-row free"><div class="tl-time">'+minToTime(startMin)+' - '+minToTime(endMin)+'</div>' +
+      '<div class="tl-content">可安排新預約</div><div class="tl-badge free">空檔</div></div>';
+  }
+  document.getElementById('saveSettingsBtn').addEventListener('click', function(){
+    settings.start = document.getElementById('setStart').value || DEFAULT_SETTINGS.start;
+    settings.end = document.getElementById('setEnd').value || DEFAULT_SETTINGS.end;
+    settings.duration = Number(document.getElementById('setDuration').value) || DEFAULT_SETTINGS.duration;
+    settings.interval = Number(document.getElementById('setInterval').value) || DEFAULT_SETTINGS.interval;
+    saveSettings(settings);
+    renderTimeline(); renderMonthAvailability(); renderTodayPage();
+    showToast('已儲存營業時間設定');
+  });
+
+  // ================= 本月可預約統計 =================
+  function renderMonthAvailability(){
+    var now = new Date();
+    var y = now.getFullYear(), m = now.getMonth();
+    var daysInMonth = new Date(y, m+1, 0).getDate();
+    var totalSlots=0, bookedSlots=0, fullDays=0;
+    var dayCells = [];
+    for(var d=1; d<=daysInMonth; d++){
+      var dateStr = y+'-'+pad(m+1)+'-'+pad(d);
+      var info = computeDaySlots(dateStr);
+      totalSlots += info.totalSlots;
+      bookedSlots += info.booked;
+      var isFull = info.remaining<=0;
+      if(isFull) fullDays++;
+      dayCells.push({d:d, dateStr:dateStr, full:isFull, isToday: dateStr===toDateStr(now)});
+    }
+    var remainingSlots = totalSlots - bookedSlots;
+    var usageRate = totalSlots ? Math.round(bookedSlots/totalSlots*1000)/10 : 0;
+    var freeDays = daysInMonth - fullDays;
+
+    document.getElementById('monthAvailLabel').textContent = y+'年'+(m+1)+'月';
+    document.getElementById('monthAvailGrid').innerHTML =
+      monthCell(daysInMonth,'本月天數') +
+      monthCell(freeDays,'還有空檔天數') +
+      monthCell(fullDays,'已滿天數') +
+      monthCell(totalSlots,'本月可預約時段') +
+      monthCell(bookedSlots,'已預約時段') +
+      monthCell(remainingSlots,'剩餘可預約時段') +
+      monthCell(usageRate+'%','預約使用率');
+
+    document.getElementById('miniCal').innerHTML = dayCells.map(function(c){
+      return '<div class="day'+(c.full?' full':'')+(c.isToday?' today':'')+'" data-date="'+c.dateStr+'">' +
+        '<div class="d">'+c.d+'</div><div>'+(c.full?'🔴':'🟢')+'</div></div>';
+    }).join('');
+    document.querySelectorAll('#miniCal .day').forEach(function(el){
+      el.addEventListener('click', function(){
+        todayPageDate = el.dataset.date;
+        switchTo('today');
+      });
+    });
+  }
+  function monthCell(num,label){
+    return '<div class="cell"><div class="num">'+num+'</div><div class="lb">'+label+'</div></div>';
+  }
+
+  // ================= 店家設定：店名 / 品牌色 / 服務項目 =================
+  function populateItemSelect(){
+    var sel = document.getElementById('f_item');
+    var current = sel.value;
+    var opts = settings.items.map(function(it){ return '<option value="'+escapeHtml(it.name)+'" data-price="'+(Number(it.price)||0)+'">'+escapeHtml(it.name)+'</option>'; });
+    opts.push('<option value="其他" data-price="0">其他（自行輸入）</option>');
+    sel.innerHTML = opts.join('');
+    if(settings.items.some(function(it){return it.name===current;}) || current==='其他') sel.value = current;
+  }
+
+  function renderShopSettings(){
+    document.getElementById('setShopName').value = settings.shopName;
+    document.getElementById('setPinEnabled').checked = !!settings.pinEnabled;
+    document.getElementById('setPinValue').value = settings.pin || '';
+    document.getElementById('setPinRecovery').value = settings.pinRecovery || '';
+    renderTemplateManageList();
+
+    var swatchEl = document.getElementById('themeSwatches');
+    swatchEl.innerHTML = Object.keys(THEMES).map(function(key){
+      var t = THEMES[key];
+      var active = (settings.theme===key) ? ' active' : '';
+      return '<button type="button" class="theme-swatch'+active+'" data-theme="'+key+'" title="'+t.label+'" style="background:linear-gradient(135deg,'+t.pink+','+t.soft+');">'+(settings.theme===key?'✓':'')+'</button>';
+    }).join('') + '<span class="hint" style="align-self:center;">'+ (THEMES[settings.theme] ? THEMES[settings.theme].label : '') +'</span>';
+
+    document.querySelectorAll('#themeSwatches .theme-swatch').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        settings.theme = btn.dataset.theme;
+        applyTheme(settings.theme);
+        saveSettings(settings);
+        renderShopSettings();
+        showToast('已套用「'+THEMES[settings.theme].label+'」配色');
+      });
+    });
+
+    document.getElementById('itemManageList').innerHTML = settings.items.map(function(item, idx){
+      return '<span class="item-chip" data-idx="'+idx+'" style="cursor:pointer;" title="點擊可編輯名稱與價格">' +
+        escapeHtml(item.name) +
+        ' <button type="button" class="chip-del" data-idx="'+idx+'" title="刪除此項目">✕</button></span>';
+    }).join('') || '<span class="hint">尚未設定任何服務項目</span>';
+
+    document.querySelectorAll('#itemManageList .item-chip').forEach(function(chip){
+      chip.addEventListener('click', function(e){
+        try{
+          if(e.target.classList.contains('chip-del')) return;
+          var idx = Number(chip.dataset.idx);
+          var item = settings.items[idx];
+          var oldName = item.name;
+          var newName = prompt('修改服務項目名稱：', oldName);
+          if(newName===null) return;
+          newName = newName.trim();
+          if(!newName){ showToast('名稱不能空白'); return; }
+          if(newName!==oldName && settings.items.some(function(it){return it.name===newName;})){ showToast('這個項目名稱已經存在囉'); return; }
+
+          var newPriceStr = prompt('設定「'+newName+'」的預設價格 (NT$，選新增預約時會自動帶入，可留空或按取消不改動)：', item.price||0);
+          var newPrice = item.price;
+          if(newPriceStr!==null){
+            var num = Number(newPriceStr);
+            if(!isNaN(num) && num>=0) newPrice = num;
+          }
+
+          var nameChanged = newName!==oldName;
+          item.name = newName;
+          item.price = newPrice;
+          saveSettings(settings);
+          if(nameChanged){
+            var changed = false;
+            appointments.forEach(function(a){ if(a.item===oldName){ a.item = newName; changed = true; } });
+            if(changed) saveAppointments(appointments);
+          }
+          renderShopSettings();
+          populateItemSelect();
+          refreshAll();
+          showToast('已更新「'+newName+'」');
+        }catch(err){
+          showToast('⚠️ 編輯項目時發生錯誤：'+err.message);
+        }
+      });
+    });
+
+    document.querySelectorAll('#itemManageList .chip-del').forEach(function(btn){
+      btn.addEventListener('click', function(e){
+        try{
+          e.stopPropagation();
+          var idx = Number(btn.dataset.idx);
+          var removed = settings.items[idx].name;
+          if(!confirm('確定要刪除服務項目「'+removed+'」嗎？（不會影響已建立的預約紀錄）')) return;
+          settings.items.splice(idx,1);
+          saveSettings(settings);
+          renderShopSettings();
+          populateItemSelect();
+          showToast('已刪除項目「'+removed+'」');
+        }catch(err){
+          showToast('⚠️ 刪除項目時發生錯誤：'+err.message);
+        }
+      });
+    });
+  }
+
+  // ---- 訊息模板管理 ----
+  function renderTemplateManageList(){
+    var el = document.getElementById('templateManageList');
+    el.innerHTML = settings.messageTemplates.map(function(tpl, idx){
+      return '<div class="template-card">' +
+        '<input type="text" class="tpl-name" data-idx="'+idx+'" value="'+escapeHtml(tpl.name)+'">' +
+        '<textarea class="tpl-content" data-idx="'+idx+'">'+escapeHtml(tpl.content)+'</textarea>' +
+        '<div class="tpl-actions">' +
+          '<button type="button" class="btn btn-ghost btn-xs tpl-copy" data-idx="'+idx+'">複製預覽</button>' +
+          '<button type="button" class="btn btn-primary btn-xs tpl-save" data-idx="'+idx+'">儲存</button>' +
+          '<button type="button" class="btn btn-danger btn-xs tpl-del" data-idx="'+idx+'">刪除</button>' +
+        '</div>' +
+        '<div class="hint" style="margin-top:4px;">可用變數：{name} 客戶姓名、{date} 日期、{time} 時間、{item} 項目、{shopName} 店名</div>' +
+      '</div>';
+    }).join('') || '<div class="hint">尚未設定任何訊息模板</div>';
+
+    el.querySelectorAll('.tpl-save').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        var idx = Number(btn.dataset.idx);
+        var card = btn.closest('.template-card');
+        var name = card.querySelector('.tpl-name').value.trim();
+        var content = card.querySelector('.tpl-content').value.trim();
+        if(!name || !content){ showToast('名稱與內容都不能空白'); return; }
+        settings.messageTemplates[idx].name = name;
+        settings.messageTemplates[idx].content = content;
+        saveSettings(settings);
+        showToast('已儲存模板「'+name+'」');
+      });
+    });
+    el.querySelectorAll('.tpl-copy').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        var idx = Number(btn.dataset.idx);
+        var card = btn.closest('.template-card');
+        var content = card.querySelector('.tpl-content').value;
+        copyToClipboard(fillTemplate(content, null));
+      });
+    });
+    el.querySelectorAll('.tpl-del').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        var idx = Number(btn.dataset.idx);
+        var name = settings.messageTemplates[idx].name;
+        if(!confirm('確定要刪除模板「'+name+'」嗎？')) return;
+        settings.messageTemplates.splice(idx,1);
+        saveSettings(settings);
+        renderTemplateManageList();
+        showToast('已刪除模板「'+name+'」');
+      });
+    });
+  }
+  document.getElementById('addTemplateBtn').addEventListener('click', function(){
+    settings.messageTemplates.push({ id:'tpl-'+uid(), name:'新模板', content:'請輸入訊息內容' });
+    saveSettings(settings);
+    renderTemplateManageList();
+  });
+
+  document.getElementById('addItemBtn').addEventListener('click', function(){
+    try{
+      var input = document.getElementById('newItemInput');
+      var val = input.value.trim();
+      if(!val){ showToast('請先輸入項目名稱'); return; }
+      if(settings.items.some(function(it){return it.name===val;})){ showToast('這個項目已經存在囉'); return; }
+      settings.items.push({name:val, price:0});
+      saveSettings(settings);
+      input.value = '';
+      renderShopSettings();
+      populateItemSelect();
+      showToast('已新增項目「'+val+'」');
+    }catch(err){
+      showToast('⚠️ 新增項目時發生錯誤：'+err.message);
+    }
+  });
+  document.getElementById('newItemInput').addEventListener('keydown', function(e){
+    if(e.key==='Enter'){ e.preventDefault(); document.getElementById('addItemBtn').click(); }
+  });
+
+  document.getElementById('saveShopSettingsBtn').addEventListener('click', function(){
+    settings.shopName = document.getElementById('setShopName').value.trim() || DEFAULT_SETTINGS.shopName;
+
+    var pinEnabled = document.getElementById('setPinEnabled').checked;
+    var pinValue = document.getElementById('setPinValue').value.trim();
+    var pinRecovery = document.getElementById('setPinRecovery').value.trim();
+    if(pinEnabled){
+      if(!/^\d{4}$/.test(pinValue)){
+        showToast('⚠️ 請輸入 4 位數字作為 PIN 碼');
+        return;
+      }
+      if(!pinRecovery){
+        showToast('⚠️ 請設定救援密語，之後忘記PIN碼時才能重設，不然可能會被永久鎖住');
+        return;
+      }
+      settings.pinEnabled = true;
+      settings.pin = pinValue;
+      settings.pinRecovery = pinRecovery;
+    }else{
+      settings.pinEnabled = false;
+      settings.pin = '';
+      settings.pinRecovery = '';
+    }
+
+    saveSettings(settings);
+    document.getElementById('shopTitle').textContent = settings.shopName;
+    showToast('已儲存店家設定');
+  });
+
+  // ================= 報表：本月比較 / 趨勢 / 存檔 =================
+  function growthHtml(cur, prev){
+    if(prev===0){ return cur>0 ? '<span class="growth-up">新增</span>' : '<span class="hint">—</span>'; }
+    var pct = Math.round((cur-prev)/prev*1000)/10;
+    if(pct>0) return '<span class="growth-up">▲ +'+pct+'%</span>';
+    if(pct<0) return '<span class="growth-down">▼ '+pct+'%</span>';
+    return '<span class="hint">持平</span>';
+  }
+
+  function renderReportsPage(){
+    var curPrefix = monthPrefixOf(0);
+    var prevPrefix = monthPrefixOf(-1);
+    var cur = computeMonthStats(curPrefix);
+    var prev = computeMonthStats(prevPrefix);
+
+    document.getElementById('compareGrid').innerHTML =
+      statCard(monthLabel(curPrefix)+' 營收', fmtMoney(cur.revenue),'pink') +
+      statCard(monthLabel(prevPrefix)+' 營收', fmtMoney(prev.revenue),'blue') +
+      statCard('營收成長', growthHtml(cur.revenue, prev.revenue),'sage') +
+      statCard(monthLabel(curPrefix)+' 預約數', cur.apptCount+' 筆','pink') +
+      statCard(monthLabel(prevPrefix)+' 預約數', prev.apptCount+' 筆','blue') +
+      statCard('預約數成長', growthHtml(cur.apptCount, prev.apptCount),'sage') +
+      statCard(monthLabel(curPrefix)+' 平均客單價', fmtMoney(cur.avgTicket),'pink') +
+      statCard(monthLabel(curPrefix)+' 新客數', cur.newCustomerCount+' 位','sage');
+
+    // 近6個月趨勢
+    var months = [];
+    for(var i=-5;i<=0;i++) months.push(monthPrefixOf(i));
+    var trendStats = months.map(function(m){ return computeMonthStats(m); });
+    var maxRevenue = Math.max.apply(null, trendStats.map(function(s){return s.revenue;}).concat([1]));
+    document.getElementById('trendTable').innerHTML = trendStats.map(function(s){
+      var widthPct = Math.round(s.revenue/maxRevenue*100);
+      return '<div class="trend-row">' +
+        '<div>'+monthLabel(s.month).replace('年','/').replace('月','')+'</div>' +
+        '<div class="trend-bar-track"><div class="trend-bar-fill" style="width:'+widthPct+'%;"></div></div>' +
+        '<div class="val">'+fmtMoney(s.revenue)+'</div>' +
+      '</div>';
+    }).join('');
+
+    // 報表存檔清單
+    document.getElementById('reportMonthPicker').value = curPrefix;
+    renderReportList();
+  }
+
+  function renderReportList(){
+    var sorted = reports.slice().sort(function(a,b){ return b.month.localeCompare(a.month); });
+    var el = document.getElementById('reportList');
+    if(!sorted.length){
+      el.innerHTML = '<div class="empty-state"><div class="em">🗃️</div>還沒有任何存檔報表</div>';
+      return;
+    }
+    el.innerHTML = sorted.map(function(r){
+      return '<div class="report-card">' +
+        '<div><div class="rmonth">'+monthLabel(r.month)+' 報表</div>' +
+          '<div class="rmeta">產生於 '+new Date(r.generatedAt).toLocaleString('zh-TW')+' ‧ 營收 '+fmtMoney(r.stats.revenue)+'</div></div>' +
+        '<div class="card-actions">' +
+          '<button class="btn btn-ghost btn-sm" onclick="WT.viewReport(\''+r.id+'\')">檢視</button>' +
+          '<button class="btn btn-ghost btn-sm" onclick="WT.exportReportCsv(\''+r.id+'\')">CSV</button>' +
+          '<button class="btn btn-ghost btn-sm" onclick="WT.exportReportPdf(\''+r.id+'\')">PDF</button>' +
+          '<button class="btn btn-danger btn-sm" onclick="WT.deleteReport(\''+r.id+'\')">刪除</button>' +
+        '</div>' +
+      '</div>';
+    }).join('');
+  }
+
+  document.getElementById('generateReportBtn').addEventListener('click', function(){
+    var monthPrefix = document.getElementById('reportMonthPicker').value;
+    if(!monthPrefix){ showToast('請先選擇月份'); return; }
+    var existing = reports.find(function(r){ return r.month===monthPrefix; });
+    if(existing && !confirm('「'+monthLabel(monthPrefix)+'」已經有一份存檔了，要覆蓋成最新數字嗎？')) return;
+
+    var stats = computeMonthStats(monthPrefix);
+    var record = { id: existing ? existing.id : uid(), month: monthPrefix, generatedAt: new Date().toISOString(), shopName: settings.shopName, stats: stats };
+    if(existing){
+      var idx = reports.findIndex(function(r){return r.id===existing.id;});
+      reports[idx] = record;
+    }else{
+      reports.push(record);
+    }
+    saveReports(reports);
+    renderReportList();
+    showToast('已產生「'+monthLabel(monthPrefix)+'」報表存檔');
+  });
+
+  var REPORT_ROW_LABELS = [
+    ['apptCount','總預約數','筆'], ['doneCount','已完成','筆'], ['cancelCount','已取消','筆'], ['noShowCount','未到店','筆'],
+    ['revenue','服務營收','money'], ['topUp','儲值進帳','money'], ['avgTicket','平均客單價','money'],
+    ['uniqueCustomerCount','服務客戶數','位'], ['newCustomerCount','新客數','位'], ['repeatRate','回客率','%']
+  ];
+  function reportRowsHtml(stats){
+    return REPORT_ROW_LABELS.map(function(r){
+      var val = stats[r[0]];
+      var display = r[2]==='money' ? fmtMoney(val) : (val + (r[2]==='%' ? '%' : ' '+r[2]));
+      return '<tr><td class="label">'+r[1]+'</td><td class="val">'+display+'</td></tr>';
+    }).join('');
+  }
+
+  window.WT = window.WT || {};
+  WT.viewReport = function(id){
+    var r = reports.find(function(x){return x.id===id;});
+    if(!r) return;
+    document.getElementById('customerDetailBody').innerHTML =
+      '<h3>'+monthLabel(r.month)+' 月報表</h3>' +
+      '<div class="hint" style="margin-bottom:14px;">'+escapeHtml(r.shopName||'')+' ‧ 產生於 '+new Date(r.generatedAt).toLocaleString('zh-TW')+'</div>' +
+      '<table style="width:100%;border-collapse:collapse;">'+reportRowsHtml(r.stats).replace(/<td class="label">/g,'<td class="label" style="padding:8px 4px;border-bottom:1px solid var(--light-blue);color:var(--gray);font-size:13px;">').replace(/<td class="val">/g,'<td class="val" style="padding:8px 4px;border-bottom:1px solid var(--light-blue);text-align:right;font-weight:700;">')+'</table>';
+    document.getElementById('customerDetailOverlay').classList.add('active');
+  };
+  WT.deleteReport = function(id){
+    var r = reports.find(function(x){return x.id===id;});
+    if(!r) return;
+    if(!confirm('確定要刪除「'+monthLabel(r.month)+'」的存檔報表嗎？')) return;
+    reports = reports.filter(function(x){return x.id!==id;});
+    saveReports(reports);
+    renderReportList();
+    showToast('已刪除存檔報表');
+  };
+  WT.exportReportCsv = function(id){
+    var r = reports.find(function(x){return x.id===id;});
+    if(!r) return;
+    var rows = [['項目','數值'].map(toCsvField).join(',')];
+    REPORT_ROW_LABELS.forEach(function(item){
+      var val = r.stats[item[0]];
+      var display = item[2]==='money' ? val : (item[2]==='%' ? val+'%' : val);
+      rows.push([item[1], display].map(toCsvField).join(','));
+    });
+    downloadCsv(rows.join('\r\n'), 1, (r.shopName||'美業')+'_'+r.month+'_月報表');
+  };
+  WT.exportReportPdf = function(id){
+    var r = reports.find(function(x){return x.id===id;});
+    if(!r) return;
+    document.getElementById('printReportArea').innerHTML =
+      '<h2>'+escapeHtml(r.shopName||'')+' ‧ '+monthLabel(r.month)+' 月報表</h2>' +
+      '<div class="p-sub">產生於 '+new Date(r.generatedAt).toLocaleString('zh-TW')+'</div>' +
+      '<table>'+reportRowsHtml(r.stats)+'</table>';
+    showToast(isIOS ? '請在列印預覽點下方縮圖或分享圖示存成PDF' : '請在列印視窗選擇「另存為 PDF」');
+    setTimeout(function(){ window.print(); }, 150);
+  };
+
+  // ================= 備份提醒 =================
+  var BACKUP_REMINDER_DAYS = 7;
+  function renderBackupReminder(){
+    var el = document.getElementById('backupReminder');
+    if(!appointments.length && !customers.length){ el.innerHTML=''; return; }
+    var daysSince = settings.lastBackupAt ? Math.floor((Date.now() - new Date(settings.lastBackupAt).getTime())/86400000) : null;
+    if(daysSince===null || daysSince >= BACKUP_REMINDER_DAYS){
+      var msg = daysSince===null ? '你還沒有匯出過備份檔' : ('距離上次備份已經 <b>'+daysSince+'</b> 天');
+      el.innerHTML = '<div class="backup-reminder"><div class="msg">💾 '+msg+'，建議盡快匯出備份，避免換裝置或清瀏覽器時資料遺失。</div>' +
+        '<button class="btn btn-primary btn-sm" id="goBackupBtn">前往備份</button></div>';
+      var btn = document.getElementById('goBackupBtn');
+      if(btn) btn.addEventListener('click', function(){ switchTo('backup'); });
+    }else{
+      el.innerHTML = '';
+    }
+  }
+  function renderLastBackupHint(){
+    var el = document.getElementById('lastBackupHint');
+    if(!el) return;
+    el.textContent = settings.lastBackupAt
+      ? ('上次備份時間：'+ new Date(settings.lastBackupAt).toLocaleString('zh-TW'))
+      : '尚未匯出過備份檔';
+  }
+
+  // ================= 生日提醒 =================
+  var BIRTHDAY_WINDOW_DAYS = 7;
+  function computeUpcomingBirthdays(days){
+    var now = new Date(); now.setHours(0,0,0,0);
+    var results = [];
+    customers.forEach(function(c){
+      if(!c.birthday) return;
+      var bd = new Date(c.birthday+'T00:00:00');
+      if(isNaN(bd.getTime())) return;
+      var thisYear = new Date(now.getFullYear(), bd.getMonth(), bd.getDate());
+      if(thisYear < now) thisYear.setFullYear(thisYear.getFullYear()+1);
+      var diffDays = Math.round((thisYear-now)/86400000);
+      if(diffDays>=0 && diffDays<=days){
+        results.push({ customer:c, date:thisYear, diffDays:diffDays });
+      }
+    });
+    results.sort(function(a,b){ return a.diffDays-b.diffDays; });
+    return results;
+  }
+  function renderBirthdayReminder(){
+    var el = document.getElementById('birthdayReminder');
+    var list = computeUpcomingBirthdays(BIRTHDAY_WINDOW_DAYS);
+    if(!list.length){ el.innerHTML=''; return; }
+    var items = list.map(function(r){
+      var label = r.diffDays===0 ? '今天' : (r.diffDays+'天後');
+      return '<div class="reminder-item">'+(r.date.getMonth()+1)+'/'+r.date.getDate()+'（'+label+'）－ <b>'+escapeHtml(r.customer.name)+'</b>' +
+        ' <button class="btn btn-ghost btn-xs" style="margin-left:6px;" onclick="WT.copyBirthdayMsg(\''+r.customer.id+'\')">複製生日祝福</button></div>';
+    }).join('');
+    el.innerHTML = '<div class="reminder-banner"><div class="icon">🎂</div><div style="flex:1;"><h4>本週壽星（共 '+list.length+' 位）</h4><div class="reminder-list">'+items+'</div></div></div>';
+  }
+
+  // ================= 今日預約頁 =================
+  function shiftDate(dateStr, days){
+    var d = new Date(dateStr+'T00:00:00');
+    d.setDate(d.getDate()+days);
+    return toDateStr(d);
+  }
+  document.getElementById('prevDayBtn').addEventListener('click', function(){ todayPageDate = shiftDate(todayPageDate,-1); renderTodayPage(); });
+  document.getElementById('nextDayBtn').addEventListener('click', function(){ todayPageDate = shiftDate(todayPageDate,1); renderTodayPage(); });
+  document.getElementById('todayBtn').addEventListener('click', function(){ todayPageDate = toDateStr(new Date()); renderTodayPage(); });
+  document.getElementById('todayPageDatePicker').addEventListener('change', function(e){
+    if(e.target.value){ todayPageDate = e.target.value; renderTodayPage(); }
+  });
+
+  function renderTodayPage(){
+    var dateStr = todayPageDate;
+    document.getElementById('todayPageDatePicker').value = dateStr;
+    var d = new Date(dateStr+'T00:00:00');
+    var days=['日','一','二','三','四','五','六'];
+    document.getElementById('todayPageLabel').textContent = dateStr.replace(/-/g,' / ')+'（週'+days[d.getDay()]+'）';
+
+    var items = appointments.filter(function(a){ return a.datetime && a.datetime.slice(0,10)===dateStr; })
+      .sort(function(a,b){ return a.datetime.localeCompare(b.datetime); });
+
+    var revenueItems = items.filter(function(a){ return isRevenue(a.status); });
+    var completedCount = items.filter(function(a){ return a.status==='已完成'; }).length;
+    var revenue = revenueItems.reduce(function(s,a){ return s+(Number(a.amount)||0)+(Number(a.extra)||0); },0);
+    var paidSum = revenueItems.filter(function(a){return a.paid;}).reduce(function(s,a){ return s+(Number(a.amount)||0)+(Number(a.extra)||0); },0);
+    var dueSum = revenue - paidSum;
+    var slotInfo = computeDaySlots(dateStr);
+
+    document.getElementById('todayStatGrid').innerHTML =
+      statCard('預約數', items.length+' 位','pink') +
+      statCard('已完成', completedCount+' 位','sage') +
+      statCard('營業額', fmtMoney(revenue),'pink') +
+      statCard('已收', fmtMoney(paidSum),'sage') +
+      statCard('待收', fmtMoney(dueSum),'pink') +
+      statCard('剩餘空檔', slotInfo.remaining+' 個','blue');
+
+    var listEl = document.getElementById('todayList');
+    if(!items.length){
+      listEl.innerHTML = '<div class="empty-state"><div class="em">🗓️</div>這天還沒有任何預約</div>';
+      return;
+    }
+    listEl.innerHTML = items.map(function(a){
+      var cust = getCustomer(a.customerId);
+      var total = (Number(a.amount)||0)+(Number(a.extra)||0);
+      var start = parseLocal(a.datetime);
+      var end = apptEnd(a.datetime);
+      var emoji = ITEM_EMOJI[a.item] || '✨';
+      var returning = isReturningCustomer(a);
+      var showPayBadge = isRevenue(a.status);
+      var actions = [];
+      actions.push('<button class="btn btn-ghost btn-xs" onclick="WT.info(\''+a.id+'\')">查看客戶</button>');
+      actions.push('<button class="btn btn-ghost btn-xs" onclick="WT.copyMessageFor(\''+a.id+'\')">複製訊息</button>');
+      actions.push('<button class="btn btn-ghost btn-xs" onclick="WT.edit(\''+a.id+'\')">編輯</button>');
+      if(a.status!=='已取消'){
+        actions.push('<button class="btn btn-ghost btn-xs" onclick="WT.edit(\''+a.id+'\')">改期</button>');
+      }
+      if(showPayBadge && !a.paid){
+        actions.push('<button class="btn btn-sage btn-xs" onclick="WT.collect(\''+a.id+'\')">收款</button>');
+      }
+
+      return '<div class="appt-card'+(a.status==='已取消'?' is-cancelled':'')+'">' +
+        '<div class="appt-top">' +
+          '<div><div class="appt-time">'+pad(start.getHours())+':'+pad(start.getMinutes())+' - '+pad(end.getHours())+':'+pad(end.getMinutes())+'</div>' +
+          '<div class="appt-name">'+emoji+' '+escapeHtml(cust.name)+'</div>' +
+          '<div class="appt-meta">'+escapeHtml(cust.phone||'')+(cust.contact?(' ‧ '+escapeHtml(cust.contact)):'')+' ‧ '+escapeHtml(a.item)+'</div></div>' +
+          '<div class="appt-badges">' +
+            '<span class="pill '+(returning?'tag-return':'tag-new')+'">'+(returning?'舊客':'新客')+'</span>' +
+            statusPillHtml(a.status) +
+            (showPayBadge ? '<span class="pill '+(a.paid?'pay-paid':'pay-due')+'">'+(a.paid?'🟢已收':'🟡待收')+'</span>' : '') +
+          '</div>' +
+        '</div>' +
+        '<div class="appt-money">'+fmtMoney(total)+'</div>' +
+        '<div class="appt-actions">'+actions.join('')+'</div>' +
+      '</div>';
+    }).join('');
+  }
+
+  // ================= 預約清單 =================
+  function refreshFilterOptions(){
+    var statusSel = document.getElementById('statusFilter');
+    var curS = statusSel.value;
+    statusSel.innerHTML = '<option value="all">全部狀態</option>' + STATUS_LIST.map(function(s){ return '<option value="'+s+'">'+s+'</option>'; }).join('');
+    statusSel.value = curS || 'all';
+
+    var itemSel = document.getElementById('itemFilter');
+    var curI = itemSel.value;
+    var set = {}; appointments.forEach(function(a){ if(a.item) set[a.item]=1; });
+    itemSel.innerHTML = '<option value="all">全部項目</option>' + Object.keys(set).map(function(i){ return '<option value="'+escapeHtml(i)+'">'+escapeHtml(i)+'</option>'; }).join('');
+    itemSel.value = curI || 'all';
+  }
+  function getFilters(){
+    return {
+      search: document.getElementById('searchInput').value.trim().toLowerCase(),
+      status: document.getElementById('statusFilter').value,
+      item: document.getElementById('itemFilter').value,
+      from: document.getElementById('dateFromFilter').value,
+      to: document.getElementById('dateToFilter').value
+    };
+  }
+  function applyFilters(list, f){
+    return list.filter(function(a){
+      if(f.search){
+        var cust = getCustomer(a.customerId);
+        var hit = (cust.name||'').toLowerCase().indexOf(f.search)>-1 || (cust.phone||'').toLowerCase().indexOf(f.search)>-1;
+        if(!hit) return false;
+      }
+      if(f.status!=='all' && a.status!==f.status) return false;
+      if(f.item!=='all' && a.item!==f.item) return false;
+      if(f.from && a.datetime && a.datetime.slice(0,10) < f.from) return false;
+      if(f.to && a.datetime && a.datetime.slice(0,10) > f.to) return false;
+      return true;
+    });
+  }
+  function renderList(){
+    refreshFilterOptions();
+    var f = getFilters();
+    var list = applyFilters(appointments, f).sort(function(a,b){ return (b.datetime||'').localeCompare(a.datetime||''); });
+
+    var el = document.getElementById('clientList');
+    if(!list.length){
+      el.innerHTML = '<div class="empty-state"><div class="em">📋</div>沒有符合條件的預約資料<br>試試調整搜尋或篩選條件</div>';
+    }else{
+      var staleIds = {}; computeStaleAppointments().forEach(function(a){ staleIds[a.id]=true; });
+      el.innerHTML = list.map(function(a){
+        var cust = getCustomer(a.customerId);
+        var total = (Number(a.amount)||0)+(Number(a.extra)||0);
+        var isStale = !!staleIds[a.id];
+        var actions = [
+          '<button class="btn btn-ghost btn-sm" onclick="WT.edit(\''+a.id+'\')">編輯</button>'
+        ];
+
+        return '<div class="client-card'+(isStale?' stale':'')+(a.status==='已取消'?' is-cancelled':'')+'">' +
+          '<div><div class="name">'+escapeHtml(cust.name)+'</div><div class="sub">'+escapeHtml(cust.phone||'')+'</div>' +
+            (isStale ? '<div class="stale-tag">⚠️ 超過1天未跟進</div>' : '') +
+          '</div>' +
+          '<div><span class="field-label">項目</span><div>'+escapeHtml(a.item||'')+'</div></div>' +
+          '<div><span class="field-label">預約時間</span><div>'+fmtDateTimeDisplay(a.datetime)+'</div></div>' +
+          '<div><span class="field-label">今日總金額</span><div style="font-weight:700;color:var(--pink);">'+fmtMoney(total)+'</div></div>' +
+          '<div>'+statusPillHtml(a.status)+'</div>' +
+          '<div class="card-actions">'+actions.join('')+'</div>' +
+        '</div>';
+      }).join('');
+    }
+
+    var staleTotal = computeStaleAppointments().length;
+    document.getElementById('staleHint').innerHTML = staleTotal
+      ? '⚠️ 目前有 <b style="color:#B5574A;">'+staleTotal+'</b> 筆待處理預約超過 1 天未更新，建議主動跟進客人'
+      : '目前沒有超過 1 天未更新的待處理預約 👍';
+  }
+  ['searchInput','statusFilter','itemFilter','dateFromFilter','dateToFilter'].forEach(function(id){
+    document.getElementById(id).addEventListener('input', renderList);
+    document.getElementById(id).addEventListener('change', renderList);
+  });
+
+  // ================= 客戶清單 =================
+  function renderCustomers(){
+    var search = document.getElementById('customerSearchInput').value.trim().toLowerCase();
+    var list = customers.filter(function(c){
+      if(!search) return true;
+      return (c.name||'').toLowerCase().indexOf(search)>-1 || (c.phone||'').toLowerCase().indexOf(search)>-1;
+    }).sort(function(a,b){ return (a.name||'').localeCompare(b.name||'','zh-Hant'); });
+
+    var el = document.getElementById('customerList');
+    if(!list.length){
+      el.innerHTML = '<div class="empty-state"><div class="em">👤</div>還沒有任何客戶資料<br>點右上角「＋ 新增客戶」開始建立</div>';
+      return;
+    }
+    el.innerHTML = list.map(function(c){
+      var stats = customerStats(c.id);
+      return '<div class="customer-card">' +
+        '<div><div class="name">'+escapeHtml(c.name)+'</div><div class="sub">'+escapeHtml(c.phone||'')+(c.contact?(' ‧ '+escapeHtml(c.contact)):'')+'</div></div>' +
+        '<div><span class="field-label">預約次數</span><div>'+stats.visitCount+' 次</div></div>' +
+        '<div><span class="field-label">累積消費</span><div style="font-weight:700;color:var(--pink);">'+fmtMoney(stats.totalSpend)+'</div></div>' +
+        '<div><span class="field-label">最近到店</span><div>'+fmtDateShort(stats.lastVisit)+'</div></div>' +
+        '<div class="card-actions">' +
+          '<button class="btn btn-primary btn-sm" onclick="WT.newApptForCustomer(\''+c.id+'\')">新增預約</button>' +
+          '<button class="btn btn-ghost btn-sm" onclick="WT.viewCustomer(\''+c.id+'\')">檢視</button>' +
+          '<button class="btn btn-ghost btn-sm" onclick="WT.editCustomer(\''+c.id+'\')">編輯</button>' +
+        '</div>' +
+      '</div>';
+    }).join('');
+  }
+  document.getElementById('customerSearchInput').addEventListener('input', renderCustomers);
+
+  // ---- 新增／編輯客戶 表單 ----
+  var custOverlay = document.getElementById('customerModalOverlay');
+  var custForm = document.getElementById('customerForm');
+  function openCustomerForm(record){
+    document.getElementById('customerModalTitle').textContent = record ? '編輯客戶' : '新增客戶';
+    document.getElementById('cf_id').value = record ? record.id : '';
+    document.getElementById('cf_name').value = record ? record.name : '';
+    document.getElementById('cf_phone').value = record ? record.phone : '';
+    document.getElementById('cf_contact').value = record ? (record.contact||'') : '';
+    document.getElementById('cf_birthday').value = record ? (record.birthday||'') : '';
+    document.getElementById('cf_note').value = record ? (record.note||'') : '';
+    custOverlay.classList.add('active');
+  }
+  function closeCustomerForm(){ custOverlay.classList.remove('active'); custForm.reset(); }
+  document.getElementById('addCustomerBtn').addEventListener('click', function(){ openCustomerForm(null); });
+  document.getElementById('cancelCustomerFormBtn').addEventListener('click', closeCustomerForm);
+  custOverlay.addEventListener('click', function(e){ if(e.target===custOverlay) closeCustomerForm(); });
+
+  custForm.addEventListener('submit', function(e){
+    e.preventDefault();
+    var id = document.getElementById('cf_id').value;
+    var record = {
+      id: id || uid(),
+      name: document.getElementById('cf_name').value.trim(),
+      phone: document.getElementById('cf_phone').value.trim(),
+      contact: document.getElementById('cf_contact').value.trim(),
+      birthday: document.getElementById('cf_birthday').value,
+      note: document.getElementById('cf_note').value.trim(),
+      updatedAt: new Date().toISOString()
+    };
+    if(id){
+      var idx = customers.findIndex(function(c){return c.id===id;});
+      if(idx>-1) customers[idx] = Object.assign({}, customers[idx], record);
+    }else{
+      record.createdAt = new Date().toISOString();
+      customers.push(record);
+    }
+    saveCustomers(customers);
+    closeCustomerForm();
+    renderCustomers();
+    populateCustomerSelect('');
+    showToast(id ? '已更新客戶資料' : '已新增客戶');
+  });
+
+  // ---- 客戶詳細頁 ----
+  var custDetailOverlay = document.getElementById('customerDetailOverlay');
+  function openCustomerDetail(customerId){
+    var cust = getCustomer(customerId);
+    var stats = customerStats(customerId);
+    var history = appointments.filter(function(a){ return a.customerId===customerId; })
+      .sort(function(a,b){ return (b.datetime||'').localeCompare(a.datetime||''); });
+
+    var rows = history.map(function(a){
+      var total = (Number(a.amount)||0)+(Number(a.extra)||0);
+      return '<div class="history-row" onclick="WT.editFromDetail(\''+a.id+'\')">' +
+        '<span>'+fmtDateShort(a.datetime)+' ‧ '+escapeHtml(a.item)+'</span>' +
+        '<span>'+fmtMoney(total)+' '+statusPillHtml(a.status)+'</span>' +
+      '</div>';
+    }).join('') || '<div class="hint" style="padding:10px 0;">這位客戶還沒有任何預約紀錄</div>';
+
+    document.getElementById('customerDetailBody').innerHTML =
+      '<h3>'+escapeHtml(cust.name)+'</h3>' +
+      '<div class="hint" style="margin-bottom:14px;">'+escapeHtml(cust.phone||'')+(cust.contact?(' ‧ '+escapeHtml(cust.contact)):'')+(cust.birthday?(' ‧ 生日 '+cust.birthday):'')+'</div>' +
+      (cust.note ? '<div class="hint" style="margin-bottom:14px;">備註：'+escapeHtml(cust.note)+'</div>' : '') +
+      '<div class="month-stat-grid">' +
+        monthCell(stats.visitCount,'預約次數') +
+        monthCell(fmtMoney(stats.totalSpend),'累積消費') +
+        monthCell(fmtMoney(stats.avgTicket),'平均客單價') +
+        monthCell(fmtDateShort(stats.lastVisit),'最近到店') +
+        monthCell(stats.cancelCount,'取消次數') +
+        monthCell(stats.noShowCount,'未到店次數') +
+      '</div>' +
+      '<div class="section-head" style="margin-top:8px;"><h3 style="font-size:14px;">歷史預約紀錄</h3></div>' +
+      rows;
+
+    custDetailOverlay.classList.add('active');
+  }
+  function closeCustomerDetail(){ custDetailOverlay.classList.remove('active'); }
+  document.getElementById('closeCustomerDetailBtn').addEventListener('click', closeCustomerDetail);
+  custDetailOverlay.addEventListener('click', function(e){ if(e.target===custDetailOverlay) closeCustomerDetail(); });
+
+  // ---- 取消預約選單（客戶卡片用） ----
+  var pickApptOverlay = document.getElementById('pickApptOverlay');
+  function closePickAppt(){ pickApptOverlay.classList.remove('active'); }
+  document.getElementById('closePickApptBtn').addEventListener('click', closePickAppt);
+  pickApptOverlay.addEventListener('click', function(e){ if(e.target===pickApptOverlay) closePickAppt(); });
+
+  var CANCELLABLE_STATUSES = ['待確認','已確認','已付訂'];
+  WT.cancelForCustomer = function(customerId){
+    var cust = getCustomer(customerId);
+    var pending = appointments.filter(function(a){ return a.customerId===customerId && CANCELLABLE_STATUSES.indexOf(a.status)>-1; })
+      .sort(function(a,b){ return (a.datetime||'').localeCompare(b.datetime||''); });
+    if(!pending.length){ showToast('「'+cust.name+'」目前沒有待處理的預約可以取消'); return; }
+    if(pending.length===1){ WT.cancelAppt(pending[0].id); return; }
+    document.getElementById('pickApptBody').innerHTML = pending.map(function(a){
+      var total = (Number(a.amount)||0)+(Number(a.extra)||0);
+      return '<div class="history-row" onclick="WT.cancelFromPicker(\''+a.id+'\')">' +
+        '<span>'+fmtDateTimeDisplay(a.datetime)+' ‧ '+escapeHtml(a.item)+'</span>' +
+        '<span>'+fmtMoney(total)+' '+statusPillHtml(a.status)+'</span>' +
+      '</div>';
+    }).join('');
+    pickApptOverlay.classList.add('active');
+  };
+  WT.cancelFromPicker = function(apptId){
+    closePickAppt();
+    WT.cancelAppt(apptId);
+  };
+
+  WT.copyBirthdayMsg = function(customerId){
+    var cust = customers.find(function(c){return c.id===customerId;});
+    if(!cust) return;
+    var tpl = settings.messageTemplates.find(function(t){return t.id==='birthday';}) || settings.messageTemplates[0];
+    if(!tpl){ showToast('尚未設定生日祝福模板'); return; }
+    copyToClipboard(fillTemplate(tpl.content, null, cust));
+  };
+
+  // ---- 複製訊息模板（今日預約卡片用） ----
+  var pickTemplateOverlay = document.getElementById('pickTemplateOverlay');
+  function closePickTemplate(){ pickTemplateOverlay.classList.remove('active'); }
+  document.getElementById('closePickTemplateBtn').addEventListener('click', closePickTemplate);
+  pickTemplateOverlay.addEventListener('click', function(e){ if(e.target===pickTemplateOverlay) closePickTemplate(); });
+
+  WT.copyMessageFor = function(apptId){
+    var appt = appointments.find(function(a){return a.id===apptId;});
+    if(!appt) return;
+    if(!settings.messageTemplates.length){ showToast('尚未設定任何訊息模板'); return; }
+    document.getElementById('pickTemplateBody').innerHTML = settings.messageTemplates.map(function(t, idx){
+      var preview = fillTemplate(t.content, appt);
+      return '<div class="history-row" onclick="WT.copyTemplateFromPicker(\''+apptId+'\','+idx+')">' +
+        '<span><b>'+escapeHtml(t.name)+'</b><br><span class="hint">'+escapeHtml(preview.slice(0,40))+(preview.length>40?'…':'')+'</span></span>' +
+        '<span>📋</span>' +
+      '</div>';
+    }).join('');
+    pickTemplateOverlay.classList.add('active');
+  };
+  WT.copyTemplateFromPicker = function(apptId, idx){
+    closePickTemplate();
+    var appt = appointments.find(function(a){return a.id===apptId;});
+    var tpl = settings.messageTemplates[idx];
+    if(!appt || !tpl) return;
+    copyToClipboard(fillTemplate(tpl.content, appt));
+  };
+
+  // ================= 預約表單（新增／編輯） =================
+  var overlay = document.getElementById('modalOverlay');
+  var form = document.getElementById('clientForm');
+
+  function populateCustomerSelect(filterText){
+    var sel = document.getElementById('f_customerId');
+    var current = sel.value;
+    var text = (filterText||'').trim().toLowerCase();
+    var filtered = customers.filter(function(c){
+      if(!text) return true;
+      return (c.name||'').toLowerCase().indexOf(text)>-1 || (c.phone||'').toLowerCase().indexOf(text)>-1;
+    }).sort(function(a,b){ return (a.name||'').localeCompare(b.name||'','zh-Hant'); });
+    sel.innerHTML = '<option value="">請選擇客戶</option>' + filtered.map(function(c){
+      return '<option value="'+c.id+'">'+escapeHtml(c.name)+'（'+escapeHtml(c.phone||'—')+'）</option>';
+    }).join('');
+    if(filtered.some(function(c){return c.id===current;})) sel.value = current;
+  }
+  document.getElementById('custSearchInput').addEventListener('input', function(){
+    populateCustomerSelect(this.value);
+  });
+
+  function setCustomerMode(mode){
+    var isExisting = mode==='existing';
+    document.getElementById('segExisting').classList.toggle('active', isExisting);
+    document.getElementById('segNew').classList.toggle('active', !isExisting);
+    document.getElementById('custExistingWrap').style.display = isExisting ? 'block':'none';
+    document.getElementById('custNewWrap').style.display = isExisting ? 'none':'block';
+    document.getElementById('customerFieldError').style.display = 'none';
+  }
+  document.getElementById('segExisting').addEventListener('click', function(){ setCustomerMode('existing'); });
+  document.getElementById('segNew').addEventListener('click', function(){ setCustomerMode('new'); });
+
+  function openForm(record, prefillCustomerId){
+    document.getElementById('modalTitle').textContent = record ? '編輯預約' : '新增預約';
+    document.getElementById('recordId').value = record ? record.id : '';
+    document.getElementById('customerFieldError').style.display = 'none';
+
+    populateCustomerSelect('');
+    document.getElementById('custSearchInput').value = '';
+    if(record){
+      setCustomerMode('existing');
+      document.getElementById('f_customerId').value = record.customerId;
+    }else if(prefillCustomerId){
+      setCustomerMode('existing');
+      document.getElementById('f_customerId').value = prefillCustomerId;
+    }else{
+      setCustomerMode(customers.length ? 'existing' : 'new');
+      document.getElementById('f_customerId').value = '';
+    }
+    document.getElementById('f_newName').value = '';
+    document.getElementById('f_newPhone').value = '';
+    document.getElementById('f_newContact').value = '';
+    document.getElementById('f_newBirthday').value = '';
+
+    document.getElementById('f_datetime').value = record ? record.datetime : '';
+
+    populateItemSelect();
+    var itemSel = document.getElementById('f_item');
+    var known = Array.prototype.map.call(itemSel.options, function(o){return o.value;});
+    if(record && record.item && known.indexOf(record.item)===-1){
+      itemSel.value = '其他';
+      document.getElementById('itemOtherWrap').style.display = 'flex';
+      document.getElementById('f_itemOther').value = record.item;
+    }else{
+      itemSel.value = record ? record.item : (settings.items[0] ? settings.items[0].name : '其他');
+      document.getElementById('itemOtherWrap').style.display = 'none';
+      document.getElementById('f_itemOther').value = '';
+    }
+    document.getElementById('f_payment').value = record ? record.payment : '現金';
+    document.getElementById('f_status').value = record ? record.status : '待確認';
+    document.getElementById('f_cancelReason').value = record ? (record.cancelReason||'客人取消') : '客人取消';
+    document.getElementById('cancelReasonWrap').style.display = (document.getElementById('f_status').value==='已取消') ? 'flex':'none';
+    document.getElementById('f_deposit').checked = record ? !!record.deposit : false;
+    document.getElementById('f_paid').checked = record ? !!record.paid : false;
+    document.getElementById('f_amount').value = record ? record.amount : 0;
+    document.getElementById('f_extra').value = record ? record.extra : 0;
+    document.getElementById('f_topup').value = record ? record.topup : 0;
+    document.getElementById('f_note').value = record ? (record.note||'') : '';
+    document.getElementById('conflictWarning').style.display = 'none';
+    updateTotalPreview();
+    overlay.classList.add('active');
+  }
+  function closeForm(){ overlay.classList.remove('active'); form.reset(); }
+  document.getElementById('addBtnList').addEventListener('click', function(){ openForm(null); });
+  document.getElementById('cancelFormBtn').addEventListener('click', closeForm);
+  overlay.addEventListener('click', function(e){ if(e.target===overlay) closeForm(); });
+
+  document.getElementById('f_item').addEventListener('change', function(){
+    document.getElementById('itemOtherWrap').style.display = (this.value==='其他') ? 'flex':'none';
+    var isNew = !document.getElementById('recordId').value;
+    var amountEl = document.getElementById('f_amount');
+    if(isNew && (Number(amountEl.value)||0)===0){
+      var opt = this.options[this.selectedIndex];
+      var price = opt ? Number(opt.dataset.price)||0 : 0;
+      if(price>0){ amountEl.value = price; updateTotalPreview(); }
+    }
+  });
+  document.getElementById('f_status').addEventListener('change', function(){
+    document.getElementById('cancelReasonWrap').style.display = (this.value==='已取消') ? 'flex':'none';
+  });
+  ['f_amount','f_extra'].forEach(function(id){ document.getElementById(id).addEventListener('input', updateTotalPreview); });
+  function updateTotalPreview(){
+    var amount = Number(document.getElementById('f_amount').value)||0;
+    var extra = Number(document.getElementById('f_extra').value)||0;
+    document.getElementById('totalPreview').textContent = fmtMoney(amount+extra);
+  }
+  document.getElementById('f_datetime').addEventListener('change', function(){
+    var id = document.getElementById('recordId').value;
+    var conflict = findConflict(this.value, id);
+    document.getElementById('conflictWarning').style.display = conflict ? 'block' : 'none';
+  });
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    var id = document.getElementById('recordId').value;
+    var isExistingMode = document.getElementById('custExistingWrap').style.display !== 'none';
+
+    var customerId = '';
+    if(isExistingMode){
+      customerId = document.getElementById('f_customerId').value;
+      if(!customerId){
+        document.getElementById('customerFieldError').style.display = 'block';
+        document.getElementById('customerFieldError').textContent = '⚠️ 請選擇一位既有客戶';
+        return;
+      }
+    }else{
+      var newName = document.getElementById('f_newName').value.trim();
+      var newPhone = document.getElementById('f_newPhone').value.trim();
+      if(!newName || !newPhone){
+        document.getElementById('customerFieldError').style.display = 'block';
+        document.getElementById('customerFieldError').textContent = '⚠️ 請填寫新客戶的姓名與電話';
+        return;
+      }
+      var newCust = {
+        id: uid(), name: newName, phone: newPhone,
+        contact: document.getElementById('f_newContact').value.trim(),
+        birthday: document.getElementById('f_newBirthday').value,
+        note: '',
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString()
+      };
+      customers.push(newCust);
+      saveCustomers(customers);
+      customerId = newCust.id;
+    }
+    document.getElementById('customerFieldError').style.display = 'none';
+
+    var datetimeVal = document.getElementById('f_datetime').value;
+    var conflict = findConflict(datetimeVal, id);
+    if(conflict){
+      var conflictCust = getCustomer(conflict.customerId);
+      var ok = confirm('⚠️ 此時段已有預約（'+conflictCust.name+' '+fmtDateTimeDisplay(conflict.datetime)+'），請確認是否要繼續儲存？');
+      if(!ok) return;
+    }
+
+    var itemVal = document.getElementById('f_item').value;
+    if(itemVal==='其他') itemVal = document.getElementById('f_itemOther').value.trim() || '其他';
+    var amount = Number(document.getElementById('f_amount').value)||0;
+    var extra = Number(document.getElementById('f_extra').value)||0;
+    var status = document.getElementById('f_status').value;
+
+    var record = {
+      id: id || uid(),
+      customerId: customerId,
+      datetime: datetimeVal,
+      item: itemVal,
+      payment: document.getElementById('f_payment').value,
+      status: status,
+      cancelReason: status==='已取消' ? document.getElementById('f_cancelReason').value : '',
+      deposit: document.getElementById('f_deposit').checked,
+      paid: document.getElementById('f_paid').checked,
+      amount: amount, extra: extra, total: amount+extra,
+      topup: Number(document.getElementById('f_topup').value)||0,
+      note: document.getElementById('f_note').value.trim(),
+      updatedAt: new Date().toISOString()
+    };
+
+    if(id){
+      var idx = appointments.findIndex(function(a){return a.id===id;});
+      if(idx>-1) appointments[idx] = Object.assign({}, appointments[idx], record);
+    }else{
+      record.createdAt = new Date().toISOString();
+      appointments.push(record);
+    }
+    saveAppointments(appointments);
+    closeForm();
+    refreshAll();
+    showToast(id ? '已更新預約資料' : '已新增預約');
+  });
+
+  function refreshAll(){
+    function safe(fn,label){ try{ fn(); }catch(e){ showToast('⚠️ '+label+'更新失敗：'+e.message); } }
+    safe(renderDashboard,'儀表板');
+    safe(renderList,'預約清單');
+    safe(renderCustomers,'客戶清單');
+    safe(renderTimeline,'時間軸');
+    safe(renderMonthAvailability,'本月統計');
+    safe(renderTodayPage,'今日預約');
+  }
+
+  // ================= 快速操作 =================
+  Object.assign(window.WT, {
+    edit: function(id){ var a = appointments.find(function(x){return x.id===id;}); if(a) openForm(a); },
+
+    editFromDetail: function(id){ closeCustomerDetail(); var a = appointments.find(function(x){return x.id===id;}); if(a) openForm(a); },
+
+    info: function(id){
+      var a = appointments.find(function(x){return x.id===id;});
+      if(!a) return;
+      openCustomerDetail(a.customerId);
+    },
+
+    viewCustomer: function(id){ openCustomerDetail(id); },
+    editCustomer: function(id){ var c = customers.find(function(x){return x.id===id;}); if(c) openCustomerForm(c); },
+
+    deleteCustomer: function(id){
+      var c = customers.find(function(x){return x.id===id;});
+      if(!c) return;
+      var relatedCount = appointments.filter(function(a){return a.customerId===id;}).length;
+      var msg = relatedCount
+        ? ('此客戶有 '+relatedCount+' 筆預約紀錄，刪除客戶將一併刪除這些預約紀錄，確定要刪除「'+c.name+'」嗎？')
+        : ('確定要刪除客戶「'+c.name+'」嗎？');
+      if(!confirm(msg)) return;
+      customers = customers.filter(function(x){return x.id!==id;});
+      appointments = appointments.filter(function(a){return a.customerId!==id;});
+      saveCustomers(customers); saveAppointments(appointments);
+      refreshAll();
+      showToast('已刪除客戶及其預約紀錄');
+    },
+
+    newApptForCustomer: function(customerId){
+      switchTo('appts');
+      openForm(null, customerId);
+    },
+
+    complete: function(id){
+      var a = appointments.find(function(x){return x.id===id;});
+      if(!a) return;
+      var cust = getCustomer(a.customerId);
+      if(!confirm('將「'+cust.name+'」這筆預約標記為已完成？')) return;
+      a.status = '已完成';
+      a.updatedAt = new Date().toISOString();
+      saveAppointments(appointments); refreshAll();
+      showToast('已標記為完成');
+    },
+
+    collect: function(id){
+      var a = appointments.find(function(x){return x.id===id;});
+      if(!a) return;
+      var cust = getCustomer(a.customerId);
+      if(!confirm('確認已收到「'+cust.name+'」這筆款項？')) return;
+      a.paid = true; a.paidAt = new Date().toISOString();
+      a.updatedAt = new Date().toISOString();
+      saveAppointments(appointments); refreshAll();
+      showToast('已標記收款完成');
+    },
+
+    cancelAppt: function(id){
+      var a = appointments.find(function(x){return x.id===id;});
+      if(!a) return;
+      var cust = getCustomer(a.customerId);
+      if(!confirm('確定要取消「'+cust.name+'」這筆預約嗎？取消後將釋放此時段，紀錄仍會保留可查詢。')) return;
+      var reason = prompt('取消原因（客人取消／店家取消／改期／其他），可直接輸入或留空：', a.cancelReason||'客人取消');
+      a.status = '已取消';
+      a.cancelReason = (reason||'').trim() || '未填寫';
+      a.updatedAt = new Date().toISOString();
+      saveAppointments(appointments); refreshAll();
+      showToast('已取消該筆預約，時段已釋放');
+    },
+
+    remove: function(id){
+      var a = appointments.find(function(x){return x.id===id;});
+      if(!a) return;
+      if(confirm('確定要刪除此預約嗎？刪除後將無法恢復。')){
+        appointments = appointments.filter(function(x){return x.id!==id;});
+        saveAppointments(appointments); refreshAll();
+        showToast('已刪除該筆資料');
+      }
+    }
+  });
+
+  // ================= CSV 匯出 =================
+  var APPT_CSV_HEADERS = ['客戶姓名','電話','LINE/IG','生日','預約項目','預約日期時間','付款方式','已匯訂金','已收全額','今日金額','其他加項金額','今日總金額','儲值金額','狀態','取消原因','備註'];
+  var CUST_CSV_HEADERS = ['客戶姓名','電話','LINE/IG','生日','備註','預約次數','取消次數','未到店次數','累積消費','平均客單價','最近到店日期'];
+  function toCsvField(v){
+    var s = (v===undefined||v===null) ? '' : String(v);
+    if(/[",\n]/.test(s)) s = '"' + s.replace(/"/g,'""') + '"';
+    return s;
+  }
+  function apptsToCsv(list){
+    var rows = [APPT_CSV_HEADERS.map(toCsvField).join(',')];
+    list.forEach(function(a){
+      var cust = getCustomer(a.customerId);
+      var total = (Number(a.amount)||0)+(Number(a.extra)||0);
+      rows.push([
+        cust.name, cust.phone, cust.contact||'', cust.birthday||'', a.item||'', fmtDateTimeDisplay(a.datetime),
+        a.payment||'', (a.deposit?'是':'否'), (a.paid?'是':'否'), a.amount||0, a.extra||0, total, a.topup||0,
+        a.status||'', a.cancelReason||'', a.note||''
+      ].map(toCsvField).join(','));
+    });
+    return rows.join('\r\n');
+  }
+  function customersToCsv(list){
+    var rows = [CUST_CSV_HEADERS.map(toCsvField).join(',')];
+    list.forEach(function(c){
+      var stats = customerStats(c.id);
+      rows.push([
+        c.name, c.phone, c.contact||'', c.birthday||'', c.note||'',
+        stats.visitCount, stats.cancelCount, stats.noShowCount, stats.totalSpend, stats.avgTicket, fmtDateShort(stats.lastVisit)
+      ].map(toCsvField).join(','));
+    });
+    return rows.join('\r\n');
+  }
+  function downloadCsv(csvBody, count, prefix){
+    var filename = prefix+'_'+toDateStr(new Date()).replace(/-/g,'')+'.csv';
+    if(isIOS){
+      openTextInNewTab('\uFEFF'+csvBody, filename);
+      showToast('已在新分頁開啟，請用 Safari 分享功能儲存');
+      return;
+    }
+    var csv = '\uFEFF' + csvBody;
+    var blob = new Blob([csv], {type:'text/csv;charset=utf-8;'});
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url; a.download = filename;
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    showToast('CSV 已匯出，共 '+count+' 筆資料');
+  }
+  document.getElementById('exportCsvListBtn').addEventListener('click', function(){
+    var list = applyFilters(appointments, getFilters()).sort(function(a,b){return (b.datetime||'').localeCompare(a.datetime||'');});
+    downloadCsv(apptsToCsv(list), list.length, '美業預約清單');
+  });
+  document.getElementById('exportCsvAllBtn').addEventListener('click', function(){
+    downloadCsv(apptsToCsv(appointments), appointments.length, '美業全部預約');
+  });
+  document.getElementById('exportCsvCustBtn').addEventListener('click', function(){
+    downloadCsv(customersToCsv(customers), customers.length, '美業客戶清單');
+  });
+
+  // ================= 備份 / 匯入 =================
+  document.getElementById('exportBtn').addEventListener('click', function(){
+    settings.lastBackupAt = new Date().toISOString();
+    saveSettings(settings);
+    var payload = { exportedAt: settings.lastBackupAt, license: LICENSE_INFO, customers: customers, appointments: appointments, reports: reports, settings: settings };
+    var jsonStr = JSON.stringify(payload,null,2);
+    var filename = '美業預約備份_'+toDateStr(new Date()).replace(/-/g,'')+'.json';
+    if(isIOS){
+      openTextInNewTab(jsonStr, filename);
+      showToast('已在新分頁開啟，請用 Safari 分享功能儲存');
+    }else{
+      var blob = new Blob([jsonStr], {type:'application/json'});
+      var url = URL.createObjectURL(blob);
+      var a = document.createElement('a');
+      a.href = url; a.download = filename;
+      document.body.appendChild(a); a.click(); document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      showToast('備份檔已下載');
+    }
+    renderBackupReminder();
+    renderLastBackupHint();
+  });
+  document.getElementById('importFile').addEventListener('change', function(e){
+    var file = e.target.files[0]; if(!file) return;
+    var reader = new FileReader();
+    reader.onload = function(evt){
+      try{
+        var data = JSON.parse(evt.target.result);
+        var newCustomers, newAppointments;
+
+        if(data && Array.isArray(data.customers) && Array.isArray(data.appointments)){
+          // 新版格式，直接採用
+          newCustomers = data.customers;
+          newAppointments = data.appointments;
+        }else{
+          // 舊版格式（純陣列，或 {clients:[...]}），自動拆分
+          var oldList = Array.isArray(data) ? data : data.clients;
+          if(!Array.isArray(oldList)) throw new Error('格式錯誤');
+          var split = splitLegacyArray(oldList);
+          newCustomers = split.customers;
+          newAppointments = split.appointments;
+        }
+
+        var total = newCustomers.length + newAppointments.length;
+        if(!confirm('即將匯入 '+newCustomers.length+' 位客戶、'+newAppointments.length+' 筆預約，並覆蓋目前所有資料，確定繼續嗎？')){ e.target.value=''; return; }
+
+        customers = newCustomers;
+        appointments = newAppointments;
+        appointments.forEach(function(a){
+          var map = { upcoming:'待確認', done:'已完成', cancelled:'已取消' };
+          if(map[a.status]) a.status = map[a.status];
+          if(STATUS_LIST.indexOf(a.status)===-1) a.status = '待確認';
+        });
+        saveCustomers(customers);
+        saveAppointments(appointments);
+        reports = Array.isArray(data.reports) ? data.reports : [];
+        saveReports(reports);
+        if(data.settings){ settings = Object.assign({}, DEFAULT_SETTINGS, data.settings); saveSettings(settings); }
+        refreshAll();
+        showToast('匯入成功，共 '+customers.length+' 位客戶、'+appointments.length+' 筆預約');
+      }catch(err){
+        alert('匯入失敗：檔案格式不正確，請確認是本工具匯出的備份檔。');
+      }
+      e.target.value = '';
+    };
+    reader.readAsText(file);
+  });
+
+  // ================= 初始化 =================
+  // PIN 碼鎖：一開始畫面預設是鎖定的，沒有設定PIN的人會立刻自動解除
+  if(!settings.pinEnabled || !settings.pin){
+    document.getElementById('pinLockOverlay').style.display = 'none';
+  }
+  document.getElementById('pinUnlockBtn').addEventListener('click', function(){
+    var val = document.getElementById('pinInput').value;
+    if(val === settings.pin){
+      document.getElementById('pinLockOverlay').style.display = 'none';
+    }else{
+      document.getElementById('pinError').style.display = 'block';
+      document.getElementById('pinInput').value = '';
+    }
+  });
+  document.getElementById('pinInput').addEventListener('keydown', function(e){
+    if(e.key==='Enter'){ e.preventDefault(); document.getElementById('pinUnlockBtn').click(); }
+  });
+
+  // ---- 忘記密碼救援流程 ----
+  document.getElementById('pinForgotBtn').addEventListener('click', function(){
+    document.getElementById('pinLockStep1').style.display = 'none';
+    document.getElementById('pinLockStep2').style.display = 'block';
+    document.getElementById('recoveryInput').value = '';
+    document.getElementById('recoveryError').style.display = 'none';
+  });
+  document.getElementById('pinBackBtn').addEventListener('click', function(){
+    document.getElementById('pinLockStep2').style.display = 'none';
+    document.getElementById('pinLockStep1').style.display = 'block';
+  });
+  document.getElementById('recoveryVerifyBtn').addEventListener('click', function(){
+    var val = document.getElementById('recoveryInput').value.trim();
+    if(val && settings.pinRecovery && val===settings.pinRecovery){
+      document.getElementById('pinLockStep2').style.display = 'none';
+      document.getElementById('pinLockStep3').style.display = 'block';
+      document.getElementById('newPinInput').value = '';
+      document.getElementById('newPinError').style.display = 'none';
+    }else{
+      document.getElementById('recoveryError').style.display = 'block';
+    }
+  });
+  document.getElementById('newPinSaveBtn').addEventListener('click', function(){
+    var newPin = document.getElementById('newPinInput').value.trim();
+    if(!/^\d{4}$/.test(newPin)){
+      document.getElementById('newPinError').style.display = 'block';
+      return;
+    }
+    settings.pin = newPin;
+    saveSettings(settings);
+    document.getElementById('pinLockStep3').style.display = 'none';
+    document.getElementById('pinLockStep1').style.display = 'block';
+    document.getElementById('pinLockOverlay').style.display = 'none';
+    showToast('已重設新的 PIN 碼');
+  });
+
+  (function renderLicenseFooter(){
+    var el = document.getElementById('licenseFooter');
+    if(LICENSE_INFO.buyer){
+      el.textContent = '本工具授權予：'+LICENSE_INFO.buyer + (LICENSE_INFO.orderId ? '（訂單編號 '+LICENSE_INFO.orderId+'）' : '') + '　禁止轉售或公開分享';
+    }
+  })();
+  applyTheme(settings.theme);
+  document.getElementById('shopTitle').textContent = settings.shopName;
+  populateItemSelect();
+  populateCustomerSelect('');
+  renderShopSettings();
+  renderLastBackupHint();
+  renderDashboard();
+  renderTimeline();
+  renderMonthAvailability();
+  renderTodayPage();
+  renderList();
+  renderCustomers();
+
+})();
+</script>
+</body>
+</html>
