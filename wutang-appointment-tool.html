@@ -1,0 +1,2470 @@
+<!--
+  ════════════════════════════════════════════════
+  授權資訊 LICENSE INFO（賣家出貨前請務必填寫）
+  ────────────────────────────────────────────────
+  買家姓名／店名：________________
+  買家聯絡方式　：________________
+  訂單編號　　　：________________
+  出售日期　　　：________________
+  本檔案僅授權上述買家於單一工作室使用，禁止轉售、公開分享或修改後散布。
+  ════════════════════════════════════════════════
+-->
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title>美業預約 ‧ 存款計畫</title>
+<link rel="icon" id="appFavicon" href="">
+<link rel="apple-touch-icon" id="appTouchIcon" href="">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" id="appTitleMeta" content="美業預約">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="theme-color" id="appThemeColor" content="#A6916B">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --pink:#A6916B; --soft-pink:#DED0B4; --light-pink:#F7F2E7;
+  --blue:#7A9BAD; --soft-blue:#B8CFDA; --light-blue:#E3EDF3;
+  --sage:#9AAE9B; --light-sage:#E8F0E8;
+  --cream:#FAF3EE; --bg:#FAFAF8; --dark:#37352F; --medium:#5A5248; --gray:#9B9A97;
+  --radius-lg:20px; --radius-md:14px; --radius-sm:10px;
+  --shadow-soft:0 4px 20px rgba(122,155,173,0.12);
+  --shadow-lift:0 10px 30px rgba(166,145,107,0.18);
+}
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{
+  font-family:'Noto Sans TC',sans-serif;
+  background:var(--bg);
+  color:var(--dark);
+  -webkit-font-smoothing:antialiased;
+  padding-bottom:60px;
+}
+h1,h2,h3,h4{font-weight:700;margin:0;color:var(--dark);}
+p{margin:0;}
+button{font-family:inherit;cursor:pointer;border:none;background:none;}
+input,select,textarea{font-family:inherit;}
+
+/* ===== 頂部裝飾 ===== */
+.hero{position:relative;overflow:hidden;background:linear-gradient(135deg,var(--light-pink) 0%,var(--cream) 45%,var(--light-blue) 100%);padding:28px 20px 20px;}
+.hero::before{content:"";position:absolute;top:-60px;right:-60px;width:220px;height:220px;border-radius:50%;background:radial-gradient(circle at 30% 30%, var(--soft-pink), transparent 70%);opacity:.6;}
+.hero::after{content:"";position:absolute;bottom:-80px;left:-40px;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle at 60% 40%, var(--soft-blue), transparent 70%);opacity:.5;}
+.hero-inner{position:relative;max-width:1100px;margin:0 auto;}
+.hero-eyebrow{font-size:12px;letter-spacing:.15em;font-weight:700;color:var(--pink);text-transform:uppercase;margin-bottom:6px;}
+.hero h1{font-size:26px;}
+.hero-sub{color:var(--medium);font-size:13px;margin-top:4px;}
+
+/* ===== Nav ===== */
+.tabbar{max-width:1100px;margin:16px auto 0;padding:0 20px;display:flex;gap:8px;overflow-x:auto;}
+.tab-btn{flex:0 0 auto;padding:9px 18px;border-radius:999px;font-size:14px;font-weight:700;color:var(--medium);background:#fff;border:1px solid var(--soft-blue);transition:all .18s;white-space:nowrap;}
+.tab-btn.active{background:linear-gradient(120deg,var(--soft-pink),var(--soft-blue));color:var(--dark);border-color:transparent;box-shadow:var(--shadow-soft);}
+
+main{max-width:1100px;margin:0 auto;padding:20px;}
+.view{display:none;}
+.view.active{display:block;}
+
+/* ===== 提醒橫幅 ===== */
+.reminder-banner{background:var(--light-pink);border:1px solid var(--soft-pink);border-radius:var(--radius-md);padding:14px 18px;margin-bottom:18px;display:flex;gap:12px;align-items:flex-start;}
+.reminder-banner .icon{font-size:20px;line-height:1;}
+.reminder-banner h4{font-size:14px;color:var(--pink);margin-bottom:6px;}
+.reminder-list{display:flex;flex-direction:column;gap:4px;}
+.reminder-item{font-size:13px;color:var(--medium);}
+.reminder-item b{color:var(--dark);}
+
+/* ===== 統計卡片 ===== */
+.stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:22px;}
+.stat-card{background:#fff;border-radius:var(--radius-md);padding:16px 18px;box-shadow:var(--shadow-soft);border:1px solid rgba(184,207,218,.35);}
+.stat-card .label{font-size:12px;color:var(--gray);font-weight:500;margin-bottom:6px;}
+.stat-card .value{font-size:22px;font-weight:900;color:var(--dark);}
+.stat-card .value.pink{color:var(--pink);}
+.stat-card .value.blue{color:var(--blue);}
+.stat-card .value.sage{color:var(--sage);}
+
+/* ===== Section 通用 ===== */
+.section{background:#fff;border-radius:var(--radius-lg);padding:18px;margin-bottom:18px;box-shadow:var(--shadow-soft);border:1px solid rgba(184,207,218,.3);}
+.section-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;flex-wrap:wrap;gap:8px;}
+.section-head h3{font-size:16px;}
+.section-head .hint{font-size:12px;color:var(--gray);}
+
+/* ===== 按鈕 ===== */
+.btn{padding:10px 18px;border-radius:999px;font-size:13px;font-weight:700;display:inline-flex;align-items:center;gap:6px;transition:.15s;}
+.btn-primary{background:linear-gradient(120deg,var(--soft-pink),var(--soft-blue));color:var(--dark);box-shadow:var(--shadow-soft);}
+.btn-primary:hover{filter:brightness(1.03);transform:translateY(-1px);}
+.btn-ghost{background:var(--light-blue);color:var(--blue);}
+.btn-ghost:hover{background:var(--soft-blue);color:#fff;}
+.btn-danger{background:var(--light-pink);color:#B5574A;}
+.btn-danger:hover{background:#eee1cb;}
+.btn-sage{background:var(--light-sage);color:var(--sage);}
+.btn-sage:hover{background:var(--sage);color:#fff;}
+.btn-sm{padding:6px 14px;font-size:12px;border-radius:999px;}
+.btn-xs{padding:4px 11px;font-size:11px;border-radius:999px;}
+.btn-icon{width:34px;height:34px;border-radius:999px;display:inline-flex;align-items:center;justify-content:center;}
+.btn[disabled]{opacity:.4;cursor:not-allowed;}
+
+/* ===== 選擇客戶 / 新增客戶 切換 ===== */
+.seg-toggle{display:flex;gap:8px;margin-bottom:10px;}
+.seg-btn{flex:1;padding:9px;border-radius:999px;background:var(--light-blue);color:var(--blue);font-size:12px;font-weight:700;text-align:center;cursor:pointer;}
+.seg-btn.active{background:linear-gradient(120deg,var(--soft-pink),var(--soft-blue));color:var(--dark);}
+
+/* ===== 今日時間軸 ===== */
+.timeline{display:flex;flex-direction:column;gap:8px;}
+.tl-row{display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:var(--radius-sm);}
+.tl-row.busy{background:var(--light-blue);border:1px solid var(--soft-blue);}
+.tl-row.free{background:var(--light-sage);border:1px dashed var(--sage);}
+.tl-time{font-size:12px;font-weight:700;color:var(--medium);min-width:96px;}
+.tl-content{font-size:13px;color:var(--dark);flex:1;}
+.tl-badge{font-size:11px;font-weight:700;padding:3px 9px;border-radius:999px;}
+.tl-badge.busy{background:var(--blue);color:#fff;}
+.tl-badge.free{background:var(--sage);color:#fff;}
+.settings-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px;font-size:12px;color:var(--medium);}
+.settings-row label{display:flex;align-items:center;gap:6px;}
+.settings-row input{width:78px;padding:5px 8px;border:1px solid var(--soft-blue);border-radius:8px;font-size:12px;}
+
+/* ===== 本月可預約統計 / 迷你月曆 ===== */
+.month-stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px;margin-bottom:14px;}
+.month-stat-grid .cell{background:var(--cream);border-radius:var(--radius-sm);padding:10px 12px;text-align:center;}
+.month-stat-grid .cell .num{font-size:18px;font-weight:900;color:var(--dark);}
+.month-stat-grid .cell .lb{font-size:11px;color:var(--gray);margin-top:2px;}
+.mini-cal{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;}
+.mini-cal .day{border-radius:10px;padding:6px 2px;text-align:center;font-size:11px;background:var(--light-sage);color:var(--sage);font-weight:700;cursor:pointer;border:1px solid transparent;}
+.mini-cal .day.full{background:var(--light-pink);color:#B5574A;}
+.mini-cal .day.today{border-color:var(--blue);}
+.mini-cal .day .d{font-size:12px;}
+
+/* ===== 今日預約頁 ===== */
+.date-nav{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:14px;}
+.date-nav .date-label{font-weight:700;font-size:15px;flex:1;min-width:140px;}
+.today-stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:10px;margin-bottom:16px;}
+.appt-card{background:var(--cream);border-radius:var(--radius-md);padding:14px;margin-bottom:10px;border:1px solid rgba(166,145,107,.15);}
+.appt-top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;flex-wrap:wrap;}
+.appt-time{font-size:13px;font-weight:700;color:var(--blue);}
+.appt-name{font-size:15px;font-weight:700;margin-top:2px;}
+.appt-meta{font-size:12px;color:var(--gray);margin-top:2px;}
+.appt-badges{display:flex;gap:6px;flex-wrap:wrap;}
+.pill{font-size:11px;font-weight:700;padding:3px 10px;border-radius:999px;display:inline-block;}
+.tag-new{background:var(--light-blue);color:var(--blue);}
+.tag-return{background:var(--light-sage);color:var(--sage);}
+.pay-paid{background:var(--light-sage);color:var(--sage);}
+.pay-due{background:var(--light-pink);color:#B5574A;}
+.appt-money{font-size:15px;font-weight:900;color:var(--pink);margin-top:8px;}
+.appt-actions{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px;}
+
+/* ===== 篩選列 ===== */
+.filter-bar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px;}
+.filter-bar input[type=text],.filter-bar select,.filter-bar input[type=date]{padding:9px 12px;border:1px solid var(--soft-blue);border-radius:var(--radius-sm);font-size:13px;color:var(--dark);background:#fff;}
+.filter-bar input[type=text]{flex:1;min-width:160px;}
+
+/* ===== 預約清單 ===== */
+.client-list{display:flex;flex-direction:column;gap:10px;}
+.client-card{display:grid;grid-template-columns:1.2fr 1fr 1fr 0.9fr 0.9fr auto;align-items:center;gap:10px;padding:14px;border-radius:var(--radius-md);background:var(--cream);border:1px solid rgba(166,145,107,.15);}
+.client-card .name{font-weight:700;font-size:14px;}
+.client-card .sub{font-size:12px;color:var(--gray);margin-top:2px;}
+.field-label{display:none;font-size:11px;color:var(--gray);font-weight:700;}
+.status-pill{font-size:11px;font-weight:700;padding:3px 10px;border-radius:999px;display:inline-block;}
+.card-actions{display:flex;gap:6px;justify-content:flex-end;flex-wrap:wrap;}
+.client-card.stale{border:1px solid var(--pink);background:var(--light-pink);}
+
+/* ===== 客戶清單卡片 ===== */
+.customer-card{display:grid;grid-template-columns:1.3fr 0.9fr 0.9fr 0.9fr auto;align-items:center;gap:10px;padding:14px;border-radius:var(--radius-md);background:var(--cream);border:1px solid rgba(166,145,107,.15);margin-bottom:10px;}
+.customer-card .name{font-weight:700;font-size:14px;}
+.customer-card .sub{font-size:12px;color:var(--gray);margin-top:2px;}
+.history-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--light-blue);font-size:13px;cursor:pointer;}
+.history-row:last-child{border-bottom:none;}
+.history-row:hover{background:var(--light-blue);}
+
+/* ===== 已取消樣式：劃線＋淡化 ===== */
+.client-card.is-cancelled,.appt-card.is-cancelled{opacity:.55;filter:grayscale(.35);}
+.client-card.is-cancelled .name,.client-card.is-cancelled .sub,.appt-card.is-cancelled .appt-name{text-decoration:line-through;}
+.client-card.is-cancelled .card-actions,.appt-card.is-cancelled .appt-actions{opacity:1;filter:none;}
+
+/* ===== 店家設定：主題色與項目管理 ===== */
+.theme-swatch{width:38px;height:38px;border-radius:50%;cursor:pointer;border:3px solid transparent;display:inline-flex;align-items:center;justify-content:center;font-size:14px;transition:.15s;}
+.theme-swatch.active{border-color:var(--dark);}
+.item-chip{display:inline-flex;align-items:center;gap:6px;background:var(--light-blue);color:var(--blue);font-size:12px;font-weight:700;padding:5px 8px 5px 12px;border-radius:999px;}
+.item-chip button{color:#B5574A;font-weight:900;line-height:1;padding:2px;}
+.template-card{background:var(--cream);border-radius:var(--radius-sm);padding:12px;margin-bottom:10px;border:1px solid rgba(166,145,107,.15);}
+.template-card input[type=text]{width:100%;padding:8px 10px;border:1px solid var(--soft-blue);border-radius:8px;font-size:13px;margin-bottom:6px;font-weight:700;}
+.template-card textarea{width:100%;padding:8px 10px;border:1px solid var(--soft-blue);border-radius:8px;font-size:12px;min-height:60px;margin-bottom:8px;}
+.template-card .tpl-actions{display:flex;gap:6px;justify-content:flex-end;}
+
+/* ===== 備份提醒橫幅 ===== */
+.backup-reminder{background:var(--light-blue);border:1px solid var(--soft-blue);border-radius:var(--radius-md);padding:14px 18px;margin-bottom:18px;display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;}
+.backup-reminder .msg{font-size:13px;color:var(--medium);}
+.backup-reminder .msg b{color:var(--blue);}
+.stale-tag{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:700;color:#B5574A;background:#fff;border:1px solid var(--soft-pink);padding:2px 9px;border-radius:999px;margin-top:6px;}
+.empty-state{text-align:center;padding:40px 20px;color:var(--gray);}
+.empty-state .em{font-size:32px;margin-bottom:8px;}
+
+/* ===== Modal ===== */
+.modal-overlay{position:fixed;inset:0;background:rgba(55,53,47,.4);display:none;align-items:flex-start;justify-content:center;padding:30px 16px;overflow-y:auto;z-index:100;}
+.modal-overlay.active{display:flex;}
+.modal{background:#fff;border-radius:var(--radius-lg);width:100%;max-width:560px;padding:24px;box-shadow:var(--shadow-lift);}
+.modal h3{font-size:18px;margin-bottom:16px;}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.form-field{display:flex;flex-direction:column;gap:5px;}
+.form-field.full{grid-column:1/-1;}
+.form-field label{font-size:12px;font-weight:700;color:var(--medium);}
+.form-field input,.form-field select,.form-field textarea{padding:10px 12px;border:1px solid var(--soft-blue);border-radius:var(--radius-sm);font-size:13px;color:var(--dark);}
+.form-field textarea{resize:vertical;min-height:50px;}
+.checkbox-field{flex-direction:row;align-items:center;gap:8px;}
+.checkbox-field input{width:16px;height:16px;}
+.total-preview{grid-column:1/-1;background:var(--light-blue);border-radius:var(--radius-sm);padding:10px 14px;font-size:13px;color:var(--blue);font-weight:700;display:flex;justify-content:space-between;flex-wrap:wrap;gap:4px;}
+.conflict-warning{grid-column:1/-1;background:var(--light-pink);border:1px solid var(--soft-pink);border-radius:var(--radius-sm);padding:10px 14px;font-size:12px;color:#B5574A;display:none;}
+.field-error{grid-column:1/-1;background:var(--light-pink);border:1px solid var(--soft-pink);border-radius:var(--radius-sm);padding:10px 14px;font-size:12px;color:#B5574A;display:none;}
+.modal-actions{display:flex;justify-content:flex-end;gap:10px;margin-top:18px;}
+
+/* ===== 備份頁 ===== */
+.backup-box{border:1px dashed var(--soft-pink);border-radius:var(--radius-md);padding:18px;text-align:center;}
+.backup-box p{color:var(--medium);font-size:13px;margin:8px 0 14px;}
+input[type=file]{display:none;}
+
+/* ===== Toast ===== */
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--dark);color:#fff;padding:10px 20px;border-radius:999px;font-size:13px;opacity:0;pointer-events:none;transition:.25s;z-index:200;max-width:90%;text-align:center;}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+/* ===== 報表：趨勢長條圖 / 存檔卡片 ===== */
+.trend-row{display:grid;grid-template-columns:70px 1fr 90px;gap:10px;align-items:center;padding:8px 0;font-size:12px;color:var(--medium);}
+.trend-bar-track{background:var(--light-blue);border-radius:999px;height:14px;overflow:hidden;}
+.trend-bar-fill{background:linear-gradient(120deg,var(--soft-pink),var(--soft-blue));height:100%;border-radius:999px;}
+.trend-row .val{text-align:right;font-weight:700;color:var(--dark);}
+.report-card{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;padding:14px;border-radius:var(--radius-md);background:var(--cream);border:1px solid rgba(166,145,107,.15);margin-bottom:10px;}
+.report-card .rmonth{font-weight:700;font-size:14px;}
+.report-card .rmeta{font-size:11px;color:var(--gray);margin-top:2px;}
+.growth-up{color:var(--sage);}
+.growth-down{color:#B5574A;}
+
+/* ===== 列印用月報表（只在列印/另存PDF時顯示） ===== */
+#printReportArea{display:none;}
+@media print{
+  body *{visibility:hidden;}
+  #printReportArea, #printReportArea *{visibility:visible;}
+  #printReportArea{display:block;position:absolute;top:0;left:0;width:100%;padding:24px;}
+  #printReportArea h2{font-size:20px;margin-bottom:4px;}
+  #printReportArea .p-sub{font-size:12px;color:#666;margin-bottom:16px;}
+  #printReportArea table{width:100%;border-collapse:collapse;margin-top:12px;}
+  #printReportArea td{padding:8px 6px;border-bottom:1px solid #ddd;font-size:13px;}
+  #printReportArea td.label{color:#666;}
+  #printReportArea td.val{text-align:right;font-weight:700;}
+}
+/* ===== RWD ===== */
+@media (max-width:760px){
+  .client-card,.customer-card{grid-template-columns:1fr;gap:4px;position:relative;}
+  .client-card .field-label,.customer-card .field-label{display:inline;}
+  .card-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px;}
+  .card-actions .btn{width:100%;justify-content:center;}
+  .appt-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px;}
+  .appt-actions .btn{width:100%;justify-content:center;font-size:12px;padding:9px 10px;}
+  .form-grid{grid-template-columns:1fr;}
+  .hero h1{font-size:22px;}
+  .mini-cal{grid-template-columns:repeat(7,1fr);}
+}
+</style>
+</head>
+<body>
+
+<div id="pinLockOverlay" style="display:flex;position:fixed;inset:0;z-index:500;background:linear-gradient(135deg,var(--light-pink),var(--light-blue));align-items:center;justify-content:center;padding:20px;">
+  <div style="background:#fff;border-radius:var(--radius-lg);padding:28px 24px;max-width:320px;width:100%;text-align:center;box-shadow:var(--shadow-lift);">
+    <div id="pinLockStep1">
+      <div style="font-size:32px;margin-bottom:8px;">🔒</div>
+      <h3 style="margin-bottom:16px;">請輸入 PIN 碼</h3>
+      <input type="password" id="pinInput" inputmode="numeric" maxlength="4" placeholder="4位數字" style="width:100%;text-align:center;font-size:22px;letter-spacing:8px;padding:12px;border:1px solid var(--soft-blue);border-radius:var(--radius-sm);margin-bottom:12px;">
+      <div id="pinError" style="display:none;color:#B5574A;font-size:12px;margin-bottom:10px;">PIN 碼不正確，請再試一次</div>
+      <button type="button" class="btn btn-primary" id="pinUnlockBtn" style="width:100%;justify-content:center;">解鎖</button>
+      <button type="button" id="pinForgotBtn" style="margin-top:12px;font-size:12px;color:var(--blue);text-decoration:underline;">忘記密碼？</button>
+    </div>
+    <div id="pinLockStep2" style="display:none;">
+      <div style="font-size:32px;margin-bottom:8px;">🔑</div>
+      <h3 style="margin-bottom:6px;">輸入救援密語</h3>
+      <p style="font-size:12px;color:var(--gray);margin-bottom:12px;">請輸入你設定PIN碼時，同時設定的救援密語</p>
+      <input type="text" id="recoveryInput" placeholder="救援密語" style="width:100%;text-align:center;font-size:15px;padding:12px;border:1px solid var(--soft-blue);border-radius:var(--radius-sm);margin-bottom:12px;">
+      <div id="recoveryError" style="display:none;color:#B5574A;font-size:12px;margin-bottom:10px;">密語不正確，請再試一次</div>
+      <button type="button" class="btn btn-primary" id="recoveryVerifyBtn" style="width:100%;justify-content:center;">驗證</button>
+      <button type="button" id="pinBackBtn" style="margin-top:12px;font-size:12px;color:var(--gray);text-decoration:underline;">返回輸入 PIN</button>
+    </div>
+    <div id="pinLockStep3" style="display:none;">
+      <div style="font-size:32px;margin-bottom:8px;">✅</div>
+      <h3 style="margin-bottom:12px;">設定新的 PIN 碼</h3>
+      <input type="password" id="newPinInput" inputmode="numeric" maxlength="4" placeholder="新的4位數PIN碼" style="width:100%;text-align:center;font-size:20px;letter-spacing:6px;padding:12px;border:1px solid var(--soft-blue);border-radius:var(--radius-sm);margin-bottom:10px;">
+      <div id="newPinError" style="display:none;color:#B5574A;font-size:12px;margin-bottom:10px;">請輸入 4 位數字</div>
+      <button type="button" class="btn btn-primary" id="newPinSaveBtn" style="width:100%;justify-content:center;">儲存並解鎖</button>
+    </div>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">存款計畫 · 客戶管理</div>
+    <h1 id="shopTitle">美業預約手帳</h1>
+    <p class="hero-sub">紀錄每一筆預約，自動幫你算好今日進帳、可預約空檔與明日提醒</p>
+  </div>
+</div>
+
+<div id="safariWarningBanner" style="display:none;max-width:1100px;margin:14px auto 0;padding:0 20px;">
+  <div style="background:var(--light-pink);border:1px solid var(--soft-pink);border-radius:var(--radius-md);padding:12px 16px;display:flex;gap:10px;align-items:center;justify-content:space-between;font-size:12px;color:#8A5A4A;">
+    <span>⚠️ 請務必使用 <b>Safari</b>（iPhone）或 <b>Chrome</b> 瀏覽器開啟本工具；若直接從檔案／訊息App的預覽畫面打開，下載與列印功能將無法使用。</span>
+    <button type="button" id="dismissSafariBanner" style="flex:0 0 auto;background:#fff;border-radius:999px;width:24px;height:24px;font-weight:900;color:#8A5A4A;">✕</button>
+  </div>
+</div>
+
+<nav class="tabbar">
+  <button class="tab-btn active" data-view="dashboard">總覽儀表板</button>
+  <button class="tab-btn" data-view="today">今日預約</button>
+  <button class="tab-btn" data-view="timeline">時間軸 / 空檔</button>
+  <button class="tab-btn" data-view="appts">預約清單</button>
+  <button class="tab-btn" data-view="customers">客戶</button>
+  <button class="tab-btn" data-view="reports">報表</button>
+  <button class="tab-btn" data-view="backup">備份 / 匯出</button>
+</nav>
+
+<main>
+
+  <!-- ============ 儀表板 ============ -->
+  <section class="view active" id="view-dashboard">
+    <div id="backupReminder"></div>
+    <div id="birthdayReminder"></div>
+    <div id="reminderBanner"></div>
+    <div class="stat-grid" id="statGrid"></div>
+    <div class="section">
+      <div class="section-head"><h3>本月營收概況</h3></div>
+      <div id="monthSummary" style="font-size:13px;color:var(--medium);line-height:1.9;"></div>
+    </div>
+  </section>
+
+  <!-- ============ 今日預約 ============ -->
+  <section class="view" id="view-today">
+    <div class="section">
+      <div class="date-nav">
+        <button class="btn btn-ghost btn-sm" id="prevDayBtn">‹ 前一天</button>
+        <button class="btn btn-ghost btn-sm" id="todayBtn">今天</button>
+        <button class="btn btn-ghost btn-sm" id="nextDayBtn">後一天 ›</button>
+        <div class="date-label" id="todayPageLabel"></div>
+        <input type="date" id="todayPageDatePicker">
+      </div>
+      <div class="today-stat-grid" id="todayStatGrid"></div>
+      <div id="todayList"></div>
+    </div>
+  </section>
+
+  <!-- ============ 時間軸 / 空檔 ============ -->
+  <section class="view" id="view-timeline">
+    <div class="section">
+      <div class="section-head"><h3>店家設定</h3></div>
+
+      <div class="form-field" style="margin-bottom:14px;max-width:360px;">
+        <label>店名 / 工作室名稱</label>
+        <input type="text" id="setShopName" placeholder="顯示在頁首標題">
+      </div>
+
+      <div class="form-field" style="margin-bottom:14px;">
+        <label>品牌色系</label>
+        <div id="themeSwatches" style="display:flex;gap:12px;flex-wrap:wrap;margin-top:4px;"></div>
+      </div>
+
+      <div class="form-field">
+        <label>服務 / 操作項目管理</label>
+        <div id="itemManageList" style="display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 10px;"></div>
+        <div style="display:flex;gap:8px;">
+          <input type="text" id="newItemInput" placeholder="輸入新的服務項目名稱" style="flex:1;padding:9px 12px;border:1px solid var(--soft-blue);border-radius:var(--radius-sm);font-size:13px;">
+          <button class="btn btn-ghost btn-sm" id="addItemBtn">＋ 新增項目</button>
+        </div>
+      </div>
+
+      <div class="form-field" style="margin-top:14px;">
+        <label>安全性</label>
+        <div class="checkbox-field" style="margin:6px 0;">
+          <input type="checkbox" id="setPinEnabled">
+          <label style="margin:0;">啟用 PIN 碼鎖（開啟工具需輸入密碼）</label>
+        </div>
+        <div style="max-width:280px;">
+          <input type="text" id="setPinValue" inputmode="numeric" maxlength="4" placeholder="設定4位數PIN碼" style="width:100%;padding:9px 12px;border:1px solid var(--soft-blue);border-radius:var(--radius-sm);font-size:13px;margin-bottom:8px;">
+          <input type="text" id="setPinRecovery" placeholder="設定救援密語（忘記PIN時用來重設，請自己記住）" style="width:100%;padding:9px 12px;border:1px solid var(--soft-blue);border-radius:var(--radius-sm);font-size:13px;">
+        </div>
+      </div>
+
+      <div class="form-field" style="margin-top:14px;">
+        <label>訊息模板管理</label>
+        <div id="templateManageList"></div>
+        <button class="btn btn-ghost btn-sm" id="addTemplateBtn" style="margin-top:8px;">＋ 新增模板</button>
+      </div>
+
+      <div style="margin-top:16px;">
+        <button class="btn btn-primary btn-sm" id="saveShopSettingsBtn">儲存店家設定</button>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-head">
+        <h3>今日時間軸 · 預約空檔</h3>
+        <span class="hint" id="todayLabel"></span>
+      </div>
+      <div class="timeline" id="timeline"></div>
+      <div class="settings-row">
+        <label>營業開始 <input type="time" id="setStart"></label>
+        <label>營業結束 <input type="time" id="setEnd"></label>
+        <label>單次預估時長(分) <input type="number" id="setDuration" min="15" step="5"></label>
+        <label>預約間隔(分) <input type="number" id="setInterval" min="5" step="5"></label>
+        <button class="btn btn-ghost btn-sm" id="saveSettingsBtn">儲存設定</button>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-head">
+        <h3>本月可預約統計</h3>
+        <span class="hint" id="monthAvailLabel"></span>
+      </div>
+      <div class="month-stat-grid" id="monthAvailGrid"></div>
+      <div class="hint" style="margin-bottom:8px;">點選日期可直接跳到該天的「今日預約」頁面</div>
+      <div class="mini-cal" id="miniCal"></div>
+    </div>
+  </section>
+
+  <!-- ============ 預約清單 ============ -->
+  <section class="view" id="view-appts">
+    <div class="section">
+      <div class="section-head">
+        <h3>預約清單</h3>
+        <div style="display:flex;gap:8px;">
+          <button class="btn btn-ghost btn-sm" id="exportCsvListBtn">匯出 CSV</button>
+          <button class="btn btn-primary btn-sm" id="addBtnList">＋ 新增預約</button>
+        </div>
+      </div>
+      <div class="hint" id="staleHint" style="margin-bottom:10px;"></div>
+      <div class="filter-bar">
+        <input type="text" id="searchInput" placeholder="搜尋姓名或電話">
+        <select id="statusFilter"><option value="all">全部狀態</option></select>
+        <select id="itemFilter"><option value="all">全部項目</option></select>
+        <input type="date" id="dateFromFilter">
+        <input type="date" id="dateToFilter">
+      </div>
+      <div class="client-list" id="clientList"></div>
+    </div>
+  </section>
+
+  <!-- ============ 客戶 ============ -->
+  <section class="view" id="view-customers">
+    <div class="section">
+      <div class="section-head">
+        <h3>客戶清單</h3>
+        <div style="display:flex;gap:8px;">
+          <button class="btn btn-ghost btn-sm" id="exportCsvCustBtn">匯出客戶 CSV</button>
+          <button class="btn btn-primary btn-sm" id="addCustomerBtn">＋ 新增客戶</button>
+        </div>
+      </div>
+      <div class="filter-bar">
+        <input type="text" id="customerSearchInput" placeholder="搜尋客戶姓名或電話">
+      </div>
+      <div id="customerList"></div>
+    </div>
+  </section>
+
+  <!-- ============ 報表 ============ -->
+  <section class="view" id="view-reports">
+    <div class="section">
+      <div class="section-head"><h3>本月 vs 上月</h3></div>
+      <div class="stat-grid" id="compareGrid"></div>
+    </div>
+
+    <div class="section">
+      <div class="section-head">
+        <h3>近 6 個月趨勢</h3>
+        <span class="hint">依預約時間統計，含未來已預約月份</span>
+      </div>
+      <div id="trendTable"></div>
+    </div>
+
+    <div class="section">
+      <div class="section-head"><h3>月報表存檔</h3></div>
+      <p class="hint" style="margin-bottom:10px;">存檔後的報表數字會固定下來，之後就算資料有更動也不會改變，適合對帳留底用。</p>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:16px;">
+        <input type="month" id="reportMonthPicker">
+        <button class="btn btn-primary btn-sm" id="generateReportBtn">產生此月報表存檔</button>
+      </div>
+      <div id="reportList"></div>
+    </div>
+  </section>
+
+  <!-- ============ 備份 ============ -->
+  <section class="view" id="view-backup">
+    <div class="section">
+      <div class="section-head"><h3>資料備份 / 匯出</h3></div>
+      <div class="backup-box">
+        <div style="font-size:28px;">🗂️</div>
+        <p>所有資料僅儲存在此瀏覽器中。<br><b>換裝置或清除瀏覽器資料前，請務必先匯出備份檔</b>，之後可用下方「匯入備份檔」還原。<br><span style="color:#B5574A;">⚠️ 請勿使用無痕／隱私瀏覽模式開啟本工具，關閉視窗後資料會直接消失且無法復原。</span></p>
+        <button class="btn btn-primary" id="exportBtn">匯出備份 (.json)</button>
+        <p style="margin-top:10px;font-size:11px;color:var(--gray);" id="lastBackupHint"></p>
+      </div>
+      <div class="backup-box" style="margin-top:14px;">
+        <div style="font-size:28px;">📥</div>
+        <p>匯入備份檔會<b>覆蓋</b>目前瀏覽器中的所有資料，請確認後再匯入。</p>
+        <label class="btn btn-ghost" for="importFile">選擇備份檔匯入</label>
+        <input type="file" id="importFile" accept="application/json">
+      </div>
+      <div class="backup-box" style="margin-top:14px;">
+        <div style="font-size:28px;">📊</div>
+        <p>將全部預約資料匯出成 CSV，方便在 Excel / Google 試算表開啟查看或製表。<br><span style="color:var(--gray);">（CSV 僅供查看用，無法用來匯入還原資料，還原請使用上方 .json 備份檔）</span></p>
+        <button class="btn btn-ghost" id="exportCsvAllBtn">匯出全部預約 CSV</button>
+      </div>
+      <div class="backup-box" style="margin-top:14px;border-color:var(--soft-blue);">
+        <div style="font-size:28px;">💬</div>
+        <p>使用上有任何問題、想備份/匯入資料需要協助，或想了解新版本功能，歡迎加入客服 LINE 詢問。</p>
+        <a class="btn btn-primary" id="lineSupportBtn" href="https://line.me/R/ti/p/@911lkgyr" target="_blank" rel="noopener">加入客服 LINE</a>
+        <p style="margin-top:10px;font-size:11px;color:var(--gray);">若要更換客服 LINE 帳號，可在程式碼中搜尋 id="lineSupportBtn" 修改連結。</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============ 新增/編輯 預約 Modal ============ -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal">
+    <h3 id="modalTitle">新增預約</h3>
+    <form id="clientForm">
+      <input type="hidden" id="recordId">
+
+      <div class="seg-toggle">
+        <div class="seg-btn active" id="segExisting">選擇既有客戶</div>
+        <div class="seg-btn" id="segNew">新增客戶</div>
+      </div>
+
+      <div id="custExistingWrap" style="margin-bottom:14px;">
+        <div class="form-field" style="margin-bottom:8px;">
+          <label>搜尋客戶（姓名或電話）</label>
+          <input type="text" id="custSearchInput" placeholder="輸入姓名或電話搜尋">
+        </div>
+        <div class="form-field">
+          <label>選擇客戶 *</label>
+          <select id="f_customerId"><option value="">請選擇客戶</option></select>
+        </div>
+      </div>
+
+      <div id="custNewWrap" style="display:none;margin-bottom:14px;">
+        <div class="form-grid">
+          <div class="form-field"><label>客戶姓名 *</label><input type="text" id="f_newName"></div>
+          <div class="form-field"><label>電話 *</label><input type="tel" id="f_newPhone"></div>
+          <div class="form-field"><label>LINE / IG（選填）</label><input type="text" id="f_newContact" placeholder="LINE ID 或 IG 帳號"></div>
+          <div class="form-field"><label>客人生日（選填）</label><input type="date" id="f_newBirthday"></div>
+        </div>
+      </div>
+
+      <div class="field-error" id="customerFieldError">⚠️ 請選擇既有客戶，或填寫新客戶的姓名與電話</div>
+
+      <div class="form-grid" style="margin-top:14px;">
+        <div class="form-field"><label>預約日期時間 *</label><input type="datetime-local" id="f_datetime" required></div>
+        <div class="form-field">
+          <label>預約 / 操作項目 *</label>
+          <select id="f_item">
+            <option value="美甲">美甲</option>
+            <option value="美睫">美睫</option>
+            <option value="紋繡">紋繡</option>
+            <option value="美髮">美髮</option>
+            <option value="臉部美容">臉部美容</option>
+            <option value="身體SPA">身體SPA</option>
+            <option value="其他">其他（自行輸入）</option>
+          </select>
+        </div>
+        <div class="form-field" id="itemOtherWrap" style="display:none;"><label>項目名稱</label><input type="text" id="f_itemOther" placeholder="請輸入項目名稱"></div>
+        <div class="form-field">
+          <label>付款方式</label>
+          <select id="f_payment">
+            <option value="現金">現金</option>
+            <option value="轉帳">轉帳</option>
+            <option value="信用卡">信用卡</option>
+            <option value="LINE Pay">LINE Pay</option>
+            <option value="其他">其他</option>
+          </select>
+        </div>
+        <div class="form-field">
+          <label>預約狀態</label>
+          <select id="f_status">
+            <option value="待確認">待確認</option>
+            <option value="已確認">已確認</option>
+            <option value="已付訂">已付訂</option>
+            <option value="已完成">已完成</option>
+            <option value="改期">改期</option>
+            <option value="已取消">已取消</option>
+            <option value="未到店">未到店</option>
+          </select>
+        </div>
+        <div class="form-field" id="cancelReasonWrap" style="display:none;">
+          <label>取消原因</label>
+          <select id="f_cancelReason">
+            <option value="客人取消">客人取消</option>
+            <option value="店家取消">店家取消</option>
+            <option value="改期">改期</option>
+            <option value="其他">其他</option>
+          </select>
+        </div>
+        <div class="form-field checkbox-field"><input type="checkbox" id="f_deposit"><label style="margin:0;">已匯款訂金</label></div>
+        <div class="form-field checkbox-field"><input type="checkbox" id="f_paid"><label style="margin:0;">已收全額款項</label></div>
+        <div class="form-field"><label>今日金額 (NT$)</label><input type="number" id="f_amount" min="0" step="1" value="0"></div>
+        <div class="form-field"><label>其他加項金額 (NT$)</label><input type="number" id="f_extra" min="0" step="1" value="0"></div>
+        <div class="form-field"><label>本次儲值金額 (NT$)</label><input type="number" id="f_topup" min="0" step="1" value="0"></div>
+        <div class="form-field full"><label>備註</label><textarea id="f_note" placeholder="選填，如取消細節、客人需求等"></textarea></div>
+        <div class="conflict-warning" id="conflictWarning">⚠️ 此時段已有其他預約，請確認是否要繼續</div>
+        <div class="total-preview"><span>今日總金額（自動計算）</span><span id="totalPreview">NT$ 0</span></div>
+      </div>
+      <div class="modal-actions">
+        <button type="button" class="btn btn-ghost" id="cancelFormBtn">取消編輯</button>
+        <button type="submit" class="btn btn-primary">儲存</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- ============ 新增/編輯 客戶 Modal ============ -->
+<div class="modal-overlay" id="customerModalOverlay">
+  <div class="modal">
+    <h3 id="customerModalTitle">新增客戶</h3>
+    <form id="customerForm">
+      <input type="hidden" id="cf_id">
+      <div class="form-grid">
+        <div class="form-field"><label>客戶姓名 *</label><input type="text" id="cf_name" required></div>
+        <div class="form-field"><label>電話 *</label><input type="tel" id="cf_phone" required></div>
+        <div class="form-field"><label>LINE / IG（選填）</label><input type="text" id="cf_contact"></div>
+        <div class="form-field"><label>客人生日（選填）</label><input type="date" id="cf_birthday"></div>
+        <div class="form-field full"><label>備註</label><textarea id="cf_note" placeholder="選填，如客人偏好、特殊需求等"></textarea></div>
+      </div>
+      <div class="modal-actions">
+        <button type="button" class="btn btn-ghost" id="cancelCustomerFormBtn">取消</button>
+        <button type="submit" class="btn btn-primary">儲存</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- ============ 客戶詳細頁 Modal ============ -->
+<div class="modal-overlay" id="customerDetailOverlay">
+  <div class="modal" style="max-width:640px;">
+    <div id="customerDetailBody"></div>
+    <div class="modal-actions">
+      <button type="button" class="btn btn-ghost" id="closeCustomerDetailBtn">關閉</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="pickApptOverlay">
+  <div class="modal" style="max-width:480px;">
+    <h3>選擇要取消的預約</h3>
+    <div id="pickApptBody"></div>
+    <div class="modal-actions">
+      <button type="button" class="btn btn-ghost" id="closePickApptBtn">關閉</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="pickTemplateOverlay">
+  <div class="modal" style="max-width:480px;">
+    <h3>選擇要複製的訊息</h3>
+    <div id="pickTemplateBody"></div>
+    <div class="modal-actions">
+      <button type="button" class="btn btn-ghost" id="closePickTemplateBtn">關閉</button>
+    </div>
+  </div>
+</div>
+
+<div id="printReportArea"></div>
+<div id="licenseFooter" style="text-align:center;font-size:10px;color:var(--gray);padding:16px 20px 4px;"></div>
+<div class="toast" id="toast"></div>
+
+<script>
+(function(){
+  "use strict";
+
+  var CUSTOMERS_KEY = "wutang_customers_v1";
+  var APPTS_KEY = "wutang_appointments_v1";
+  var OLD_KEY = "wutang_clients_v1"; // 舊版單一陣列格式（升級前），僅用於資料遷移
+  var SETTINGS_KEY = "wutang_settings_v1";
+  var REPORTS_KEY = "wutang_monthly_reports_v1";
+
+  // ⚠️ 賣家出貨前請填寫買家資訊，用於畫面浮水印與備份檔追溯（不影響工具功能）
+  var LICENSE_INFO = {
+    buyer: "",       // 例如："王小美美睫工作室"
+    contact: "",     // 例如："0912-345-678"
+    orderId: "",     // 例如："SHOPEE-20260812-001"
+    soldAt: ""       // 例如："2026-08-12"
+  };
+
+  var DEFAULT_SETTINGS = {
+    start:"10:00", end:"20:00", duration:60, interval:30,
+    shopName:"美業預約手帳",
+    theme:"cream",
+    items:[{name:"美甲",price:0},{name:"美睫",price:0},{name:"紋繡",price:0},{name:"美髮",price:0},{name:"臉部美容",price:0},{name:"身體SPA",price:0}],
+    lastBackupAt: null,
+    pinEnabled: false,
+    pin: "",
+    pinRecovery: "",
+    messageTemplates: [
+      { id:"reminder", name:"預約提醒", content:"{name}您好，提醒您 {date} {time} 有預約 {item}，期待您的光臨😊" },
+      { id:"aftercare", name:"術後注意事項", content:"術後保養小提醒：24小時內請避免碰水、去角質或曝曬，如有任何不適請隨時與我們聯繫喔！" },
+      { id:"thanks", name:"感謝訊息", content:"{name}謝謝您今天的光臨，期待您下次再來💕" },
+      { id:"birthday", name:"生日祝福", content:"{name}生日快樂🎂祝您天天美麗，這個月有專屬生日優惠，歡迎回來找我們喔！" }
+    ]
+  };
+  var THEMES = {
+    cream: { label:"奶白香檳", pink:"#A6916B", soft:"#DED0B4", light:"#F7F2E7" },
+    rose:  { label:"霧粉玫瑰", pink:"#C9938A", soft:"#E8C4BC", light:"#F5E6E3" },
+    dusk:  { label:"霧藍靛",   pink:"#7A8FAD", soft:"#BCC9DC", light:"#E9EEF5" },
+    sage:  { label:"鼠尾草綠", pink:"#8FA089", soft:"#C7D6C2", light:"#EEF3EC" }
+  };
+  function applyTheme(key){
+    var t = THEMES[key] || THEMES.cream;
+    var root = document.documentElement.style;
+    root.setProperty('--pink', t.pink);
+    root.setProperty('--soft-pink', t.soft);
+    root.setProperty('--light-pink', t.light);
+    updateAppIcon();
+  }
+
+  // 產生手機「加入主畫面」用的圖示：套用目前品牌色系＋店名首字，並更新標題/主題色
+  function updateAppIcon(){
+    var theme = THEMES[settings.theme] || THEMES.cream;
+    var name = (settings.shopName || '美業預約').trim();
+    var dataUri;
+    if(typeof CUSTOM_APP_ICON !== 'undefined' && CUSTOM_APP_ICON){
+      dataUri = CUSTOM_APP_ICON;
+    }else{
+      var initial = name.slice(0,2) || '美';
+      var svg = '<svg xmlns="http://www.w3.org/2000/svg" width="180" height="180">' +
+        '<defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1">' +
+        '<stop offset="0%" stop-color="'+theme.pink+'"/><stop offset="100%" stop-color="'+theme.soft+'"/>' +
+        '</linearGradient></defs>' +
+        '<rect width="180" height="180" rx="40" fill="url(#g)"/>' +
+        '<text x="90" y="115" font-family="-apple-system,BlinkMacSystemFont,sans-serif" font-size="64" font-weight="700" fill="#ffffff" text-anchor="middle">'+initial+'</text>' +
+        '</svg>';
+      dataUri = 'data:image/svg+xml,' + encodeURIComponent(svg);
+    }
+    var touchIcon = document.getElementById('appTouchIcon');
+    var favicon = document.getElementById('appFavicon');
+    var titleMeta = document.getElementById('appTitleMeta');
+    var themeColorMeta = document.getElementById('appThemeColor');
+    if(touchIcon) touchIcon.setAttribute('href', dataUri);
+    if(favicon) favicon.setAttribute('href', dataUri);
+    if(titleMeta) titleMeta.setAttribute('content', name);
+    if(themeColorMeta) themeColorMeta.setAttribute('content', theme.pink);
+    document.title = name + ' ‧ 存款計畫';
+  }
+
+  // 賣家可替換此常數，改用自訂的品牌 Logo 當作手機主畫面圖示；留空則自動用店名+品牌色產生圖示
+  var CUSTOM_APP_ICON = "data:image/png;base64,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";
+
+  var STATUS_LIST = ['待確認','已確認','已付訂','已完成','改期','已取消','未到店'];
+  var STATUS_META = {
+    '待確認': {bg:'#F3EEE3', fg:'#8A7B5C', occupy:true,  revenue:true},
+    '已確認': {bg:'#E3EDF3', fg:'#7A9BAD', occupy:true,  revenue:true},
+    '已付訂': {bg:'#E8F0E8', fg:'#9AAE9B', occupy:true,  revenue:true},
+    '已完成': {bg:'#EDE7DB', fg:'#6B6152', occupy:true,  revenue:true},
+    '改期':   {bg:'#EFE3EA', fg:'#9B6B84', occupy:false, revenue:false},
+    '已取消': {bg:'#EEEEEE', fg:'#9B9A97', occupy:false, revenue:false},
+    '未到店': {bg:'#F3E3E3', fg:'#B5574A', occupy:false, revenue:false}
+  };
+  var ITEM_EMOJI = {'美甲':'💅','美睫':'👁️','紋繡':'✏️','美髮':'💇','臉部美容':'🧖‍♀️','身體SPA':'🛁'};
+
+  // ---------- 基礎工具 ----------
+  function uid(){ return 'id-' + Date.now().toString(36) + '-' + Math.random().toString(36).slice(2,8); }
+  function fmtMoney(n){ n = Number(n)||0; return "NT$ " + n.toLocaleString('zh-TW'); }
+  function pad(n){ return n<10 ? '0'+n : ''+n; }
+  function toDateStr(d){ return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate()); }
+  function toTimeStr(d){ return pad(d.getHours())+':'+pad(d.getMinutes()); }
+  function parseLocal(dtStr){ return dtStr ? new Date(dtStr) : null; }
+  function fmtDateTimeDisplay(dtStr){
+    var d = parseLocal(dtStr); if(!d) return '未設定';
+    var days=['日','一','二','三','四','五','六'];
+    return (d.getMonth()+1)+'/'+d.getDate()+'（週'+days[d.getDay()]+'）'+pad(d.getHours())+':'+pad(d.getMinutes());
+  }
+  function fmtDateShort(dtStr){
+    if(!dtStr) return '—';
+    var d = parseLocal(dtStr);
+    return (d.getMonth()+1)+'/'+d.getDate();
+  }
+  function showToast(msg){
+    var t = document.getElementById('toast'); t.textContent = msg; t.classList.add('show');
+    clearTimeout(showToast._timer); showToast._timer = setTimeout(function(){ t.classList.remove('show'); }, 2400);
+  }
+  function escapeHtml(str){
+    return String(str==null?'':str).replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; });
+  }
+
+  // ---------- iOS 偵測與下載備援 ----------
+  var isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform==='MacIntel' && navigator.maxTouchPoints>1);
+  var SAFARI_BANNER_KEY = 'wutang_safari_banner_dismissed';
+  (function initSafariBanner(){
+    if(localStorage.getItem(SAFARI_BANNER_KEY)==='1') return;
+    var el = document.getElementById('safariWarningBanner');
+    el.style.display = 'block';
+    document.getElementById('dismissSafariBanner').addEventListener('click', function(){
+      el.style.display = 'none';
+      localStorage.setItem(SAFARI_BANNER_KEY, '1');
+    });
+  })();
+  // iOS 對 Blob 檔案下載限制較多，改用開新分頁＋純文字顯示，讓使用者用 Safari 分享功能自行儲存
+  function openTextInNewTab(content, filename){
+    var w = window.open('', '_blank');
+    if(!w){ alert('請允許彈出視窗，或改用瀏覽器選單中的分享功能'); return; }
+    var escaped = String(content).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    w.document.write(
+      '<!DOCTYPE html><html><head><meta charset="utf-8"><title>'+escapeHtml(filename)+'</title>' +
+      '<style>body{font-family:-apple-system,sans-serif;padding:16px;background:#FAF3EE;} .tip{background:#F7F2E7;padding:12px;border-radius:10px;margin-bottom:12px;font-size:14px;line-height:1.6;} pre{white-space:pre-wrap;word-break:break-all;background:#fff;padding:12px;border-radius:10px;border:1px solid #ddd;font-size:12px;} button{padding:10px 18px;border-radius:999px;border:none;background:#A6916B;color:#fff;font-weight:700;margin-bottom:12px;}</style>' +
+      '</head><body>' +
+      '<div class="tip">📱 請點右上角「分享」圖示（或長按下方內容）選擇「儲存到檔案」。<br>建議檔名：'+escapeHtml(filename)+'</div>' +
+      '<button onclick="navigator.clipboard.writeText(document.getElementById(\'c\').textContent).then(function(){alert(\'已複製全部內容，可貼到備忘錄或檔案App\');})">複製全部內容</button>' +
+      '<pre id="c">'+escaped+'</pre>' +
+      '</body></html>'
+    );
+    w.document.close();
+  }
+
+  // ---------- 全域錯誤自動提示：任何未預期的錯誤都會直接顯示，不會再默默失敗 ----------
+  window.addEventListener('error', function(e){
+    showToast('⚠️ 發生錯誤：'+(e && e.message ? e.message : '未知錯誤，請截圖回報'));
+  });
+
+  // ---------- 複製到剪貼簿（含備援方案） ----------
+  function copyToClipboard(text){
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(text).then(function(){
+        showToast('已複製，可直接貼到 LINE');
+      }).catch(function(){ fallbackCopy(text); });
+    }else{
+      fallbackCopy(text);
+    }
+  }
+  function fallbackCopy(text){
+    var ta = document.createElement('textarea');
+    ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
+    document.body.appendChild(ta); ta.focus(); ta.select();
+    try{ document.execCommand('copy'); showToast('已複製，可直接貼到 LINE'); }
+    catch(e){ alert('請手動複製以下內容：\n\n'+text); }
+    document.body.removeChild(ta);
+  }
+  // 將訊息模板中的變數替換成實際內容；appt 可為 null（僅預覽/無特定預約時變數留空）
+  function fillTemplate(content, appt, customerOverride){
+    var cust = customerOverride || (appt ? getCustomer(appt.customerId) : null) || {name:'',phone:''};
+    var d = appt && appt.datetime ? parseLocal(appt.datetime) : null;
+    return String(content)
+      .replace(/{name}/g, cust.name||'')
+      .replace(/{phone}/g, cust.phone||'')
+      .replace(/{item}/g, appt ? (appt.item||'') : '')
+      .replace(/{date}/g, d ? (d.getMonth()+1)+'/'+d.getDate() : '')
+      .replace(/{time}/g, d ? pad(d.getHours())+':'+pad(d.getMinutes()) : '')
+      .replace(/{shopName}/g, settings.shopName||'');
+  }
+
+  function isOccupying(status){ return !!(STATUS_META[status] && STATUS_META[status].occupy); }
+  function isRevenue(status){ return !!(STATUS_META[status] && STATUS_META[status].revenue); }
+  function statusPillHtml(status){
+    var m = STATUS_META[status] || {bg:'#eee',fg:'#999'};
+    return '<span class="status-pill" style="background:'+m.bg+';color:'+m.fg+';">'+escapeHtml(status)+'</span>';
+  }
+
+  // ---------- 儲存 / 讀取 ----------
+  function loadCustomers(){
+    try{ var raw = localStorage.getItem(CUSTOMERS_KEY); return raw ? JSON.parse(raw) : []; }catch(e){ return []; }
+  }
+  function saveCustomers(arr){ localStorage.setItem(CUSTOMERS_KEY, JSON.stringify(arr)); }
+  function loadAppointments(){
+    try{ var raw = localStorage.getItem(APPTS_KEY); return raw ? JSON.parse(raw) : []; }catch(e){ return []; }
+  }
+  function saveAppointments(arr){ localStorage.setItem(APPTS_KEY, JSON.stringify(arr)); }
+  function loadSettings(){
+    try{
+      var raw = localStorage.getItem(SETTINGS_KEY);
+      var s = raw ? Object.assign({}, DEFAULT_SETTINGS, JSON.parse(raw)) : Object.assign({}, DEFAULT_SETTINGS);
+      if(Array.isArray(s.items)){
+        s.items = s.items.map(function(it){ return (typeof it==='string') ? {name:it, price:0} : it; });
+      }
+      if(!Array.isArray(s.messageTemplates) || !s.messageTemplates.length){ s.messageTemplates = DEFAULT_SETTINGS.messageTemplates.slice(); }
+      return s;
+    }catch(e){ return Object.assign({}, DEFAULT_SETTINGS); }
+  }
+  function saveSettings(s){ localStorage.setItem(SETTINGS_KEY, JSON.stringify(s)); }
+  function loadReports(){
+    try{ var raw = localStorage.getItem(REPORTS_KEY); return raw ? JSON.parse(raw) : []; }catch(e){ return []; }
+  }
+  function saveReports(arr){ localStorage.setItem(REPORTS_KEY, JSON.stringify(arr)); }
+
+  // 把舊版「每筆預約內嵌客戶欄位」的陣列，拆成 客戶主檔 + 預約紀錄（用電話/姓名比對合併同一人）
+  function splitLegacyArray(oldList){
+    var statusMap = { upcoming:'待確認', done:'已完成', cancelled:'已取消' };
+    var custMap = {};
+    var newAppts = [];
+    (oldList||[]).forEach(function(old){
+      var key = old.phone ? ('p_'+old.phone) : ('n_'+(old.name||''));
+      var cust = custMap[key];
+      if(!cust){
+        cust = {
+          id: uid(), name: old.name||'', phone: old.phone||'',
+          contact: old.contact||'', birthday: old.birthday||'', note:'',
+          createdAt: old.createdAt || new Date().toISOString(),
+          updatedAt: new Date().toISOString()
+        };
+        custMap[key] = cust;
+      }else{
+        if(!cust.contact && old.contact) cust.contact = old.contact;
+        if(!cust.birthday && old.birthday) cust.birthday = old.birthday;
+      }
+      var status = old.status;
+      if(statusMap[status]) status = statusMap[status];
+      if(STATUS_LIST.indexOf(status)===-1) status = '待確認';
+      newAppts.push({
+        id: old.id || uid(),
+        customerId: cust.id,
+        item: old.item||'',
+        datetime: old.datetime||'',
+        payment: old.payment||'現金',
+        status: status,
+        cancelReason: old.cancelReason||'',
+        deposit: !!old.deposit,
+        paid: !!old.paid,
+        paidAt: old.paidAt||'',
+        amount: Number(old.amount)||0,
+        extra: Number(old.extra)||0,
+        total: (Number(old.amount)||0)+(Number(old.extra)||0),
+        topup: Number(old.topup)||0,
+        note: old.note||'',
+        createdAt: old.createdAt || new Date().toISOString(),
+        updatedAt: old.updatedAt || new Date().toISOString()
+      });
+    });
+    var custArr = Object.keys(custMap).map(function(k){ return custMap[k]; });
+    return { customers: custArr, appointments: newAppts };
+  }
+
+  // 首次載入：若尚未有新版資料，且偵測到舊版資料，自動搬遷
+  (function migrateIfNeeded(){
+    if(localStorage.getItem(APPTS_KEY)) return; // 已是新版格式
+    var oldRaw = localStorage.getItem(OLD_KEY);
+    if(!oldRaw) return; // 全新使用者，不用搬
+    var oldList = [];
+    try{ oldList = JSON.parse(oldRaw); }catch(e){ oldList = []; }
+    if(!Array.isArray(oldList) || !oldList.length) return;
+    var result = splitLegacyArray(oldList);
+    saveCustomers(result.customers);
+    saveAppointments(result.appointments);
+  })();
+
+  // ---------- 資料狀態 ----------
+  var customers = loadCustomers();
+  var appointments = loadAppointments();
+  var reports = loadReports();
+  var settings = loadSettings();
+  var todayPageDate = toDateStr(new Date());
+
+  // 舊版狀態值遷移保險（避免匯入舊備份時漏轉換）
+  (function fixStatuses(){
+    var map = { upcoming:'待確認', done:'已完成', cancelled:'已取消' };
+    var changed = false;
+    appointments.forEach(function(a){
+      if(map[a.status]){ a.status = map[a.status]; changed = true; }
+      if(STATUS_LIST.indexOf(a.status)===-1){ a.status = '待確認'; changed = true; }
+    });
+    if(changed) saveAppointments(appointments);
+  })();
+
+  function getCustomer(id){
+    return customers.find(function(c){ return c.id===id; }) || {id:'', name:'（客戶已刪除）', phone:'', contact:'', birthday:'', note:''};
+  }
+  function customerStats(customerId){
+    var appts = appointments.filter(function(a){ return a.customerId===customerId; });
+    var revenueAppts = appts.filter(function(a){ return isRevenue(a.status); });
+    var totalSpend = revenueAppts.reduce(function(s,a){ return s+(Number(a.amount)||0)+(Number(a.extra)||0); },0);
+    var visitCount = revenueAppts.length;
+    var cancelCount = appts.filter(function(a){return a.status==='已取消';}).length;
+    var noShowCount = appts.filter(function(a){return a.status==='未到店';}).length;
+    var lastVisit = null;
+    revenueAppts.forEach(function(a){ if(a.datetime && (!lastVisit || a.datetime>lastVisit)) lastVisit = a.datetime; });
+    var avgTicket = visitCount ? Math.round(totalSpend/visitCount) : 0;
+    return { apptCount:appts.length, visitCount:visitCount, totalSpend:totalSpend, cancelCount:cancelCount, noShowCount:noShowCount, lastVisit:lastVisit, avgTicket:avgTicket };
+  }
+  function isReturningCustomer(apptRecord){
+    return appointments.some(function(a){
+      return a.id!==apptRecord.id && a.customerId===apptRecord.customerId && a.datetime && apptRecord.datetime && a.datetime < apptRecord.datetime;
+    });
+  }
+
+  // 計算指定月份（'YYYY-MM'）的營運統計，供報表比較與月報存檔共用
+  function computeMonthStats(monthPrefix){
+    var monthAppts = appointments.filter(function(a){ return a.datetime && a.datetime.slice(0,7)===monthPrefix; });
+    var revenueAppts = monthAppts.filter(function(a){ return isRevenue(a.status); });
+    var revenue = revenueAppts.reduce(function(s,a){ return s+(Number(a.amount)||0)+(Number(a.extra)||0); },0);
+    var topUp = revenueAppts.reduce(function(s,a){ return s+(Number(a.topup)||0); },0);
+    var doneCount = monthAppts.filter(function(a){return a.status==='已完成';}).length;
+    var cancelCount = monthAppts.filter(function(a){return a.status==='已取消';}).length;
+    var noShowCount = monthAppts.filter(function(a){return a.status==='未到店';}).length;
+    var avgTicket = revenueAppts.length ? Math.round(revenue/revenueAppts.length) : 0;
+
+    var uniqueCustomerIds = {};
+    revenueAppts.forEach(function(a){ uniqueCustomerIds[a.customerId]=true; });
+    var uniqueCustomerCount = Object.keys(uniqueCustomerIds).length;
+
+    var newCustomerCount = 0;
+    Object.keys(uniqueCustomerIds).forEach(function(cid){
+      var firstDate = null;
+      appointments.forEach(function(a){
+        if(a.customerId===cid && isRevenue(a.status) && a.datetime){
+          if(!firstDate || a.datetime<firstDate) firstDate = a.datetime;
+        }
+      });
+      if(firstDate && firstDate.slice(0,7)===monthPrefix) newCustomerCount++;
+    });
+    var repeatCustomerCount = uniqueCustomerCount - newCustomerCount;
+    var repeatRate = uniqueCustomerCount ? Math.round(repeatCustomerCount/uniqueCustomerCount*100) : 0;
+
+    return {
+      month: monthPrefix, apptCount: monthAppts.length, revenue: revenue, topUp: topUp,
+      doneCount: doneCount, cancelCount: cancelCount, noShowCount: noShowCount, avgTicket: avgTicket,
+      uniqueCustomerCount: uniqueCustomerCount, newCustomerCount: newCustomerCount, repeatRate: repeatRate
+    };
+  }
+  function monthPrefixOf(offsetFromCurrent){
+    var d = new Date();
+    d.setDate(1);
+    d.setMonth(d.getMonth()+offsetFromCurrent);
+    return d.getFullYear()+'-'+pad(d.getMonth()+1);
+  }
+  function monthLabel(monthPrefix){
+    var parts = monthPrefix.split('-');
+    return parts[0]+'年'+Number(parts[1])+'月';
+  }
+
+  function getDuration(){ return Number(settings.duration)||60; }
+  function getInterval(){ return Number(settings.interval)||30; }
+  function apptEnd(datetimeStr){ return new Date(parseLocal(datetimeStr).getTime() + getDuration()*60000); }
+  function timeToMin(t){ var p=(t||'0:0').split(':'); return (parseInt(p[0],10)||0)*60+(parseInt(p[1],10)||0); }
+  function minToTime(m){ m=((m%1440)+1440)%1440; return pad(Math.floor(m/60))+':'+pad(m%60); }
+  function overlaps(aS,aE,bS,bE){ return aS < bE && bS < aE; }
+
+  function findConflict(datetimeStr, excludeId){
+    if(!datetimeStr) return null;
+    var start = parseLocal(datetimeStr);
+    var end = apptEnd(datetimeStr);
+    var dayStr = datetimeStr.slice(0,10);
+    return appointments.find(function(a){
+      if(a.id===excludeId) return false;
+      if(!isOccupying(a.status)) return false;
+      if(!a.datetime || a.datetime.slice(0,10)!==dayStr) return false;
+      var cs = parseLocal(a.datetime), ce = apptEnd(a.datetime);
+      return overlaps(start,end,cs,ce);
+    });
+  }
+
+  function computeDaySlots(dateStr){
+    var startMin = timeToMin(settings.start), endMin = timeToMin(settings.end);
+    var dur = getDuration(), interval = getInterval();
+    var dayItems = appointments.filter(function(a){ return isOccupying(a.status) && a.datetime && a.datetime.slice(0,10)===dateStr; });
+    var busyRanges = dayItems.map(function(a){
+      var s = timeToMin(toTimeStr(parseLocal(a.datetime)));
+      return [s, s+dur];
+    });
+    var freeStarts = [];
+    for(var t=startMin; t+dur<=endMin; t+=interval){
+      var conflict = busyRanges.some(function(r){ return overlaps(t,t+dur,r[0],r[1]); });
+      if(!conflict) freeStarts.push(t);
+    }
+    var totalSlots = freeStarts.length + dayItems.length;
+    return { totalSlots:totalSlots, booked:dayItems.length, remaining:freeStarts.length, freeStarts:freeStarts, items:dayItems };
+  }
+
+  // ================= 頁籤切換 =================
+  var tabBtns = document.querySelectorAll('.tab-btn');
+  function switchTo(view){
+    tabBtns.forEach(function(b){ b.classList.toggle('active', b.dataset.view===view); });
+    document.querySelectorAll('.view').forEach(function(v){ v.classList.remove('active'); });
+    document.getElementById('view-'+view).classList.add('active');
+    if(view==='appts') renderList();
+    if(view==='customers') renderCustomers();
+    if(view==='dashboard') renderDashboard();
+    if(view==='timeline'){ renderTimeline(); renderMonthAvailability(); renderShopSettings(); }
+    if(view==='today') renderTodayPage();
+    if(view==='backup') renderLastBackupHint();
+    if(view==='reports') renderReportsPage();
+  }
+  tabBtns.forEach(function(btn){ btn.addEventListener('click', function(){ switchTo(btn.dataset.view); }); });
+
+  // ================= 儀表板 =================
+  var STALE_MS = 24*60*60*1000;
+  var STALE_STATUSES = ['待確認','已確認'];
+  function computeStaleAppointments(){
+    var now = Date.now();
+    return appointments.filter(function(a){
+      if(STALE_STATUSES.indexOf(a.status)===-1) return false;
+      var last = a.updatedAt || a.createdAt;
+      if(!last) return false;
+      return (now - new Date(last).getTime()) > STALE_MS;
+    });
+  }
+
+  function renderDashboard(){
+    renderBackupReminder();
+    renderBirthdayReminder();
+    var now = new Date();
+    var todayStr = toDateStr(now);
+    var tomorrow = new Date(now.getTime()+86400000);
+    var tomorrowStr = toDateStr(tomorrow);
+
+    var tomorrowList = appointments.filter(function(a){
+      return isOccupying(a.status) && a.datetime && a.datetime.slice(0,10)===tomorrowStr;
+    }).sort(function(a,b){ return a.datetime.localeCompare(b.datetime); });
+
+    var bannerEl = document.getElementById('reminderBanner');
+    if(tomorrowList.length){
+      var items = tomorrowList.map(function(a){
+        var cust = getCustomer(a.customerId);
+        return '<div class="reminder-item">'+pad(parseLocal(a.datetime).getHours())+':'+pad(parseLocal(a.datetime).getMinutes())+
+          ' － <b>'+escapeHtml(cust.name)+'</b>（'+escapeHtml(a.item)+'）'+escapeHtml(cust.phone||'')+'</div>';
+      }).join('');
+      bannerEl.innerHTML = '<div class="reminder-banner"><div class="icon">⏰</div><div style="flex:1;"><h4>明日預約提醒（共 '+tomorrowList.length+' 筆）</h4><div class="reminder-list">'+items+'</div></div></div>';
+    }else{ bannerEl.innerHTML = ''; }
+
+    var todayItems = appointments.filter(function(a){ return a.datetime && a.datetime.slice(0,10)===todayStr && isRevenue(a.status); });
+    var todayRevenue = todayItems.reduce(function(s,a){ return s + (Number(a.amount)||0) + (Number(a.extra)||0); },0);
+    var todayTopUp = todayItems.reduce(function(s,a){ return s + (Number(a.topup)||0); },0);
+
+    var monthPrefix = todayStr.slice(0,7);
+    var monthItems = appointments.filter(function(a){ return a.datetime && a.datetime.slice(0,7)===monthPrefix && isRevenue(a.status); });
+    var monthRevenue = monthItems.reduce(function(s,a){ return s + (Number(a.amount)||0) + (Number(a.extra)||0); },0);
+    var monthTopUp = monthItems.reduce(function(s,a){ return s + (Number(a.topup)||0); },0);
+
+    var totalCustomers = customers.length;
+    var allTopUp = appointments.reduce(function(s,a){ return s + (Number(a.topup)||0); },0);
+
+    var allValid = appointments.filter(function(a){ return isRevenue(a.status); });
+    var allRevenue = allValid.reduce(function(s,a){ return s + (Number(a.amount)||0) + (Number(a.extra)||0); },0);
+    var avgTicket = allValid.length ? Math.round(allRevenue/allValid.length) : 0;
+    var byCustomer = {};
+    allValid.forEach(function(a){ byCustomer[a.customerId] = (byCustomer[a.customerId]||0)+1; });
+    var repeatCustomerCount = Object.keys(byCustomer).filter(function(k){ return byCustomer[k]>=2; }).length;
+    var repeatRate = totalCustomers ? Math.round(repeatCustomerCount/totalCustomers*100) : 0;
+
+    var staleList = computeStaleAppointments();
+
+    var grid = document.getElementById('statGrid');
+    grid.innerHTML =
+      statCard('今日預約', todayItems.length+' 筆','pink') +
+      statCard('今日份總營收', fmtMoney(todayRevenue),'pink') +
+      statCard('今日儲值進帳', fmtMoney(todayTopUp),'blue') +
+      statCard('本月總營收', fmtMoney(monthRevenue),'blue') +
+      statCard('本月儲值進帳', fmtMoney(monthTopUp),'sage') +
+      statCard('明日待處理', tomorrowList.length+' 筆','pink') +
+      statCard('累積客戶數', totalCustomers+' 位','sage') +
+      statCard('累積儲值總額', fmtMoney(allTopUp),'sage') +
+      statCard('平均客單價（美業指標）', fmtMoney(avgTicket),'blue') +
+      statCard('回客率（美業指標）', repeatRate+' %','blue') +
+      statCard('超過1天未跟進', staleList.length+' 筆','pink');
+
+    var doneCount = monthItems.filter(function(a){return a.status==='已完成';}).length;
+    var pendingCount = monthItems.filter(function(a){return a.status==='待確認'||a.status==='已確認'||a.status==='已付訂';}).length;
+    document.getElementById('monthSummary').innerHTML =
+      '本月共有 <b>'+monthItems.length+'</b> 筆有效預約，已完成 <b>'+doneCount+'</b> 筆、待處理 <b>'+pendingCount+'</b> 筆。<br>' +
+      '本月服務營收 <b>'+fmtMoney(monthRevenue)+'</b>，加上儲值進帳共 <b>'+fmtMoney(monthRevenue+monthTopUp)+'</b>。<br>' +
+      '平均客單價約 <b>'+fmtMoney(avgTicket)+'</b>，回客率約 <b>'+repeatRate+'%</b>。';
+  }
+  function statCard(label,value,color){
+    return '<div class="stat-card"><div class="label">'+label+'</div><div class="value '+color+'">'+value+'</div></div>';
+  }
+
+  // ================= 時間軸 / 空檔 =================
+  function renderTimeline(){
+    var todayStr = toDateStr(new Date());
+    document.getElementById('todayLabel').textContent = todayStr + '（今日）';
+    document.getElementById('setStart').value = settings.start;
+    document.getElementById('setEnd').value = settings.end;
+    document.getElementById('setDuration').value = settings.duration;
+    document.getElementById('setInterval').value = settings.interval;
+
+    var info = computeDaySlots(todayStr);
+    var sorted = info.items.slice().sort(function(a,b){ return a.datetime.localeCompare(b.datetime); });
+    var startMin = timeToMin(settings.start), endMin = timeToMin(settings.end), dur = getDuration();
+    var rows = [], cursor = startMin;
+    sorted.forEach(function(a){
+      var apptMin = timeToMin(toTimeStr(parseLocal(a.datetime)));
+      if(apptMin > cursor + 4) rows.push(freeRow(cursor, apptMin));
+      var apptEndMin = apptMin + dur;
+      rows.push(busyRow(apptMin, apptEndMin, a));
+      cursor = Math.max(cursor, apptEndMin);
+    });
+    if(cursor < endMin - 4) rows.push(freeRow(cursor, endMin));
+
+    var el = document.getElementById('timeline');
+    el.innerHTML = rows.length ? rows.join('') : '<div class="empty-state"><div class="em">🌤️</div>今日整天都是空檔，還沒有安排預約</div>';
+  }
+  function busyRow(startMin,endMin,a){
+    var cust = getCustomer(a.customerId);
+    return '<div class="tl-row busy"><div class="tl-time">'+minToTime(startMin)+' - '+minToTime(endMin)+'</div>' +
+      '<div class="tl-content"><b>'+escapeHtml(cust.name)+'</b> ‧ '+escapeHtml(a.item)+'</div>' +
+      '<div class="tl-badge busy">已預約</div></div>';
+  }
+  function freeRow(startMin,endMin){
+    return '<div class="tl-row free"><div class="tl-time">'+minToTime(startMin)+' - '+minToTime(endMin)+'</div>' +
+      '<div class="tl-content">可安排新預約</div><div class="tl-badge free">空檔</div></div>';
+  }
+  document.getElementById('saveSettingsBtn').addEventListener('click', function(){
+    settings.start = document.getElementById('setStart').value || DEFAULT_SETTINGS.start;
+    settings.end = document.getElementById('setEnd').value || DEFAULT_SETTINGS.end;
+    settings.duration = Number(document.getElementById('setDuration').value) || DEFAULT_SETTINGS.duration;
+    settings.interval = Number(document.getElementById('setInterval').value) || DEFAULT_SETTINGS.interval;
+    saveSettings(settings);
+    renderTimeline(); renderMonthAvailability(); renderTodayPage();
+    showToast('已儲存營業時間設定');
+  });
+
+  // ================= 本月可預約統計 =================
+  function renderMonthAvailability(){
+    var now = new Date();
+    var y = now.getFullYear(), m = now.getMonth();
+    var daysInMonth = new Date(y, m+1, 0).getDate();
+    var totalSlots=0, bookedSlots=0, fullDays=0;
+    var dayCells = [];
+    for(var d=1; d<=daysInMonth; d++){
+      var dateStr = y+'-'+pad(m+1)+'-'+pad(d);
+      var info = computeDaySlots(dateStr);
+      totalSlots += info.totalSlots;
+      bookedSlots += info.booked;
+      var isFull = info.remaining<=0;
+      if(isFull) fullDays++;
+      dayCells.push({d:d, dateStr:dateStr, full:isFull, isToday: dateStr===toDateStr(now)});
+    }
+    var remainingSlots = totalSlots - bookedSlots;
+    var usageRate = totalSlots ? Math.round(bookedSlots/totalSlots*1000)/10 : 0;
+    var freeDays = daysInMonth - fullDays;
+
+    document.getElementById('monthAvailLabel').textContent = y+'年'+(m+1)+'月';
+    document.getElementById('monthAvailGrid').innerHTML =
+      monthCell(daysInMonth,'本月天數') +
+      monthCell(freeDays,'還有空檔天數') +
+      monthCell(fullDays,'已滿天數') +
+      monthCell(totalSlots,'本月可預約時段') +
+      monthCell(bookedSlots,'已預約時段') +
+      monthCell(remainingSlots,'剩餘可預約時段') +
+      monthCell(usageRate+'%','預約使用率');
+
+    document.getElementById('miniCal').innerHTML = dayCells.map(function(c){
+      return '<div class="day'+(c.full?' full':'')+(c.isToday?' today':'')+'" data-date="'+c.dateStr+'">' +
+        '<div class="d">'+c.d+'</div><div>'+(c.full?'🔴':'🟢')+'</div></div>';
+    }).join('');
+    document.querySelectorAll('#miniCal .day').forEach(function(el){
+      el.addEventListener('click', function(){
+        todayPageDate = el.dataset.date;
+        switchTo('today');
+      });
+    });
+  }
+  function monthCell(num,label){
+    return '<div class="cell"><div class="num">'+num+'</div><div class="lb">'+label+'</div></div>';
+  }
+
+  // ================= 店家設定：店名 / 品牌色 / 服務項目 =================
+  function populateItemSelect(){
+    var sel = document.getElementById('f_item');
+    var current = sel.value;
+    var opts = settings.items.map(function(it){ return '<option value="'+escapeHtml(it.name)+'" data-price="'+(Number(it.price)||0)+'">'+escapeHtml(it.name)+'</option>'; });
+    opts.push('<option value="其他" data-price="0">其他（自行輸入）</option>');
+    sel.innerHTML = opts.join('');
+    if(settings.items.some(function(it){return it.name===current;}) || current==='其他') sel.value = current;
+  }
+
+  function renderShopSettings(){
+    document.getElementById('setShopName').value = settings.shopName;
+    document.getElementById('setPinEnabled').checked = !!settings.pinEnabled;
+    document.getElementById('setPinValue').value = settings.pin || '';
+    document.getElementById('setPinRecovery').value = settings.pinRecovery || '';
+    renderTemplateManageList();
+
+    var swatchEl = document.getElementById('themeSwatches');
+    swatchEl.innerHTML = Object.keys(THEMES).map(function(key){
+      var t = THEMES[key];
+      var active = (settings.theme===key) ? ' active' : '';
+      return '<button type="button" class="theme-swatch'+active+'" data-theme="'+key+'" title="'+t.label+'" style="background:linear-gradient(135deg,'+t.pink+','+t.soft+');">'+(settings.theme===key?'✓':'')+'</button>';
+    }).join('') + '<span class="hint" style="align-self:center;">'+ (THEMES[settings.theme] ? THEMES[settings.theme].label : '') +'</span>';
+
+    document.querySelectorAll('#themeSwatches .theme-swatch').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        settings.theme = btn.dataset.theme;
+        applyTheme(settings.theme);
+        saveSettings(settings);
+        renderShopSettings();
+        showToast('已套用「'+THEMES[settings.theme].label+'」配色');
+      });
+    });
+
+    document.getElementById('itemManageList').innerHTML = settings.items.map(function(item, idx){
+      return '<span class="item-chip" data-idx="'+idx+'" style="cursor:pointer;" title="點擊可編輯名稱與價格">' +
+        escapeHtml(item.name) +
+        ' <button type="button" class="chip-del" data-idx="'+idx+'" title="刪除此項目">✕</button></span>';
+    }).join('') || '<span class="hint">尚未設定任何服務項目</span>';
+
+    document.querySelectorAll('#itemManageList .item-chip').forEach(function(chip){
+      chip.addEventListener('click', function(e){
+        try{
+          if(e.target.classList.contains('chip-del')) return;
+          var idx = Number(chip.dataset.idx);
+          var item = settings.items[idx];
+          var oldName = item.name;
+          var newName = prompt('修改服務項目名稱：', oldName);
+          if(newName===null) return;
+          newName = newName.trim();
+          if(!newName){ showToast('名稱不能空白'); return; }
+          if(newName!==oldName && settings.items.some(function(it){return it.name===newName;})){ showToast('這個項目名稱已經存在囉'); return; }
+
+          var newPriceStr = prompt('設定「'+newName+'」的預設價格 (NT$，選新增預約時會自動帶入，可留空或按取消不改動)：', item.price||0);
+          var newPrice = item.price;
+          if(newPriceStr!==null){
+            var num = Number(newPriceStr);
+            if(!isNaN(num) && num>=0) newPrice = num;
+          }
+
+          var nameChanged = newName!==oldName;
+          item.name = newName;
+          item.price = newPrice;
+          saveSettings(settings);
+          if(nameChanged){
+            var changed = false;
+            appointments.forEach(function(a){ if(a.item===oldName){ a.item = newName; changed = true; } });
+            if(changed) saveAppointments(appointments);
+          }
+          renderShopSettings();
+          populateItemSelect();
+          refreshAll();
+          showToast('已更新「'+newName+'」');
+        }catch(err){
+          showToast('⚠️ 編輯項目時發生錯誤：'+err.message);
+        }
+      });
+    });
+
+    document.querySelectorAll('#itemManageList .chip-del').forEach(function(btn){
+      btn.addEventListener('click', function(e){
+        try{
+          e.stopPropagation();
+          var idx = Number(btn.dataset.idx);
+          var removed = settings.items[idx].name;
+          if(!confirm('確定要刪除服務項目「'+removed+'」嗎？（不會影響已建立的預約紀錄）')) return;
+          settings.items.splice(idx,1);
+          saveSettings(settings);
+          renderShopSettings();
+          populateItemSelect();
+          showToast('已刪除項目「'+removed+'」');
+        }catch(err){
+          showToast('⚠️ 刪除項目時發生錯誤：'+err.message);
+        }
+      });
+    });
+  }
+
+  // ---- 訊息模板管理 ----
+  function renderTemplateManageList(){
+    var el = document.getElementById('templateManageList');
+    el.innerHTML = settings.messageTemplates.map(function(tpl, idx){
+      return '<div class="template-card">' +
+        '<input type="text" class="tpl-name" data-idx="'+idx+'" value="'+escapeHtml(tpl.name)+'">' +
+        '<textarea class="tpl-content" data-idx="'+idx+'">'+escapeHtml(tpl.content)+'</textarea>' +
+        '<div class="tpl-actions">' +
+          '<button type="button" class="btn btn-ghost btn-xs tpl-copy" data-idx="'+idx+'">複製預覽</button>' +
+          '<button type="button" class="btn btn-primary btn-xs tpl-save" data-idx="'+idx+'">儲存</button>' +
+          '<button type="button" class="btn btn-danger btn-xs tpl-del" data-idx="'+idx+'">刪除</button>' +
+        '</div>' +
+        '<div class="hint" style="margin-top:4px;">可用變數：{name} 客戶姓名、{date} 日期、{time} 時間、{item} 項目、{shopName} 店名</div>' +
+      '</div>';
+    }).join('') || '<div class="hint">尚未設定任何訊息模板</div>';
+
+    el.querySelectorAll('.tpl-save').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        var idx = Number(btn.dataset.idx);
+        var card = btn.closest('.template-card');
+        var name = card.querySelector('.tpl-name').value.trim();
+        var content = card.querySelector('.tpl-content').value.trim();
+        if(!name || !content){ showToast('名稱與內容都不能空白'); return; }
+        settings.messageTemplates[idx].name = name;
+        settings.messageTemplates[idx].content = content;
+        saveSettings(settings);
+        showToast('已儲存模板「'+name+'」');
+      });
+    });
+    el.querySelectorAll('.tpl-copy').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        var idx = Number(btn.dataset.idx);
+        var card = btn.closest('.template-card');
+        var content = card.querySelector('.tpl-content').value;
+        copyToClipboard(fillTemplate(content, null));
+      });
+    });
+    el.querySelectorAll('.tpl-del').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        var idx = Number(btn.dataset.idx);
+        var name = settings.messageTemplates[idx].name;
+        if(!confirm('確定要刪除模板「'+name+'」嗎？')) return;
+        settings.messageTemplates.splice(idx,1);
+        saveSettings(settings);
+        renderTemplateManageList();
+        showToast('已刪除模板「'+name+'」');
+      });
+    });
+  }
+  document.getElementById('addTemplateBtn').addEventListener('click', function(){
+    settings.messageTemplates.push({ id:'tpl-'+uid(), name:'新模板', content:'請輸入訊息內容' });
+    saveSettings(settings);
+    renderTemplateManageList();
+  });
+
+  document.getElementById('addItemBtn').addEventListener('click', function(){
+    try{
+      var input = document.getElementById('newItemInput');
+      var val = input.value.trim();
+      if(!val){ showToast('請先輸入項目名稱'); return; }
+      if(settings.items.some(function(it){return it.name===val;})){ showToast('這個項目已經存在囉'); return; }
+      settings.items.push({name:val, price:0});
+      saveSettings(settings);
+      input.value = '';
+      renderShopSettings();
+      populateItemSelect();
+      showToast('已新增項目「'+val+'」');
+    }catch(err){
+      showToast('⚠️ 新增項目時發生錯誤：'+err.message);
+    }
+  });
+  document.getElementById('newItemInput').addEventListener('keydown', function(e){
+    if(e.key==='Enter'){ e.preventDefault(); document.getElementById('addItemBtn').click(); }
+  });
+
+  document.getElementById('saveShopSettingsBtn').addEventListener('click', function(){
+    settings.shopName = document.getElementById('setShopName').value.trim() || DEFAULT_SETTINGS.shopName;
+
+    var pinEnabled = document.getElementById('setPinEnabled').checked;
+    var pinValue = document.getElementById('setPinValue').value.trim();
+    var pinRecovery = document.getElementById('setPinRecovery').value.trim();
+    if(pinEnabled){
+      if(!/^\d{4}$/.test(pinValue)){
+        showToast('⚠️ 請輸入 4 位數字作為 PIN 碼');
+        return;
+      }
+      if(!pinRecovery){
+        showToast('⚠️ 請設定救援密語，之後忘記PIN碼時才能重設，不然可能會被永久鎖住');
+        return;
+      }
+      settings.pinEnabled = true;
+      settings.pin = pinValue;
+      settings.pinRecovery = pinRecovery;
+    }else{
+      settings.pinEnabled = false;
+      settings.pin = '';
+      settings.pinRecovery = '';
+    }
+
+    saveSettings(settings);
+    document.getElementById('shopTitle').textContent = settings.shopName;
+    updateAppIcon();
+    showToast('已儲存店家設定');
+  });
+
+  // ================= 報表：本月比較 / 趨勢 / 存檔 =================
+  function growthHtml(cur, prev){
+    if(prev===0){ return cur>0 ? '<span class="growth-up">新增</span>' : '<span class="hint">—</span>'; }
+    var pct = Math.round((cur-prev)/prev*1000)/10;
+    if(pct>0) return '<span class="growth-up">▲ +'+pct+'%</span>';
+    if(pct<0) return '<span class="growth-down">▼ '+pct+'%</span>';
+    return '<span class="hint">持平</span>';
+  }
+
+  function renderReportsPage(){
+    var curPrefix = monthPrefixOf(0);
+    var prevPrefix = monthPrefixOf(-1);
+    var cur = computeMonthStats(curPrefix);
+    var prev = computeMonthStats(prevPrefix);
+
+    document.getElementById('compareGrid').innerHTML =
+      statCard(monthLabel(curPrefix)+' 營收', fmtMoney(cur.revenue),'pink') +
+      statCard(monthLabel(prevPrefix)+' 營收', fmtMoney(prev.revenue),'blue') +
+      statCard('營收成長', growthHtml(cur.revenue, prev.revenue),'sage') +
+      statCard(monthLabel(curPrefix)+' 預約數', cur.apptCount+' 筆','pink') +
+      statCard(monthLabel(prevPrefix)+' 預約數', prev.apptCount+' 筆','blue') +
+      statCard('預約數成長', growthHtml(cur.apptCount, prev.apptCount),'sage') +
+      statCard(monthLabel(curPrefix)+' 平均客單價', fmtMoney(cur.avgTicket),'pink') +
+      statCard(monthLabel(curPrefix)+' 新客數', cur.newCustomerCount+' 位','sage');
+
+    // 近6個月趨勢
+    var months = [];
+    for(var i=-5;i<=0;i++) months.push(monthPrefixOf(i));
+    var trendStats = months.map(function(m){ return computeMonthStats(m); });
+    var maxRevenue = Math.max.apply(null, trendStats.map(function(s){return s.revenue;}).concat([1]));
+    document.getElementById('trendTable').innerHTML = trendStats.map(function(s){
+      var widthPct = Math.round(s.revenue/maxRevenue*100);
+      return '<div class="trend-row">' +
+        '<div>'+monthLabel(s.month).replace('年','/').replace('月','')+'</div>' +
+        '<div class="trend-bar-track"><div class="trend-bar-fill" style="width:'+widthPct+'%;"></div></div>' +
+        '<div class="val">'+fmtMoney(s.revenue)+'</div>' +
+      '</div>';
+    }).join('');
+
+    // 報表存檔清單
+    document.getElementById('reportMonthPicker').value = curPrefix;
+    renderReportList();
+  }
+
+  function renderReportList(){
+    var sorted = reports.slice().sort(function(a,b){ return b.month.localeCompare(a.month); });
+    var el = document.getElementById('reportList');
+    if(!sorted.length){
+      el.innerHTML = '<div class="empty-state"><div class="em">🗃️</div>還沒有任何存檔報表</div>';
+      return;
+    }
+    el.innerHTML = sorted.map(function(r){
+      return '<div class="report-card">' +
+        '<div><div class="rmonth">'+monthLabel(r.month)+' 報表</div>' +
+          '<div class="rmeta">產生於 '+new Date(r.generatedAt).toLocaleString('zh-TW')+' ‧ 營收 '+fmtMoney(r.stats.revenue)+'</div></div>' +
+        '<div class="card-actions">' +
+          '<button class="btn btn-ghost btn-sm" onclick="WT.viewReport(\''+r.id+'\')">檢視</button>' +
+          '<button class="btn btn-ghost btn-sm" onclick="WT.exportReportCsv(\''+r.id+'\')">CSV</button>' +
+          '<button class="btn btn-ghost btn-sm" onclick="WT.exportReportPdf(\''+r.id+'\')">PDF</button>' +
+          '<button class="btn btn-danger btn-sm" onclick="WT.deleteReport(\''+r.id+'\')">刪除</button>' +
+        '</div>' +
+      '</div>';
+    }).join('');
+  }
+
+  document.getElementById('generateReportBtn').addEventListener('click', function(){
+    var monthPrefix = document.getElementById('reportMonthPicker').value;
+    if(!monthPrefix){ showToast('請先選擇月份'); return; }
+    var existing = reports.find(function(r){ return r.month===monthPrefix; });
+    if(existing && !confirm('「'+monthLabel(monthPrefix)+'」已經有一份存檔了，要覆蓋成最新數字嗎？')) return;
+
+    var stats = computeMonthStats(monthPrefix);
+    var record = { id: existing ? existing.id : uid(), month: monthPrefix, generatedAt: new Date().toISOString(), shopName: settings.shopName, stats: stats };
+    if(existing){
+      var idx = reports.findIndex(function(r){return r.id===existing.id;});
+      reports[idx] = record;
+    }else{
+      reports.push(record);
+    }
+    saveReports(reports);
+    renderReportList();
+    showToast('已產生「'+monthLabel(monthPrefix)+'」報表存檔');
+  });
+
+  var REPORT_ROW_LABELS = [
+    ['apptCount','總預約數','筆'], ['doneCount','已完成','筆'], ['cancelCount','已取消','筆'], ['noShowCount','未到店','筆'],
+    ['revenue','服務營收','money'], ['topUp','儲值進帳','money'], ['avgTicket','平均客單價','money'],
+    ['uniqueCustomerCount','服務客戶數','位'], ['newCustomerCount','新客數','位'], ['repeatRate','回客率','%']
+  ];
+  function reportRowsHtml(stats){
+    return REPORT_ROW_LABELS.map(function(r){
+      var val = stats[r[0]];
+      var display = r[2]==='money' ? fmtMoney(val) : (val + (r[2]==='%' ? '%' : ' '+r[2]));
+      return '<tr><td class="label">'+r[1]+'</td><td class="val">'+display+'</td></tr>';
+    }).join('');
+  }
+
+  window.WT = window.WT || {};
+  WT.viewReport = function(id){
+    var r = reports.find(function(x){return x.id===id;});
+    if(!r) return;
+    document.getElementById('customerDetailBody').innerHTML =
+      '<h3>'+monthLabel(r.month)+' 月報表</h3>' +
+      '<div class="hint" style="margin-bottom:14px;">'+escapeHtml(r.shopName||'')+' ‧ 產生於 '+new Date(r.generatedAt).toLocaleString('zh-TW')+'</div>' +
+      '<table style="width:100%;border-collapse:collapse;">'+reportRowsHtml(r.stats).replace(/<td class="label">/g,'<td class="label" style="padding:8px 4px;border-bottom:1px solid var(--light-blue);color:var(--gray);font-size:13px;">').replace(/<td class="val">/g,'<td class="val" style="padding:8px 4px;border-bottom:1px solid var(--light-blue);text-align:right;font-weight:700;">')+'</table>';
+    document.getElementById('customerDetailOverlay').classList.add('active');
+  };
+  WT.deleteReport = function(id){
+    var r = reports.find(function(x){return x.id===id;});
+    if(!r) return;
+    if(!confirm('確定要刪除「'+monthLabel(r.month)+'」的存檔報表嗎？')) return;
+    reports = reports.filter(function(x){return x.id!==id;});
+    saveReports(reports);
+    renderReportList();
+    showToast('已刪除存檔報表');
+  };
+  WT.exportReportCsv = function(id){
+    var r = reports.find(function(x){return x.id===id;});
+    if(!r) return;
+    var rows = [['項目','數值'].map(toCsvField).join(',')];
+    REPORT_ROW_LABELS.forEach(function(item){
+      var val = r.stats[item[0]];
+      var display = item[2]==='money' ? val : (item[2]==='%' ? val+'%' : val);
+      rows.push([item[1], display].map(toCsvField).join(','));
+    });
+    downloadCsv(rows.join('\r\n'), 1, (r.shopName||'美業')+'_'+r.month+'_月報表');
+  };
+  WT.exportReportPdf = function(id){
+    var r = reports.find(function(x){return x.id===id;});
+    if(!r) return;
+    document.getElementById('printReportArea').innerHTML =
+      '<h2>'+escapeHtml(r.shopName||'')+' ‧ '+monthLabel(r.month)+' 月報表</h2>' +
+      '<div class="p-sub">產生於 '+new Date(r.generatedAt).toLocaleString('zh-TW')+'</div>' +
+      '<table>'+reportRowsHtml(r.stats)+'</table>';
+    showToast(isIOS ? '請在列印預覽點下方縮圖或分享圖示存成PDF' : '請在列印視窗選擇「另存為 PDF」');
+    setTimeout(function(){ window.print(); }, 150);
+  };
+
+  // ================= 備份提醒 =================
+  var BACKUP_REMINDER_DAYS = 7;
+  function renderBackupReminder(){
+    var el = document.getElementById('backupReminder');
+    if(!appointments.length && !customers.length){ el.innerHTML=''; return; }
+    var daysSince = settings.lastBackupAt ? Math.floor((Date.now() - new Date(settings.lastBackupAt).getTime())/86400000) : null;
+    if(daysSince===null || daysSince >= BACKUP_REMINDER_DAYS){
+      var msg = daysSince===null ? '你還沒有匯出過備份檔' : ('距離上次備份已經 <b>'+daysSince+'</b> 天');
+      el.innerHTML = '<div class="backup-reminder"><div class="msg">💾 '+msg+'，建議盡快匯出備份，避免換裝置或清瀏覽器時資料遺失。</div>' +
+        '<button class="btn btn-primary btn-sm" id="goBackupBtn">前往備份</button></div>';
+      var btn = document.getElementById('goBackupBtn');
+      if(btn) btn.addEventListener('click', function(){ switchTo('backup'); });
+    }else{
+      el.innerHTML = '';
+    }
+  }
+  function renderLastBackupHint(){
+    var el = document.getElementById('lastBackupHint');
+    if(!el) return;
+    el.textContent = settings.lastBackupAt
+      ? ('上次備份時間：'+ new Date(settings.lastBackupAt).toLocaleString('zh-TW'))
+      : '尚未匯出過備份檔';
+  }
+
+  // ================= 生日提醒 =================
+  var BIRTHDAY_WINDOW_DAYS = 7;
+  function computeUpcomingBirthdays(days){
+    var now = new Date(); now.setHours(0,0,0,0);
+    var results = [];
+    customers.forEach(function(c){
+      if(!c.birthday) return;
+      var bd = new Date(c.birthday+'T00:00:00');
+      if(isNaN(bd.getTime())) return;
+      var thisYear = new Date(now.getFullYear(), bd.getMonth(), bd.getDate());
+      if(thisYear < now) thisYear.setFullYear(thisYear.getFullYear()+1);
+      var diffDays = Math.round((thisYear-now)/86400000);
+      if(diffDays>=0 && diffDays<=days){
+        results.push({ customer:c, date:thisYear, diffDays:diffDays });
+      }
+    });
+    results.sort(function(a,b){ return a.diffDays-b.diffDays; });
+    return results;
+  }
+  function renderBirthdayReminder(){
+    var el = document.getElementById('birthdayReminder');
+    var list = computeUpcomingBirthdays(BIRTHDAY_WINDOW_DAYS);
+    if(!list.length){ el.innerHTML=''; return; }
+    var items = list.map(function(r){
+      var label = r.diffDays===0 ? '今天' : (r.diffDays+'天後');
+      return '<div class="reminder-item">'+(r.date.getMonth()+1)+'/'+r.date.getDate()+'（'+label+'）－ <b>'+escapeHtml(r.customer.name)+'</b>' +
+        ' <button class="btn btn-ghost btn-xs" style="margin-left:6px;" onclick="WT.copyBirthdayMsg(\''+r.customer.id+'\')">複製生日祝福</button></div>';
+    }).join('');
+    el.innerHTML = '<div class="reminder-banner"><div class="icon">🎂</div><div style="flex:1;"><h4>本週壽星（共 '+list.length+' 位）</h4><div class="reminder-list">'+items+'</div></div></div>';
+  }
+
+  // ================= 今日預約頁 =================
+  function shiftDate(dateStr, days){
+    var d = new Date(dateStr+'T00:00:00');
+    d.setDate(d.getDate()+days);
+    return toDateStr(d);
+  }
+  document.getElementById('prevDayBtn').addEventListener('click', function(){ todayPageDate = shiftDate(todayPageDate,-1); renderTodayPage(); });
+  document.getElementById('nextDayBtn').addEventListener('click', function(){ todayPageDate = shiftDate(todayPageDate,1); renderTodayPage(); });
+  document.getElementById('todayBtn').addEventListener('click', function(){ todayPageDate = toDateStr(new Date()); renderTodayPage(); });
+  document.getElementById('todayPageDatePicker').addEventListener('change', function(e){
+    if(e.target.value){ todayPageDate = e.target.value; renderTodayPage(); }
+  });
+
+  function renderTodayPage(){
+    var dateStr = todayPageDate;
+    document.getElementById('todayPageDatePicker').value = dateStr;
+    var d = new Date(dateStr+'T00:00:00');
+    var days=['日','一','二','三','四','五','六'];
+    document.getElementById('todayPageLabel').textContent = dateStr.replace(/-/g,' / ')+'（週'+days[d.getDay()]+'）';
+
+    var items = appointments.filter(function(a){ return a.datetime && a.datetime.slice(0,10)===dateStr; })
+      .sort(function(a,b){ return a.datetime.localeCompare(b.datetime); });
+
+    var revenueItems = items.filter(function(a){ return isRevenue(a.status); });
+    var completedCount = items.filter(function(a){ return a.status==='已完成'; }).length;
+    var revenue = revenueItems.reduce(function(s,a){ return s+(Number(a.amount)||0)+(Number(a.extra)||0); },0);
+    var paidSum = revenueItems.filter(function(a){return a.paid;}).reduce(function(s,a){ return s+(Number(a.amount)||0)+(Number(a.extra)||0); },0);
+    var dueSum = revenue - paidSum;
+    var slotInfo = computeDaySlots(dateStr);
+
+    document.getElementById('todayStatGrid').innerHTML =
+      statCard('預約數', items.length+' 位','pink') +
+      statCard('已完成', completedCount+' 位','sage') +
+      statCard('營業額', fmtMoney(revenue),'pink') +
+      statCard('已收', fmtMoney(paidSum),'sage') +
+      statCard('待收', fmtMoney(dueSum),'pink') +
+      statCard('剩餘空檔', slotInfo.remaining+' 個','blue');
+
+    var listEl = document.getElementById('todayList');
+    if(!items.length){
+      listEl.innerHTML = '<div class="empty-state"><div class="em">🗓️</div>這天還沒有任何預約</div>';
+      return;
+    }
+    listEl.innerHTML = items.map(function(a){
+      var cust = getCustomer(a.customerId);
+      var total = (Number(a.amount)||0)+(Number(a.extra)||0);
+      var start = parseLocal(a.datetime);
+      var end = apptEnd(a.datetime);
+      var emoji = ITEM_EMOJI[a.item] || '✨';
+      var returning = isReturningCustomer(a);
+      var showPayBadge = isRevenue(a.status);
+      var actions = [];
+      actions.push('<button class="btn btn-ghost btn-xs" onclick="WT.info(\''+a.id+'\')">查看客戶</button>');
+      actions.push('<button class="btn btn-ghost btn-xs" onclick="WT.copyMessageFor(\''+a.id+'\')">複製訊息</button>');
+      actions.push('<button class="btn btn-ghost btn-xs" onclick="WT.edit(\''+a.id+'\')">編輯</button>');
+      if(a.status!=='已取消'){
+        actions.push('<button class="btn btn-ghost btn-xs" onclick="WT.edit(\''+a.id+'\')">改期</button>');
+      }
+      if(showPayBadge && !a.paid){
+        actions.push('<button class="btn btn-sage btn-xs" onclick="WT.collect(\''+a.id+'\')">收款</button>');
+      }
+
+      return '<div class="appt-card'+(a.status==='已取消'?' is-cancelled':'')+'">' +
+        '<div class="appt-top">' +
+          '<div><div class="appt-time">'+pad(start.getHours())+':'+pad(start.getMinutes())+' - '+pad(end.getHours())+':'+pad(end.getMinutes())+'</div>' +
+          '<div class="appt-name">'+emoji+' '+escapeHtml(cust.name)+'</div>' +
+          '<div class="appt-meta">'+escapeHtml(cust.phone||'')+(cust.contact?(' ‧ '+escapeHtml(cust.contact)):'')+' ‧ '+escapeHtml(a.item)+'</div></div>' +
+          '<div class="appt-badges">' +
+            '<span class="pill '+(returning?'tag-return':'tag-new')+'">'+(returning?'舊客':'新客')+'</span>' +
+            statusPillHtml(a.status) +
+            (showPayBadge ? '<span class="pill '+(a.paid?'pay-paid':'pay-due')+'">'+(a.paid?'🟢已收':'🟡待收')+'</span>' : '') +
+          '</div>' +
+        '</div>' +
+        '<div class="appt-money">'+fmtMoney(total)+'</div>' +
+        '<div class="appt-actions">'+actions.join('')+'</div>' +
+      '</div>';
+    }).join('');
+  }
+
+  // ================= 預約清單 =================
+  function refreshFilterOptions(){
+    var statusSel = document.getElementById('statusFilter');
+    var curS = statusSel.value;
+    statusSel.innerHTML = '<option value="all">全部狀態</option>' + STATUS_LIST.map(function(s){ return '<option value="'+s+'">'+s+'</option>'; }).join('');
+    statusSel.value = curS || 'all';
+
+    var itemSel = document.getElementById('itemFilter');
+    var curI = itemSel.value;
+    var set = {}; appointments.forEach(function(a){ if(a.item) set[a.item]=1; });
+    itemSel.innerHTML = '<option value="all">全部項目</option>' + Object.keys(set).map(function(i){ return '<option value="'+escapeHtml(i)+'">'+escapeHtml(i)+'</option>'; }).join('');
+    itemSel.value = curI || 'all';
+  }
+  function getFilters(){
+    return {
+      search: document.getElementById('searchInput').value.trim().toLowerCase(),
+      status: document.getElementById('statusFilter').value,
+      item: document.getElementById('itemFilter').value,
+      from: document.getElementById('dateFromFilter').value,
+      to: document.getElementById('dateToFilter').value
+    };
+  }
+  function applyFilters(list, f){
+    return list.filter(function(a){
+      if(f.search){
+        var cust = getCustomer(a.customerId);
+        var hit = (cust.name||'').toLowerCase().indexOf(f.search)>-1 || (cust.phone||'').toLowerCase().indexOf(f.search)>-1;
+        if(!hit) return false;
+      }
+      if(f.status!=='all' && a.status!==f.status) return false;
+      if(f.item!=='all' && a.item!==f.item) return false;
+      if(f.from && a.datetime && a.datetime.slice(0,10) < f.from) return false;
+      if(f.to && a.datetime && a.datetime.slice(0,10) > f.to) return false;
+      return true;
+    });
+  }
+  function renderList(){
+    refreshFilterOptions();
+    var f = getFilters();
+    var list = applyFilters(appointments, f).sort(function(a,b){ return (b.datetime||'').localeCompare(a.datetime||''); });
+
+    var el = document.getElementById('clientList');
+    if(!list.length){
+      el.innerHTML = '<div class="empty-state"><div class="em">📋</div>沒有符合條件的預約資料<br>試試調整搜尋或篩選條件</div>';
+    }else{
+      var staleIds = {}; computeStaleAppointments().forEach(function(a){ staleIds[a.id]=true; });
+      el.innerHTML = list.map(function(a){
+        var cust = getCustomer(a.customerId);
+        var total = (Number(a.amount)||0)+(Number(a.extra)||0);
+        var isStale = !!staleIds[a.id];
+        var actions = [
+          '<button class="btn btn-ghost btn-sm" onclick="WT.edit(\''+a.id+'\')">編輯</button>'
+        ];
+
+        return '<div class="client-card'+(isStale?' stale':'')+(a.status==='已取消'?' is-cancelled':'')+'">' +
+          '<div><div class="name">'+escapeHtml(cust.name)+'</div><div class="sub">'+escapeHtml(cust.phone||'')+'</div>' +
+            (isStale ? '<div class="stale-tag">⚠️ 超過1天未跟進</div>' : '') +
+          '</div>' +
+          '<div><span class="field-label">項目</span><div>'+escapeHtml(a.item||'')+'</div></div>' +
+          '<div><span class="field-label">預約時間</span><div>'+fmtDateTimeDisplay(a.datetime)+'</div></div>' +
+          '<div><span class="field-label">今日總金額</span><div style="font-weight:700;color:var(--pink);">'+fmtMoney(total)+'</div></div>' +
+          '<div>'+statusPillHtml(a.status)+'</div>' +
+          '<div class="card-actions">'+actions.join('')+'</div>' +
+        '</div>';
+      }).join('');
+    }
+
+    var staleTotal = computeStaleAppointments().length;
+    document.getElementById('staleHint').innerHTML = staleTotal
+      ? '⚠️ 目前有 <b style="color:#B5574A;">'+staleTotal+'</b> 筆待處理預約超過 1 天未更新，建議主動跟進客人'
+      : '目前沒有超過 1 天未更新的待處理預約 👍';
+  }
+  ['searchInput','statusFilter','itemFilter','dateFromFilter','dateToFilter'].forEach(function(id){
+    document.getElementById(id).addEventListener('input', renderList);
+    document.getElementById(id).addEventListener('change', renderList);
+  });
+
+  // ================= 客戶清單 =================
+  function renderCustomers(){
+    var search = document.getElementById('customerSearchInput').value.trim().toLowerCase();
+    var list = customers.filter(function(c){
+      if(!search) return true;
+      return (c.name||'').toLowerCase().indexOf(search)>-1 || (c.phone||'').toLowerCase().indexOf(search)>-1;
+    }).sort(function(a,b){ return (a.name||'').localeCompare(b.name||'','zh-Hant'); });
+
+    var el = document.getElementById('customerList');
+    if(!list.length){
+      el.innerHTML = '<div class="empty-state"><div class="em">👤</div>還沒有任何客戶資料<br>點右上角「＋ 新增客戶」開始建立</div>';
+      return;
+    }
+    el.innerHTML = list.map(function(c){
+      var stats = customerStats(c.id);
+      return '<div class="customer-card">' +
+        '<div><div class="name">'+escapeHtml(c.name)+'</div><div class="sub">'+escapeHtml(c.phone||'')+(c.contact?(' ‧ '+escapeHtml(c.contact)):'')+'</div></div>' +
+        '<div><span class="field-label">預約次數</span><div>'+stats.visitCount+' 次</div></div>' +
+        '<div><span class="field-label">累積消費</span><div style="font-weight:700;color:var(--pink);">'+fmtMoney(stats.totalSpend)+'</div></div>' +
+        '<div><span class="field-label">最近到店</span><div>'+fmtDateShort(stats.lastVisit)+'</div></div>' +
+        '<div class="card-actions">' +
+          '<button class="btn btn-primary btn-sm" onclick="WT.newApptForCustomer(\''+c.id+'\')">新增預約</button>' +
+          '<button class="btn btn-ghost btn-sm" onclick="WT.viewCustomer(\''+c.id+'\')">檢視</button>' +
+          '<button class="btn btn-ghost btn-sm" onclick="WT.editCustomer(\''+c.id+'\')">編輯</button>' +
+        '</div>' +
+      '</div>';
+    }).join('');
+  }
+  document.getElementById('customerSearchInput').addEventListener('input', renderCustomers);
+
+  // ---- 新增／編輯客戶 表單 ----
+  var custOverlay = document.getElementById('customerModalOverlay');
+  var custForm = document.getElementById('customerForm');
+  function openCustomerForm(record){
+    document.getElementById('customerModalTitle').textContent = record ? '編輯客戶' : '新增客戶';
+    document.getElementById('cf_id').value = record ? record.id : '';
+    document.getElementById('cf_name').value = record ? record.name : '';
+    document.getElementById('cf_phone').value = record ? record.phone : '';
+    document.getElementById('cf_contact').value = record ? (record.contact||'') : '';
+    document.getElementById('cf_birthday').value = record ? (record.birthday||'') : '';
+    document.getElementById('cf_note').value = record ? (record.note||'') : '';
+    custOverlay.classList.add('active');
+  }
+  function closeCustomerForm(){ custOverlay.classList.remove('active'); custForm.reset(); }
+  document.getElementById('addCustomerBtn').addEventListener('click', function(){ openCustomerForm(null); });
+  document.getElementById('cancelCustomerFormBtn').addEventListener('click', closeCustomerForm);
+  custOverlay.addEventListener('click', function(e){ if(e.target===custOverlay) closeCustomerForm(); });
+
+  custForm.addEventListener('submit', function(e){
+    e.preventDefault();
+    var id = document.getElementById('cf_id').value;
+    var record = {
+      id: id || uid(),
+      name: document.getElementById('cf_name').value.trim(),
+      phone: document.getElementById('cf_phone').value.trim(),
+      contact: document.getElementById('cf_contact').value.trim(),
+      birthday: document.getElementById('cf_birthday').value,
+      note: document.getElementById('cf_note').value.trim(),
+      updatedAt: new Date().toISOString()
+    };
+    if(id){
+      var idx = customers.findIndex(function(c){return c.id===id;});
+      if(idx>-1) customers[idx] = Object.assign({}, customers[idx], record);
+    }else{
+      record.createdAt = new Date().toISOString();
+      customers.push(record);
+    }
+    saveCustomers(customers);
+    closeCustomerForm();
+    renderCustomers();
+    populateCustomerSelect('');
+    showToast(id ? '已更新客戶資料' : '已新增客戶');
+  });
+
+  // ---- 客戶詳細頁 ----
+  var custDetailOverlay = document.getElementById('customerDetailOverlay');
+  function openCustomerDetail(customerId){
+    var cust = getCustomer(customerId);
+    var stats = customerStats(customerId);
+    var history = appointments.filter(function(a){ return a.customerId===customerId; })
+      .sort(function(a,b){ return (b.datetime||'').localeCompare(a.datetime||''); });
+
+    var rows = history.map(function(a){
+      var total = (Number(a.amount)||0)+(Number(a.extra)||0);
+      return '<div class="history-row" onclick="WT.editFromDetail(\''+a.id+'\')">' +
+        '<span>'+fmtDateShort(a.datetime)+' ‧ '+escapeHtml(a.item)+'</span>' +
+        '<span>'+fmtMoney(total)+' '+statusPillHtml(a.status)+'</span>' +
+      '</div>';
+    }).join('') || '<div class="hint" style="padding:10px 0;">這位客戶還沒有任何預約紀錄</div>';
+
+    document.getElementById('customerDetailBody').innerHTML =
+      '<h3>'+escapeHtml(cust.name)+'</h3>' +
+      '<div class="hint" style="margin-bottom:14px;">'+escapeHtml(cust.phone||'')+(cust.contact?(' ‧ '+escapeHtml(cust.contact)):'')+(cust.birthday?(' ‧ 生日 '+cust.birthday):'')+'</div>' +
+      (cust.note ? '<div class="hint" style="margin-bottom:14px;">備註：'+escapeHtml(cust.note)+'</div>' : '') +
+      '<div class="month-stat-grid">' +
+        monthCell(stats.visitCount,'預約次數') +
+        monthCell(fmtMoney(stats.totalSpend),'累積消費') +
+        monthCell(fmtMoney(stats.avgTicket),'平均客單價') +
+        monthCell(fmtDateShort(stats.lastVisit),'最近到店') +
+        monthCell(stats.cancelCount,'取消次數') +
+        monthCell(stats.noShowCount,'未到店次數') +
+      '</div>' +
+      '<div class="section-head" style="margin-top:8px;"><h3 style="font-size:14px;">歷史預約紀錄</h3></div>' +
+      rows;
+
+    custDetailOverlay.classList.add('active');
+  }
+  function closeCustomerDetail(){ custDetailOverlay.classList.remove('active'); }
+  document.getElementById('closeCustomerDetailBtn').addEventListener('click', closeCustomerDetail);
+  custDetailOverlay.addEventListener('click', function(e){ if(e.target===custDetailOverlay) closeCustomerDetail(); });
+
+  // ---- 取消預約選單（客戶卡片用） ----
+  var pickApptOverlay = document.getElementById('pickApptOverlay');
+  function closePickAppt(){ pickApptOverlay.classList.remove('active'); }
+  document.getElementById('closePickApptBtn').addEventListener('click', closePickAppt);
+  pickApptOverlay.addEventListener('click', function(e){ if(e.target===pickApptOverlay) closePickAppt(); });
+
+  var CANCELLABLE_STATUSES = ['待確認','已確認','已付訂'];
+  WT.cancelForCustomer = function(customerId){
+    var cust = getCustomer(customerId);
+    var pending = appointments.filter(function(a){ return a.customerId===customerId && CANCELLABLE_STATUSES.indexOf(a.status)>-1; })
+      .sort(function(a,b){ return (a.datetime||'').localeCompare(b.datetime||''); });
+    if(!pending.length){ showToast('「'+cust.name+'」目前沒有待處理的預約可以取消'); return; }
+    if(pending.length===1){ WT.cancelAppt(pending[0].id); return; }
+    document.getElementById('pickApptBody').innerHTML = pending.map(function(a){
+      var total = (Number(a.amount)||0)+(Number(a.extra)||0);
+      return '<div class="history-row" onclick="WT.cancelFromPicker(\''+a.id+'\')">' +
+        '<span>'+fmtDateTimeDisplay(a.datetime)+' ‧ '+escapeHtml(a.item)+'</span>' +
+        '<span>'+fmtMoney(total)+' '+statusPillHtml(a.status)+'</span>' +
+      '</div>';
+    }).join('');
+    pickApptOverlay.classList.add('active');
+  };
+  WT.cancelFromPicker = function(apptId){
+    closePickAppt();
+    WT.cancelAppt(apptId);
+  };
+
+  WT.copyBirthdayMsg = function(customerId){
+    var cust = customers.find(function(c){return c.id===customerId;});
+    if(!cust) return;
+    var tpl = settings.messageTemplates.find(function(t){return t.id==='birthday';}) || settings.messageTemplates[0];
+    if(!tpl){ showToast('尚未設定生日祝福模板'); return; }
+    copyToClipboard(fillTemplate(tpl.content, null, cust));
+  };
+
+  // ---- 複製訊息模板（今日預約卡片用） ----
+  var pickTemplateOverlay = document.getElementById('pickTemplateOverlay');
+  function closePickTemplate(){ pickTemplateOverlay.classList.remove('active'); }
+  document.getElementById('closePickTemplateBtn').addEventListener('click', closePickTemplate);
+  pickTemplateOverlay.addEventListener('click', function(e){ if(e.target===pickTemplateOverlay) closePickTemplate(); });
+
+  WT.copyMessageFor = function(apptId){
+    var appt = appointments.find(function(a){return a.id===apptId;});
+    if(!appt) return;
+    if(!settings.messageTemplates.length){ showToast('尚未設定任何訊息模板'); return; }
+    document.getElementById('pickTemplateBody').innerHTML = settings.messageTemplates.map(function(t, idx){
+      var preview = fillTemplate(t.content, appt);
+      return '<div class="history-row" onclick="WT.copyTemplateFromPicker(\''+apptId+'\','+idx+')">' +
+        '<span><b>'+escapeHtml(t.name)+'</b><br><span class="hint">'+escapeHtml(preview.slice(0,40))+(preview.length>40?'…':'')+'</span></span>' +
+        '<span>📋</span>' +
+      '</div>';
+    }).join('');
+    pickTemplateOverlay.classList.add('active');
+  };
+  WT.copyTemplateFromPicker = function(apptId, idx){
+    closePickTemplate();
+    var appt = appointments.find(function(a){return a.id===apptId;});
+    var tpl = settings.messageTemplates[idx];
+    if(!appt || !tpl) return;
+    copyToClipboard(fillTemplate(tpl.content, appt));
+  };
+
+  // ================= 預約表單（新增／編輯） =================
+  var overlay = document.getElementById('modalOverlay');
+  var form = document.getElementById('clientForm');
+
+  function populateCustomerSelect(filterText){
+    var sel = document.getElementById('f_customerId');
+    var current = sel.value;
+    var text = (filterText||'').trim().toLowerCase();
+    var filtered = customers.filter(function(c){
+      if(!text) return true;
+      return (c.name||'').toLowerCase().indexOf(text)>-1 || (c.phone||'').toLowerCase().indexOf(text)>-1;
+    }).sort(function(a,b){ return (a.name||'').localeCompare(b.name||'','zh-Hant'); });
+    sel.innerHTML = '<option value="">請選擇客戶</option>' + filtered.map(function(c){
+      return '<option value="'+c.id+'">'+escapeHtml(c.name)+'（'+escapeHtml(c.phone||'—')+'）</option>';
+    }).join('');
+    if(filtered.some(function(c){return c.id===current;})) sel.value = current;
+  }
+  document.getElementById('custSearchInput').addEventListener('input', function(){
+    populateCustomerSelect(this.value);
+  });
+
+  function setCustomerMode(mode){
+    var isExisting = mode==='existing';
+    document.getElementById('segExisting').classList.toggle('active', isExisting);
+    document.getElementById('segNew').classList.toggle('active', !isExisting);
+    document.getElementById('custExistingWrap').style.display = isExisting ? 'block':'none';
+    document.getElementById('custNewWrap').style.display = isExisting ? 'none':'block';
+    document.getElementById('customerFieldError').style.display = 'none';
+  }
+  document.getElementById('segExisting').addEventListener('click', function(){ setCustomerMode('existing'); });
+  document.getElementById('segNew').addEventListener('click', function(){ setCustomerMode('new'); });
+
+  function openForm(record, prefillCustomerId){
+    document.getElementById('modalTitle').textContent = record ? '編輯預約' : '新增預約';
+    document.getElementById('recordId').value = record ? record.id : '';
+    document.getElementById('customerFieldError').style.display = 'none';
+
+    populateCustomerSelect('');
+    document.getElementById('custSearchInput').value = '';
+    if(record){
+      setCustomerMode('existing');
+      document.getElementById('f_customerId').value = record.customerId;
+    }else if(prefillCustomerId){
+      setCustomerMode('existing');
+      document.getElementById('f_customerId').value = prefillCustomerId;
+    }else{
+      setCustomerMode(customers.length ? 'existing' : 'new');
+      document.getElementById('f_customerId').value = '';
+    }
+    document.getElementById('f_newName').value = '';
+    document.getElementById('f_newPhone').value = '';
+    document.getElementById('f_newContact').value = '';
+    document.getElementById('f_newBirthday').value = '';
+
+    document.getElementById('f_datetime').value = record ? record.datetime : '';
+
+    populateItemSelect();
+    var itemSel = document.getElementById('f_item');
+    var known = Array.prototype.map.call(itemSel.options, function(o){return o.value;});
+    if(record && record.item && known.indexOf(record.item)===-1){
+      itemSel.value = '其他';
+      document.getElementById('itemOtherWrap').style.display = 'flex';
+      document.getElementById('f_itemOther').value = record.item;
+    }else{
+      itemSel.value = record ? record.item : (settings.items[0] ? settings.items[0].name : '其他');
+      document.getElementById('itemOtherWrap').style.display = 'none';
+      document.getElementById('f_itemOther').value = '';
+    }
+    document.getElementById('f_payment').value = record ? record.payment : '現金';
+    document.getElementById('f_status').value = record ? record.status : '待確認';
+    document.getElementById('f_cancelReason').value = record ? (record.cancelReason||'客人取消') : '客人取消';
+    document.getElementById('cancelReasonWrap').style.display = (document.getElementById('f_status').value==='已取消') ? 'flex':'none';
+    document.getElementById('f_deposit').checked = record ? !!record.deposit : false;
+    document.getElementById('f_paid').checked = record ? !!record.paid : false;
+    document.getElementById('f_amount').value = record ? record.amount : 0;
+    document.getElementById('f_extra').value = record ? record.extra : 0;
+    document.getElementById('f_topup').value = record ? record.topup : 0;
+    document.getElementById('f_note').value = record ? (record.note||'') : '';
+    document.getElementById('conflictWarning').style.display = 'none';
+    updateTotalPreview();
+    overlay.classList.add('active');
+  }
+  function closeForm(){ overlay.classList.remove('active'); form.reset(); }
+  document.getElementById('addBtnList').addEventListener('click', function(){ openForm(null); });
+  document.getElementById('cancelFormBtn').addEventListener('click', closeForm);
+  overlay.addEventListener('click', function(e){ if(e.target===overlay) closeForm(); });
+
+  document.getElementById('f_item').addEventListener('change', function(){
+    document.getElementById('itemOtherWrap').style.display = (this.value==='其他') ? 'flex':'none';
+    var isNew = !document.getElementById('recordId').value;
+    var amountEl = document.getElementById('f_amount');
+    if(isNew && (Number(amountEl.value)||0)===0){
+      var opt = this.options[this.selectedIndex];
+      var price = opt ? Number(opt.dataset.price)||0 : 0;
+      if(price>0){ amountEl.value = price; updateTotalPreview(); }
+    }
+  });
+  document.getElementById('f_status').addEventListener('change', function(){
+    document.getElementById('cancelReasonWrap').style.display = (this.value==='已取消') ? 'flex':'none';
+  });
+  ['f_amount','f_extra'].forEach(function(id){ document.getElementById(id).addEventListener('input', updateTotalPreview); });
+  function updateTotalPreview(){
+    var amount = Number(document.getElementById('f_amount').value)||0;
+    var extra = Number(document.getElementById('f_extra').value)||0;
+    document.getElementById('totalPreview').textContent = fmtMoney(amount+extra);
+  }
+  document.getElementById('f_datetime').addEventListener('change', function(){
+    var id = document.getElementById('recordId').value;
+    var conflict = findConflict(this.value, id);
+    document.getElementById('conflictWarning').style.display = conflict ? 'block' : 'none';
+  });
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    var id = document.getElementById('recordId').value;
+    var isExistingMode = document.getElementById('custExistingWrap').style.display !== 'none';
+
+    var customerId = '';
+    if(isExistingMode){
+      customerId = document.getElementById('f_customerId').value;
+      if(!customerId){
+        document.getElementById('customerFieldError').style.display = 'block';
+        document.getElementById('customerFieldError').textContent = '⚠️ 請選擇一位既有客戶';
+        return;
+      }
+    }else{
+      var newName = document.getElementById('f_newName').value.trim();
+      var newPhone = document.getElementById('f_newPhone').value.trim();
+      if(!newName || !newPhone){
+        document.getElementById('customerFieldError').style.display = 'block';
+        document.getElementById('customerFieldError').textContent = '⚠️ 請填寫新客戶的姓名與電話';
+        return;
+      }
+      var newCust = {
+        id: uid(), name: newName, phone: newPhone,
+        contact: document.getElementById('f_newContact').value.trim(),
+        birthday: document.getElementById('f_newBirthday').value,
+        note: '',
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString()
+      };
+      customers.push(newCust);
+      saveCustomers(customers);
+      customerId = newCust.id;
+    }
+    document.getElementById('customerFieldError').style.display = 'none';
+
+    var datetimeVal = document.getElementById('f_datetime').value;
+    var conflict = findConflict(datetimeVal, id);
+    if(conflict){
+      var conflictCust = getCustomer(conflict.customerId);
+      var ok = confirm('⚠️ 此時段已有預約（'+conflictCust.name+' '+fmtDateTimeDisplay(conflict.datetime)+'），請確認是否要繼續儲存？');
+      if(!ok) return;
+    }
+
+    var itemVal = document.getElementById('f_item').value;
+    if(itemVal==='其他') itemVal = document.getElementById('f_itemOther').value.trim() || '其他';
+    var amount = Number(document.getElementById('f_amount').value)||0;
+    var extra = Number(document.getElementById('f_extra').value)||0;
+    var status = document.getElementById('f_status').value;
+
+    var record = {
+      id: id || uid(),
+      customerId: customerId,
+      datetime: datetimeVal,
+      item: itemVal,
+      payment: document.getElementById('f_payment').value,
+      status: status,
+      cancelReason: status==='已取消' ? document.getElementById('f_cancelReason').value : '',
+      deposit: document.getElementById('f_deposit').checked,
+      paid: document.getElementById('f_paid').checked,
+      amount: amount, extra: extra, total: amount+extra,
+      topup: Number(document.getElementById('f_topup').value)||0,
+      note: document.getElementById('f_note').value.trim(),
+      updatedAt: new Date().toISOString()
+    };
+
+    if(id){
+      var idx = appointments.findIndex(function(a){return a.id===id;});
+      if(idx>-1) appointments[idx] = Object.assign({}, appointments[idx], record);
+    }else{
+      record.createdAt = new Date().toISOString();
+      appointments.push(record);
+    }
+    saveAppointments(appointments);
+    closeForm();
+    refreshAll();
+    showToast(id ? '已更新預約資料' : '已新增預約');
+  });
+
+  function refreshAll(){
+    function safe(fn,label){ try{ fn(); }catch(e){ showToast('⚠️ '+label+'更新失敗：'+e.message); } }
+    safe(renderDashboard,'儀表板');
+    safe(renderList,'預約清單');
+    safe(renderCustomers,'客戶清單');
+    safe(renderTimeline,'時間軸');
+    safe(renderMonthAvailability,'本月統計');
+    safe(renderTodayPage,'今日預約');
+  }
+
+  // ================= 快速操作 =================
+  Object.assign(window.WT, {
+    edit: function(id){ var a = appointments.find(function(x){return x.id===id;}); if(a) openForm(a); },
+
+    editFromDetail: function(id){ closeCustomerDetail(); var a = appointments.find(function(x){return x.id===id;}); if(a) openForm(a); },
+
+    info: function(id){
+      var a = appointments.find(function(x){return x.id===id;});
+      if(!a) return;
+      openCustomerDetail(a.customerId);
+    },
+
+    viewCustomer: function(id){ openCustomerDetail(id); },
+    editCustomer: function(id){ var c = customers.find(function(x){return x.id===id;}); if(c) openCustomerForm(c); },
+
+    deleteCustomer: function(id){
+      var c = customers.find(function(x){return x.id===id;});
+      if(!c) return;
+      var relatedCount = appointments.filter(function(a){return a.customerId===id;}).length;
+      var msg = relatedCount
+        ? ('此客戶有 '+relatedCount+' 筆預約紀錄，刪除客戶將一併刪除這些預約紀錄，確定要刪除「'+c.name+'」嗎？')
+        : ('確定要刪除客戶「'+c.name+'」嗎？');
+      if(!confirm(msg)) return;
+      customers = customers.filter(function(x){return x.id!==id;});
+      appointments = appointments.filter(function(a){return a.customerId!==id;});
+      saveCustomers(customers); saveAppointments(appointments);
+      refreshAll();
+      showToast('已刪除客戶及其預約紀錄');
+    },
+
+    newApptForCustomer: function(customerId){
+      switchTo('appts');
+      openForm(null, customerId);
+    },
+
+    complete: function(id){
+      var a = appointments.find(function(x){return x.id===id;});
+      if(!a) return;
+      var cust = getCustomer(a.customerId);
+      if(!confirm('將「'+cust.name+'」這筆預約標記為已完成？')) return;
+      a.status = '已完成';
+      a.updatedAt = new Date().toISOString();
+      saveAppointments(appointments); refreshAll();
+      showToast('已標記為完成');
+    },
+
+    collect: function(id){
+      var a = appointments.find(function(x){return x.id===id;});
+      if(!a) return;
+      var cust = getCustomer(a.customerId);
+      if(!confirm('確認已收到「'+cust.name+'」這筆款項？')) return;
+      a.paid = true; a.paidAt = new Date().toISOString();
+      a.updatedAt = new Date().toISOString();
+      saveAppointments(appointments); refreshAll();
+      showToast('已標記收款完成');
+    },
+
+    cancelAppt: function(id){
+      var a = appointments.find(function(x){return x.id===id;});
+      if(!a) return;
+      var cust = getCustomer(a.customerId);
+      if(!confirm('確定要取消「'+cust.name+'」這筆預約嗎？取消後將釋放此時段，紀錄仍會保留可查詢。')) return;
+      var reason = prompt('取消原因（客人取消／店家取消／改期／其他），可直接輸入或留空：', a.cancelReason||'客人取消');
+      a.status = '已取消';
+      a.cancelReason = (reason||'').trim() || '未填寫';
+      a.updatedAt = new Date().toISOString();
+      saveAppointments(appointments); refreshAll();
+      showToast('已取消該筆預約，時段已釋放');
+    },
+
+    remove: function(id){
+      var a = appointments.find(function(x){return x.id===id;});
+      if(!a) return;
+      if(confirm('確定要刪除此預約嗎？刪除後將無法恢復。')){
+        appointments = appointments.filter(function(x){return x.id!==id;});
+        saveAppointments(appointments); refreshAll();
+        showToast('已刪除該筆資料');
+      }
+    }
+  });
+
+  // ================= CSV 匯出 =================
+  var APPT_CSV_HEADERS = ['客戶姓名','電話','LINE/IG','生日','預約項目','預約日期時間','付款方式','已匯訂金','已收全額','今日金額','其他加項金額','今日總金額','儲值金額','狀態','取消原因','備註'];
+  var CUST_CSV_HEADERS = ['客戶姓名','電話','LINE/IG','生日','備註','預約次數','取消次數','未到店次數','累積消費','平均客單價','最近到店日期'];
+  function toCsvField(v){
+    var s = (v===undefined||v===null) ? '' : String(v);
+    if(/[",\n]/.test(s)) s = '"' + s.replace(/"/g,'""') + '"';
+    return s;
+  }
+  function apptsToCsv(list){
+    var rows = [APPT_CSV_HEADERS.map(toCsvField).join(',')];
+    list.forEach(function(a){
+      var cust = getCustomer(a.customerId);
+      var total = (Number(a.amount)||0)+(Number(a.extra)||0);
+      rows.push([
+        cust.name, cust.phone, cust.contact||'', cust.birthday||'', a.item||'', fmtDateTimeDisplay(a.datetime),
+        a.payment||'', (a.deposit?'是':'否'), (a.paid?'是':'否'), a.amount||0, a.extra||0, total, a.topup||0,
+        a.status||'', a.cancelReason||'', a.note||''
+      ].map(toCsvField).join(','));
+    });
+    return rows.join('\r\n');
+  }
+  function customersToCsv(list){
+    var rows = [CUST_CSV_HEADERS.map(toCsvField).join(',')];
+    list.forEach(function(c){
+      var stats = customerStats(c.id);
+      rows.push([
+        c.name, c.phone, c.contact||'', c.birthday||'', c.note||'',
+        stats.visitCount, stats.cancelCount, stats.noShowCount, stats.totalSpend, stats.avgTicket, fmtDateShort(stats.lastVisit)
+      ].map(toCsvField).join(','));
+    });
+    return rows.join('\r\n');
+  }
+  function downloadCsv(csvBody, count, prefix){
+    var filename = prefix+'_'+toDateStr(new Date()).replace(/-/g,'')+'.csv';
+    if(isIOS){
+      openTextInNewTab('\uFEFF'+csvBody, filename);
+      showToast('已在新分頁開啟，請用 Safari 分享功能儲存');
+      return;
+    }
+    var csv = '\uFEFF' + csvBody;
+    var blob = new Blob([csv], {type:'text/csv;charset=utf-8;'});
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url; a.download = filename;
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    showToast('CSV 已匯出，共 '+count+' 筆資料');
+  }
+  document.getElementById('exportCsvListBtn').addEventListener('click', function(){
+    var list = applyFilters(appointments, getFilters()).sort(function(a,b){return (b.datetime||'').localeCompare(a.datetime||'');});
+    downloadCsv(apptsToCsv(list), list.length, '美業預約清單');
+  });
+  document.getElementById('exportCsvAllBtn').addEventListener('click', function(){
+    downloadCsv(apptsToCsv(appointments), appointments.length, '美業全部預約');
+  });
+  document.getElementById('exportCsvCustBtn').addEventListener('click', function(){
+    downloadCsv(customersToCsv(customers), customers.length, '美業客戶清單');
+  });
+
+  // ================= 備份 / 匯入 =================
+  document.getElementById('exportBtn').addEventListener('click', function(){
+    settings.lastBackupAt = new Date().toISOString();
+    saveSettings(settings);
+    var payload = { exportedAt: settings.lastBackupAt, license: LICENSE_INFO, customers: customers, appointments: appointments, reports: reports, settings: settings };
+    var jsonStr = '\uFEFF' + JSON.stringify(payload,null,2);
+    var filename = '美業預約備份_'+toDateStr(new Date()).replace(/-/g,'')+'.json';
+    if(isIOS){
+      openTextInNewTab(jsonStr, filename);
+      showToast('已在新分頁開啟，請用 Safari 分享功能儲存');
+    }else{
+      var blob = new Blob([jsonStr], {type:'application/json'});
+      var url = URL.createObjectURL(blob);
+      var a = document.createElement('a');
+      a.href = url; a.download = filename;
+      document.body.appendChild(a); a.click(); document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      showToast('備份檔已下載');
+    }
+    renderBackupReminder();
+    renderLastBackupHint();
+  });
+  document.getElementById('importFile').addEventListener('change', function(e){
+    var file = e.target.files[0]; if(!file) return;
+    var reader = new FileReader();
+    reader.onload = function(evt){
+      try{
+        var rawText = String(evt.target.result).replace(/^\uFEFF/, '');
+        var data = JSON.parse(rawText);
+        var newCustomers, newAppointments;
+
+        if(data && Array.isArray(data.customers) && Array.isArray(data.appointments)){
+          // 新版格式，直接採用
+          newCustomers = data.customers;
+          newAppointments = data.appointments;
+        }else{
+          // 舊版格式（純陣列，或 {clients:[...]}），自動拆分
+          var oldList = Array.isArray(data) ? data : data.clients;
+          if(!Array.isArray(oldList)) throw new Error('格式錯誤');
+          var split = splitLegacyArray(oldList);
+          newCustomers = split.customers;
+          newAppointments = split.appointments;
+        }
+
+        var total = newCustomers.length + newAppointments.length;
+        if(!confirm('即將匯入 '+newCustomers.length+' 位客戶、'+newAppointments.length+' 筆預約，並覆蓋目前所有資料，確定繼續嗎？')){ e.target.value=''; return; }
+
+        customers = newCustomers;
+        appointments = newAppointments;
+        appointments.forEach(function(a){
+          var map = { upcoming:'待確認', done:'已完成', cancelled:'已取消' };
+          if(map[a.status]) a.status = map[a.status];
+          if(STATUS_LIST.indexOf(a.status)===-1) a.status = '待確認';
+        });
+        saveCustomers(customers);
+        saveAppointments(appointments);
+        reports = Array.isArray(data.reports) ? data.reports : [];
+        saveReports(reports);
+        if(data.settings){ settings = Object.assign({}, DEFAULT_SETTINGS, data.settings); saveSettings(settings); }
+        refreshAll();
+        showToast('匯入成功，共 '+customers.length+' 位客戶、'+appointments.length+' 筆預約');
+      }catch(err){
+        alert('匯入失敗：檔案格式不正確，請確認是本工具匯出的備份檔。');
+      }
+      e.target.value = '';
+    };
+    reader.readAsText(file);
+  });
+
+  // ================= 初始化 =================
+  // PIN 碼鎖：一開始畫面預設是鎖定的，沒有設定PIN的人會立刻自動解除
+  if(!settings.pinEnabled || !settings.pin){
+    document.getElementById('pinLockOverlay').style.display = 'none';
+  }
+  document.getElementById('pinUnlockBtn').addEventListener('click', function(){
+    var val = document.getElementById('pinInput').value;
+    if(val === settings.pin){
+      document.getElementById('pinLockOverlay').style.display = 'none';
+    }else{
+      document.getElementById('pinError').style.display = 'block';
+      document.getElementById('pinInput').value = '';
+    }
+  });
+  document.getElementById('pinInput').addEventListener('keydown', function(e){
+    if(e.key==='Enter'){ e.preventDefault(); document.getElementById('pinUnlockBtn').click(); }
+  });
+
+  // ---- 忘記密碼救援流程 ----
+  document.getElementById('pinForgotBtn').addEventListener('click', function(){
+    document.getElementById('pinLockStep1').style.display = 'none';
+    document.getElementById('pinLockStep2').style.display = 'block';
+    document.getElementById('recoveryInput').value = '';
+    document.getElementById('recoveryError').style.display = 'none';
+  });
+  document.getElementById('pinBackBtn').addEventListener('click', function(){
+    document.getElementById('pinLockStep2').style.display = 'none';
+    document.getElementById('pinLockStep1').style.display = 'block';
+  });
+  document.getElementById('recoveryVerifyBtn').addEventListener('click', function(){
+    var val = document.getElementById('recoveryInput').value.trim();
+    if(val && settings.pinRecovery && val===settings.pinRecovery){
+      document.getElementById('pinLockStep2').style.display = 'none';
+      document.getElementById('pinLockStep3').style.display = 'block';
+      document.getElementById('newPinInput').value = '';
+      document.getElementById('newPinError').style.display = 'none';
+    }else{
+      document.getElementById('recoveryError').style.display = 'block';
+    }
+  });
+  document.getElementById('newPinSaveBtn').addEventListener('click', function(){
+    var newPin = document.getElementById('newPinInput').value.trim();
+    if(!/^\d{4}$/.test(newPin)){
+      document.getElementById('newPinError').style.display = 'block';
+      return;
+    }
+    settings.pin = newPin;
+    saveSettings(settings);
+    document.getElementById('pinLockStep3').style.display = 'none';
+    document.getElementById('pinLockStep1').style.display = 'block';
+    document.getElementById('pinLockOverlay').style.display = 'none';
+    showToast('已重設新的 PIN 碼');
+  });
+
+  (function renderLicenseFooter(){
+    var el = document.getElementById('licenseFooter');
+    if(LICENSE_INFO.buyer){
+      el.textContent = '本工具授權予：'+LICENSE_INFO.buyer + (LICENSE_INFO.orderId ? '（訂單編號 '+LICENSE_INFO.orderId+'）' : '') + '　禁止轉售或公開分享';
+    }
+  })();
+  applyTheme(settings.theme);
+  document.getElementById('shopTitle').textContent = settings.shopName;
+  populateItemSelect();
+  populateCustomerSelect('');
+  renderShopSettings();
+  renderLastBackupHint();
+  renderDashboard();
+  renderTimeline();
+  renderMonthAvailability();
+  renderTodayPage();
+  renderList();
+  renderCustomers();
+
+})();
+</script>
+</body>
+</html>
