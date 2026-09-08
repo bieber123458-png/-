@@ -676,19 +676,19 @@ input[type=file]{display:none;}
         <div class="form-field"><label>客人生日（選填）</label><input type="date" id="cf_birthday"></div>
         <div class="form-field full"><label>備註</label><textarea id="cf_note" placeholder="選填，如客人偏好、特殊需求等"></textarea></div>
         <div class="form-field full">
-          <label>施作前 / 施作後照片（選填）</label>
-          <div style="display:flex;gap:16px;flex-wrap:wrap;margin-top:4px;">
-            <div style="text-align:center;">
+          <label>施作前 / 施作後照片（選填，各最多6張）</label>
+          <div style="display:flex;gap:20px;flex-wrap:wrap;margin-top:4px;">
+            <div>
               <div class="hint" style="margin-bottom:4px;">施作前</div>
-              <img id="cf_photoBeforePreview" style="width:90px;height:90px;object-fit:cover;border-radius:10px;border:1px solid var(--soft-blue);display:none;">
-              <input type="file" accept="image/*" id="cf_photoBeforeInput">
-              <label class="btn btn-ghost btn-xs" for="cf_photoBeforeInput" style="display:block;margin-top:4px;">選擇照片</label>
+              <div id="cf_photoBeforeList" style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:6px;"></div>
+              <input type="file" accept="image/*" multiple id="cf_photoBeforeInput">
+              <label class="btn btn-ghost btn-xs" for="cf_photoBeforeInput" style="display:inline-block;">＋ 選擇照片（可多選）</label>
             </div>
-            <div style="text-align:center;">
+            <div>
               <div class="hint" style="margin-bottom:4px;">施作後</div>
-              <img id="cf_photoAfterPreview" style="width:90px;height:90px;object-fit:cover;border-radius:10px;border:1px solid var(--soft-blue);display:none;">
-              <input type="file" accept="image/*" id="cf_photoAfterInput">
-              <label class="btn btn-ghost btn-xs" for="cf_photoAfterInput" style="display:block;margin-top:4px;">選擇照片</label>
+              <div id="cf_photoAfterList" style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:6px;"></div>
+              <input type="file" accept="image/*" multiple id="cf_photoAfterInput">
+              <label class="btn btn-ghost btn-xs" for="cf_photoAfterInput" style="display:inline-block;">＋ 選擇照片（可多選）</label>
             </div>
           </div>
         </div>
@@ -2525,12 +2525,29 @@ input[type=file]{display:none;}
   // ---- 新增／編輯客戶 表單 ----
   var custOverlay = document.getElementById('customerModalOverlay');
   var custForm = document.getElementById('customerForm');
-  var pendingPhotos = { before:null, after:null };
-  function setPhotoPreview(kind, dataUrl){
-    var img = document.getElementById('cf_photo'+kind+'Preview');
-    if(dataUrl){ img.src = dataUrl; img.style.display = 'inline-block'; }
-    else{ img.src=''; img.style.display = 'none'; }
+  var PHOTO_MAX_PER_KIND = 6;
+  var pendingPhotos = { before:[], after:[] };
+  // 舊版一位客戶前/後各只存一張（單一字串），新版改成陣列存多張；讀到舊格式時自動包成陣列相容
+  function normalizePhotoArray(val){
+    if(Array.isArray(val)) return val.slice();
+    if(typeof val === 'string' && val) return [val];
+    return [];
   }
+  function renderPhotoList(kind){
+    var key = kind.toLowerCase();
+    var el = document.getElementById('cf_photo'+kind+'List');
+    el.innerHTML = pendingPhotos[key].map(function(url, i){
+      return '<div style="position:relative;width:74px;height:74px;">' +
+        '<img src="'+url+'" style="width:100%;height:100%;object-fit:cover;border-radius:10px;border:1px solid var(--soft-blue);">' +
+        '<button type="button" onclick="WT.removePendingPhoto(\''+key+'\','+i+')" style="position:absolute;top:-6px;right:-6px;width:20px;height:20px;border-radius:50%;background:#B5574A;color:#fff;font-weight:900;font-size:11px;line-height:1;border:2px solid #fff;">✕</button>' +
+      '</div>';
+    }).join('');
+  }
+  window.WT = window.WT || {};
+  window.WT.removePendingPhoto = function(key, idx){
+    pendingPhotos[key].splice(idx, 1);
+    renderPhotoList(key === 'before' ? 'Before' : 'After');
+  };
   function readImageFile(file, cb){
     if(!file) return;
     if(file.size > 4*1024*1024){ showToast('⚠️ 圖片檔案太大，請選擇 4MB 以內的照片'); return; }
@@ -2538,11 +2555,23 @@ input[type=file]{display:none;}
     reader.onload = function(e){ cb(e.target.result); };
     reader.readAsDataURL(file);
   }
+  function addPhotoFiles(kind, fileList){
+    var key = kind.toLowerCase();
+    var files = Array.prototype.slice.call(fileList);
+    var room = PHOTO_MAX_PER_KIND - pendingPhotos[key].length;
+    if(files.length > room){
+      showToast('⚠️ '+(kind==='Before'?'施作前':'施作後')+'照片最多 '+PHOTO_MAX_PER_KIND+' 張，只加入前面 '+Math.max(room,0)+' 張');
+      files = files.slice(0, Math.max(room,0));
+    }
+    files.forEach(function(file){
+      readImageFile(file, function(dataUrl){ pendingPhotos[key].push(dataUrl); renderPhotoList(kind); });
+    });
+  }
   document.getElementById('cf_photoBeforeInput').addEventListener('change', function(e){
-    readImageFile(e.target.files[0], function(dataUrl){ pendingPhotos.before = dataUrl; setPhotoPreview('Before', dataUrl); });
+    addPhotoFiles('Before', e.target.files); e.target.value = '';
   });
   document.getElementById('cf_photoAfterInput').addEventListener('change', function(e){
-    readImageFile(e.target.files[0], function(dataUrl){ pendingPhotos.after = dataUrl; setPhotoPreview('After', dataUrl); });
+    addPhotoFiles('After', e.target.files); e.target.value = '';
   });
 
   function openCustomerForm(record){
@@ -2553,10 +2582,10 @@ input[type=file]{display:none;}
     document.getElementById('cf_contact').value = record ? (record.contact||'') : '';
     document.getElementById('cf_birthday').value = record ? (record.birthday||'') : '';
     document.getElementById('cf_note').value = record ? (record.note||'') : '';
-    pendingPhotos.before = (record && record.photos) ? (record.photos.before||null) : null;
-    pendingPhotos.after = (record && record.photos) ? (record.photos.after||null) : null;
-    setPhotoPreview('Before', pendingPhotos.before);
-    setPhotoPreview('After', pendingPhotos.after);
+    pendingPhotos.before = normalizePhotoArray(record && record.photos ? record.photos.before : null);
+    pendingPhotos.after = normalizePhotoArray(record && record.photos ? record.photos.after : null);
+    renderPhotoList('Before');
+    renderPhotoList('After');
     document.getElementById('cf_photoBeforeInput').value = '';
     document.getElementById('cf_photoAfterInput').value = '';
     custOverlay.classList.add('active');
@@ -2576,7 +2605,7 @@ input[type=file]{display:none;}
       contact: document.getElementById('cf_contact').value.trim(),
       birthday: document.getElementById('cf_birthday').value,
       note: document.getElementById('cf_note').value.trim(),
-      photos: { before: pendingPhotos.before, after: pendingPhotos.after },
+      photos: { before: pendingPhotos.before.slice(), after: pendingPhotos.after.slice() },
       updatedAt: new Date().toISOString()
     };
     if(id){
@@ -2703,11 +2732,20 @@ input[type=file]{display:none;}
       }).join('') || '<div class="hint" style="padding:6px 0;">尚無儲值紀錄</div>';
 
     var photos = cust.photos || {};
-    var photoHtml = (photos.before || photos.after) ?
+    var photoBeforeArr = normalizePhotoArray(photos.before);
+    var photoAfterArr = normalizePhotoArray(photos.after);
+    function photoGalleryHtml(label, arr){
+      if(!arr.length) return '';
+      return '<div><div class="hint" style="margin-bottom:4px;">'+label+'（'+arr.length+'張）</div>' +
+        '<div style="display:flex;gap:8px;flex-wrap:wrap;">' +
+        arr.map(function(url){ return '<img src="'+url+'" style="width:90px;height:90px;object-fit:cover;border-radius:10px;border:1px solid var(--soft-blue);cursor:pointer;" onclick="window.open(this.src)">'; }).join('') +
+        '</div></div>';
+    }
+    var photoHtml = (photoBeforeArr.length || photoAfterArr.length) ?
       '<div class="section-head" style="margin-top:8px;"><h3 style="font-size:14px;">施作前 / 後照片</h3></div>' +
-      '<div style="display:flex;gap:14px;margin-bottom:10px;">' +
-        (photos.before ? '<div style="text-align:center;"><div class="hint">施作前</div><img src="'+photos.before+'" style="width:110px;height:110px;object-fit:cover;border-radius:10px;border:1px solid var(--soft-blue);"></div>' : '') +
-        (photos.after ? '<div style="text-align:center;"><div class="hint">施作後</div><img src="'+photos.after+'" style="width:110px;height:110px;object-fit:cover;border-radius:10px;border:1px solid var(--soft-blue);"></div>' : '') +
+      '<div style="display:flex;gap:20px;flex-wrap:wrap;margin-bottom:10px;">' +
+        photoGalleryHtml('施作前', photoBeforeArr) +
+        photoGalleryHtml('施作後', photoAfterArr) +
       '</div>' : '';
 
     var consentHtml = '<div class="section-head" style="margin-top:8px;"><h3 style="font-size:14px;">紋繡同意書</h3></div>' +
