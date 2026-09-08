@@ -2734,18 +2734,23 @@ input[type=file]{display:none;}
     var photos = cust.photos || {};
     var photoBeforeArr = normalizePhotoArray(photos.before);
     var photoAfterArr = normalizePhotoArray(photos.after);
-    function photoGalleryHtml(label, arr){
+    function photoGalleryHtml(label, kind, arr){
       if(!arr.length) return '';
       return '<div><div class="hint" style="margin-bottom:4px;">'+label+'（'+arr.length+'張）</div>' +
         '<div style="display:flex;gap:8px;flex-wrap:wrap;">' +
-        arr.map(function(url){ return '<img src="'+url+'" style="width:90px;height:90px;object-fit:cover;border-radius:10px;border:1px solid var(--soft-blue);cursor:pointer;" onclick="window.open(this.src)">'; }).join('') +
+        arr.map(function(url, i){
+          return '<div style="position:relative;width:90px;height:90px;">' +
+            '<img src="'+url+'" style="width:100%;height:100%;object-fit:cover;border-radius:10px;border:1px solid var(--soft-blue);cursor:pointer;" onclick="window.open(this.src)">' +
+            '<button type="button" onclick="WT.deleteCustomerPhoto(\''+customerId+'\',\''+kind+'\','+i+')" style="position:absolute;top:-6px;right:-6px;width:22px;height:22px;border-radius:50%;background:#B5574A;color:#fff;font-weight:900;font-size:12px;line-height:1;border:2px solid #fff;">✕</button>' +
+          '</div>';
+        }).join('') +
         '</div></div>';
     }
     var photoHtml = (photoBeforeArr.length || photoAfterArr.length) ?
       '<div class="section-head" style="margin-top:8px;"><h3 style="font-size:14px;">施作前 / 後照片</h3></div>' +
       '<div style="display:flex;gap:20px;flex-wrap:wrap;margin-bottom:10px;">' +
-        photoGalleryHtml('施作前', photoBeforeArr) +
-        photoGalleryHtml('施作後', photoAfterArr) +
+        photoGalleryHtml('施作前', 'before', photoBeforeArr) +
+        photoGalleryHtml('施作後', 'after', photoAfterArr) +
       '</div>' : '';
 
     var consentHtml = '<div class="section-head" style="margin-top:8px;"><h3 style="font-size:14px;">紋繡同意書</h3></div>' +
@@ -3297,6 +3302,20 @@ input[type=file]{display:none;}
 
     viewCustomer: function(id){ openCustomerDetail(id); },
     editCustomer: function(id){ var c = customers.find(function(x){return x.id===id;}); if(c) openCustomerForm(c); },
+
+    deleteCustomerPhoto: async function(customerId, kind, idx){
+      var c = customers.find(function(x){return x.id===customerId;});
+      if(!c) return;
+      if(!(await customConfirm('確定要刪除這張照片嗎？'))) return;
+      var arr = normalizePhotoArray(c.photos ? c.photos[kind] : null);
+      arr.splice(idx, 1);
+      c.photos = Object.assign({}, c.photos, { before: normalizePhotoArray(c.photos && c.photos.before), after: normalizePhotoArray(c.photos && c.photos.after) });
+      c.photos[kind] = arr;
+      c.updatedAt = new Date().toISOString();
+      saveCustomers(customers);
+      openCustomerDetail(customerId);
+      showToast('已刪除照片');
+    },
 
     deleteCustomer: async function(id){
       var c = customers.find(function(x){return x.id===id;});
