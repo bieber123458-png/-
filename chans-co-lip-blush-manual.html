@@ -123,6 +123,51 @@
   }
   .caption-note{font-size:11.5px;color:var(--text-soft);text-align:center;margin-bottom:18px;}
   @media(max-width:640px){.result-gallery{grid-template-columns:repeat(2,1fr);}}
+  .photo-note{margin:18px 0 6px;text-align:center;}
+  .photo-single{
+    width:100%;max-width:520px;margin:0 auto;border-radius:12px;
+    box-shadow:0 8px 20px -10px rgba(60,13,23,.35);
+  }
+
+  .skin-diagram{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin:20px 0 6px;}
+  .skin-col-title{font-size:13px;font-weight:700;color:var(--wine);text-align:center;margin-bottom:10px;}
+  .skin-stack{display:flex;flex-direction:column;border-radius:10px;overflow:hidden;height:220px;box-shadow:0 6px 16px -8px rgba(60,13,23,.3);}
+  .skin-layer{
+    flex:1;display:flex;align-items:center;justify-content:center;
+    font-size:11px;font-weight:700;color:#fff;letter-spacing:.03em;
+  }
+  .skin-layer.thin{flex:0.6;font-size:10px;}
+  .skin-layer.sebum{background:var(--gold);flex:0.3;color:var(--wine-dark);}
+  .skin-layer.horny{background:var(--wine-soft);}
+  .skin-layer.granular{background:var(--wine-mid);}
+  .skin-layer.spinous{background:var(--wine);}
+  .skin-layer.basal{background:var(--wine-dark);}
+  .skin-layer.dermis{background:#E8CBAE;color:var(--ink);flex:1.6;}
+  .skin-note{text-align:center;font-size:11.5px;color:var(--gold-deep);font-weight:700;margin-top:8px;}
+  @media(max-width:640px){.skin-diagram{grid-template-columns:1fr;}}
+
+  .color-diagram{display:grid;grid-template-columns:1fr 1fr 1fr;gap:22px;margin:20px 0 6px;align-items:start;}
+  .color-col-title{
+    display:inline-block;background:var(--wine);color:#fff;font-size:12px;font-weight:700;
+    padding:5px 16px;border-radius:999px;margin-bottom:14px;
+  }
+  .color-col{text-align:center;}
+  .color-col-desc{font-size:11.5px;color:var(--text-soft);margin-top:10px;}
+  .hue-wheel{
+    width:120px;height:120px;border-radius:50%;margin:0 auto;
+    background:conic-gradient(red,orange,yellow,greenyellow,green,teal,blue,indigo,violet,magenta,red);
+    box-shadow:0 6px 16px -8px rgba(60,13,23,.35);
+  }
+  .value-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;max-width:160px;margin:0 auto;}
+  .value-grid span{display:block;aspect-ratio:1;border-radius:4px;}
+  .chroma-bar{display:flex;max-width:220px;margin:0 auto;border-radius:8px;overflow:hidden;height:40px;}
+  .chroma-bar span{flex:1;}
+  .chroma-bar .pure{
+    flex:1.3;display:flex;align-items:center;justify-content:center;
+    background:#B5202E;color:#fff;font-size:11px;font-weight:700;
+  }
+  .chroma-labels{display:flex;justify-content:space-between;max-width:220px;margin:6px auto 0;font-size:10.5px;color:var(--text-soft);}
+  @media(max-width:760px){.color-diagram{grid-template-columns:1fr;}}
   table{width:100%;border-collapse:collapse;margin:16px 0;font-size:13.5px;}
   th,td{border:1px solid var(--line);padding:11px 14px;text-align:left;}
   th{background:var(--blush);color:var(--wine);font-weight:700;}
@@ -314,7 +359,31 @@
 
       <div class="tip"><b>術前評估應用：</b>建議在評估客人唇況時，避免在低溫環境或客人剛喝完冰飲後立即判色，以免因血管收縮造成誤判，影響配色決策的準確度。</div>
 
-      <div class="img-placeholder">〔圖片版位〕唇部肌膚結構示意圖（一般肌膚 vs 唇部肌膚對照）</div>
+      <div class="skin-diagram">
+        <div class="skin-col">
+          <div class="skin-col-title">一般肌膚結構</div>
+          <div class="skin-stack">
+            <div class="skin-layer sebum">皮脂</div>
+            <div class="skin-layer horny">角質層</div>
+            <div class="skin-layer granular">顆粒層</div>
+            <div class="skin-layer spinous">有棘層</div>
+            <div class="skin-layer basal">基底層</div>
+            <div class="skin-layer dermis">真皮層</div>
+          </div>
+        </div>
+        <div class="skin-col">
+          <div class="skin-col-title">嘴唇肌膚結構</div>
+          <div class="skin-stack">
+            <div class="skin-layer horny thin">角質層（較薄）</div>
+            <div class="skin-layer granular thin">顆粒層</div>
+            <div class="skin-layer spinous thin">有棘層</div>
+            <div class="skin-layer basal thin">基底層</div>
+            <div class="skin-layer dermis" style="flex:2;">真皮層</div>
+          </div>
+          <div class="skin-note">唇部表面幾乎沒有油脂</div>
+        </div>
+      </div>
+      <p class="caption-note">一般肌膚結構 vs 唇部肌膚結構對照示意圖</p>
 
       <div class="recap"><b>本節重點整理</b>
         <ul>
@@ -403,7 +472,10 @@
         <li><b>唇珠</b>：上唇中央微凸的區域，是唇型設計的視覺焦點</li>
       </ul>
 
-      <div class="img-placeholder">〔圖片版位〕唇部分區標示圖（上唇／下唇／唇峰／嘴角／唇珠）</div>
+      <div class="photo-note">
+        <img src="assets/diagrams/lip-zones.jpg" alt="唇部五大分區標示圖：上唇、下唇、唇峰、嘴角、唇珠" class="photo-single">
+        <p class="caption-note">唇部五大分區標示圖</p>
+      </div>
 
       <h4 class="h">常見唇型調整設計對照</h4>
       <table>
@@ -463,7 +535,10 @@
 
       <div class="callout"><b>選針原則：</b>依客人膚質厚薄、設計風格（漸層 / 顆粒感）與施作階段（打底 / 收邊加深）選擇合適針具，並確保針具皆為單支無菌包裝、一人一針，符合感染控制規範。使用後針具須立即置入專用利器回收桶，不可重複使用。</div>
 
-      <div class="img-placeholder">〔圖片版位〕排針／單針實體照片對照</div>
+      <div class="photo-note">
+        <img src="assets/diagrams/needle-types.jpg" alt="排針與單針實體照片對照" class="photo-single" style="max-width:320px;margin:0 auto;">
+        <p class="caption-note">排針（上）／單針（下）實體照片對照</p>
+      </div>
 
       <div class="recap"><b>本節重點整理</b>
         <ul>
@@ -505,7 +580,12 @@
 
       <div class="callout"><b>諮詢話術重點：</b>當客人屬於先天基因造成的烏唇，應誠實告知擦護唇膏難以根本改善，並說明可透過霧唇技術，以色乳從肌膚淺層調整呈色，達到由內而外的唇色矯正效果，建立專業信任感。</div>
 
-      <div class="img-placeholder">〔圖片版位〕烏唇矯正術前術後對比照</div>
+      <div class="result-gallery" style="grid-template-columns:1.3fr 1fr 1fr;">
+        <img src="assets/diagrams/darklip-before-after-01.jpg" alt="烏唇矯正操作實拍 01" loading="lazy">
+        <img src="assets/diagrams/darklip-before-after-02.jpg" alt="烏唇矯正前後對比 02" loading="lazy">
+        <img src="assets/diagrams/darklip-before-after-03.jpg" alt="烏唇矯正前後對比 03" loading="lazy">
+      </div>
+      <p class="caption-note">烏唇矯正操作與前後對比實拍照</p>
 
       <div class="recap"><b>本節重點整理</b>
         <ul>
@@ -544,7 +624,10 @@
 
       <div class="callout"><b>教學重點：</b>唇況判讀的準確度，會直接影響後續對衝色的選用與調色比例，是霧唇技術中極為關鍵的術前評估能力，建議學員大量練習實際案例判讀，並養成拍照存檔比對的習慣。</div>
 
-      <div class="img-placeholder">〔圖片版位〕四大唇況分級對照表（含輕／中／重度實拍照）</div>
+      <div class="photo-note">
+        <img src="assets/diagrams/lip-condition-grid.jpg" alt="四大唇況分級對照表：花唇、冷烏唇、烏黑唇、暖烏唇，各分輕中重度" class="photo-single">
+        <p class="caption-note">四大唇況分級對照表（花唇／冷烏唇／烏黑唇／暖烏唇 × 輕中重度）</p>
+      </div>
 
       <div class="recap"><b>本節重點整理</b>
         <ul>
@@ -617,7 +700,30 @@
         <tr><td>彩度</td><td>顏色的純度，彩度越高色澤越鮮明飽和，彩度越低則越接近灰調</td></tr>
       </table>
 
-      <div class="img-placeholder">〔圖片版位〕色相環／明度階／彩度階示意圖</div>
+      <div class="color-diagram">
+        <div class="color-col">
+          <div class="color-col-title">色相</div>
+          <div class="hue-wheel"></div>
+          <p class="color-col-desc">色相是由原色、間色和複色構成的。</p>
+        </div>
+        <div class="color-col">
+          <div class="color-col-title">明度</div>
+          <div class="value-grid">
+            <span style="background:#D81E2C"></span><span style="background:#E8616B"></span><span style="background:#F3A1A7"></span><span style="background:#FAD2D4"></span>
+            <span style="background:#F4D71C"></span><span style="background:#F7E35C"></span><span style="background:#FAEF9B"></span><span style="background:#FDF7D2"></span>
+            <span style="background:#1E5AA8"></span><span style="background:#5C88C0"></span><span style="background:#9BB6D8"></span><span style="background:#D2E0EE"></span>
+          </div>
+          <p class="color-col-desc">明度是顏色的深淺，距離黑與白的位置。</p>
+        </div>
+        <div class="color-col">
+          <div class="color-col-title">彩度</div>
+          <div class="chroma-bar">
+            <span style="background:#5C0E16"></span><span style="background:#8A1620"></span><span class="pure">純紅</span><span style="background:#D16870"></span><span style="background:#E8B2B6"></span>
+          </div>
+          <div class="chroma-labels"><span>彩度提高</span><span>彩度降低</span></div>
+          <p class="color-col-desc">彩度是一個顏色的純度。</p>
+        </div>
+      </div>
 
       <div class="recap"><b>本節重點整理</b>
         <ul>
@@ -698,6 +804,11 @@
         <li>避免出針過長，出針過長將造成皮損過大。</li>
         <li>避免造成大面創傷。若創面過大、傷口過深，容易導致術後潮濕發炎；一般發炎狀況多出現在術後第三天，客人可能出現組織液分泌、唇部乾燥緊繃及邊緣發紅等現象，須提前於術前衛教告知，並於術後追蹤關心。</li>
       </ol>
+
+      <div class="photo-note">
+        <img src="assets/diagrams/operation-sop.jpg" alt="霧唇操作實拍照" class="photo-single" style="max-width:320px;margin:0 auto;">
+        <p class="caption-note">霧唇操作過程實拍照</p>
+      </div>
 
       <div class="recap"><b>本節重點整理</b>
         <ul>
