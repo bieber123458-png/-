@@ -168,6 +168,26 @@
   }
   .chroma-labels{display:flex;justify-content:space-between;max-width:220px;margin:6px auto 0;font-size:10.5px;color:var(--text-soft);}
   @media(max-width:760px){.color-diagram{grid-template-columns:1fr;}}
+
+  .transition-diagram{display:flex;align-items:center;justify-content:center;gap:14px;margin:22px 0 6px;flex-wrap:wrap;}
+  .transition-step{text-align:center;width:120px;}
+  .transition-swatch{width:84px;height:84px;border-radius:50%;margin:0 auto 10px;box-shadow:0 8px 18px -10px rgba(60,13,23,.4);border:3px solid #fff;outline:1px solid var(--line);}
+  .transition-label{font-size:11.5px;color:var(--text);font-weight:700;line-height:1.5;}
+  .transition-label span{display:block;font-weight:500;color:var(--text-soft);font-size:10.5px;}
+  .transition-arrow{font-size:20px;color:var(--gold);font-weight:900;}
+  @media(max-width:560px){.transition-diagram{gap:8px;}}
+
+  .depth-diagram{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin:20px 0 6px;}
+  .depth-badge{font-size:12.5px;font-weight:700;text-align:center;padding:8px;border-radius:8px;margin-bottom:10px;}
+  .depth-col.correct .depth-badge{background:#EAF4EC;color:#2F6B3A;}
+  .depth-col.wrong .depth-badge{background:#FBEAEA;color:#A3312B;}
+  .depth-cross{border-radius:10px;overflow:hidden;box-shadow:0 6px 16px -8px rgba(60,13,23,.3);}
+  .depth-epidermis{background:#F3D9C4;min-height:76px;display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:6px;padding:10px;font-size:11px;font-weight:700;color:#8a5a33;}
+  .depth-dermis{background:#D9A77E;min-height:118px;display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:8px;padding:12px;font-size:11px;font-weight:700;color:#5a3a22;}
+  .pigment-dot{width:10px;height:10px;border-radius:50%;background:var(--wine);flex:0 0 auto;}
+  .pigment-dot.surface{background:var(--wine);box-shadow:0 0 0 2px rgba(255,255,255,.7);}
+  .depth-label{width:100%;text-align:center;font-size:10.5px;margin-top:4px;}
+  @media(max-width:640px){.depth-diagram{grid-template-columns:1fr;}}
   table{width:100%;border-collapse:collapse;margin:16px 0;font-size:13.5px;}
   th,td{border:1px solid var(--line);padding:11px 14px;text-align:left;}
   th{background:var(--blush);color:var(--wine);font-weight:700;}
@@ -658,7 +678,23 @@
 
       <div class="callout"><b>案例參考重點：</b>重度紫烏唇客人於第二次操作後，唇色已由原本深紫暗沉，逐漸轉為自然紅潤色澤。術前應向客人清楚說明「轉色是漸進式的過程」，避免因單次期待落差造成客訴。</div>
 
-      <div class="img-placeholder">〔圖片版位〕烏唇轉色案例（原唇況 → 第二次操作後留色對比）</div>
+      <div class="transition-diagram">
+        <div class="transition-step">
+          <div class="transition-swatch" style="background:#4B2E55;"></div>
+          <div class="transition-label">原唇況<span>重度紫烏唇</span></div>
+        </div>
+        <div class="transition-arrow">→</div>
+        <div class="transition-step">
+          <div class="transition-swatch" style="background:#8C4B5E;"></div>
+          <div class="transition-label">第一次操作後<span>色素逐漸中和</span></div>
+        </div>
+        <div class="transition-arrow">→</div>
+        <div class="transition-step">
+          <div class="transition-swatch" style="background:#C96B74;"></div>
+          <div class="transition-label">第二次操作後<span>自然紅潤色澤</span></div>
+        </div>
+      </div>
+      <p class="caption-note">示意圖：重度烏唇漸進轉色概念（原創示意，實際呈色依個案膚況調整；建議之後補上學員／客人真實案例照）</p>
 
       <div class="recap"><b>本節重點整理</b>
         <ul>
@@ -762,7 +798,29 @@
 
       <div class="warn"><b>常見錯誤原因：</b>錯誤上色多半是因為操作時未確實掌握進針深度，導致色乳停留在肌膚表層而非滲透至正確皮層，長期下來會影響最終呈色效果與客人滿意度。</div>
 
-      <div class="img-placeholder">〔圖片版位〕正確上色／錯誤上色對照圖（含標示「顏色滲透皮下」／「顏色浮在表面」）</div>
+      <div class="depth-diagram">
+        <div class="depth-col correct">
+          <div class="depth-badge">✓ 正確上色</div>
+          <div class="depth-cross">
+            <div class="depth-epidermis">表皮層</div>
+            <div class="depth-dermis">
+              <span class="pigment-dot"></span><span class="pigment-dot"></span><span class="pigment-dot"></span><span class="pigment-dot"></span><span class="pigment-dot"></span>
+              <span class="depth-label">色乳滲透皮下，均勻分佈於真皮淺層</span>
+            </div>
+          </div>
+        </div>
+        <div class="depth-col wrong">
+          <div class="depth-badge">✗ 錯誤上色</div>
+          <div class="depth-cross">
+            <div class="depth-epidermis">
+              <span class="pigment-dot surface"></span><span class="pigment-dot surface"></span><span class="pigment-dot surface"></span><span class="pigment-dot surface"></span><span class="pigment-dot surface"></span>
+              <span class="depth-label">色乳浮在表皮層，未深入正確皮層</span>
+            </div>
+            <div class="depth-dermis empty">真皮層（色乳未到達）</div>
+          </div>
+        </div>
+      </div>
+      <p class="caption-note">示意圖：色乳正確深度 vs 錯誤深度對照（原創繪製）</p>
 
       <div class="recap"><b>本節重點整理</b>
         <ul>
