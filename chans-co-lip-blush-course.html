@@ -113,6 +113,22 @@
   .hero-stats .stat b{display:block;font-size:clamp(22px,3vw,30px);font-weight:900;color:var(--gold-light);font-family:"Noto Serif TC",serif;}
   .hero-stats .stat span{font-size:12px;color:rgba(255,255,255,.7);letter-spacing:.05em;}
 
+  /* ---------- ACHIEVEMENT ---------- */
+  .achievement{background:var(--wine-dark);padding:0;}
+  .achievement-inner{
+    display:flex;align-items:center;gap:36px;padding:40px 24px;flex-wrap:wrap;
+  }
+  .ach-num{
+    font-family:"Noto Serif TC",serif;font-weight:900;color:var(--gold-light);
+    font-size:clamp(56px,8vw,84px);line-height:1;flex:0 0 auto;
+  }
+  .ach-num span{font-size:0.55em;}
+  .ach-text{flex:1;min-width:260px;}
+  .ach-label{font-size:11.5px;font-weight:700;letter-spacing:.14em;color:var(--gold);text-transform:uppercase;margin-bottom:8px;}
+  .ach-text h3{color:#fff;font-size:clamp(18px,2.6vw,24px);font-weight:900;margin-bottom:8px;}
+  .ach-text p{color:rgba(255,255,255,.75);font-size:13.5px;max-width:620px;}
+  @media(max-width:640px){.achievement-inner{text-align:center;justify-content:center;flex-direction:column;}}
+
   /* ---------- PAIN POINTS ---------- */
   .pain{padding:80px 24px 40px;}
   .pain-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:42px;}
@@ -146,17 +162,25 @@
 
   /* ---------- CURRICULUM ---------- */
   .curriculum{padding:88px 24px;}
-  .module{
-    display:grid;grid-template-columns:110px 1fr;gap:24px;
-    padding:26px 0;border-bottom:1px solid rgba(92,21,35,.1);
-    align-items:start;
+  .unit-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
+  .unit-card{
+    background:var(--white);border-radius:var(--radius);padding:28px 26px;
+    border:1.5px solid rgba(92,21,35,.1);box-shadow:var(--shadow-soft);
   }
-  .module:first-of-type{border-top:1px solid rgba(92,21,35,.1);}
-  .module .m-label{font-family:"Noto Serif TC",serif;font-weight:900;color:var(--gold);font-size:13px;letter-spacing:.1em;padding-top:4px;}
-  .module .m-label small{display:block;color:var(--text-soft);font-family:"Noto Sans TC",sans-serif;font-weight:500;font-size:11px;margin-top:4px;}
-  .module h4{font-size:17px;font-weight:700;margin-bottom:8px;color:var(--ink);}
-  .module p{font-size:13.5px;color:var(--text-soft);}
-  @media(max-width:600px){.module{grid-template-columns:1fr;gap:6px;}}
+  .unit-card .u-tag{
+    display:inline-block;font-size:11px;font-weight:700;letter-spacing:.1em;
+    color:var(--gold-deep,var(--gold));background:var(--blush);padding:4px 12px;border-radius:999px;margin-bottom:12px;
+  }
+  .unit-card h4{font-size:17px;font-weight:900;margin-bottom:14px;color:var(--ink);}
+  .unit-card ul{list-style:none;}
+  .unit-card li{
+    display:flex;gap:8px;font-size:13px;color:var(--text-soft);padding:6px 0;
+    border-bottom:1px dashed rgba(92,21,35,.1);
+  }
+  .unit-card li:last-child{border-bottom:none;}
+  .unit-card li b{color:var(--wine);font-family:"Noto Serif TC",serif;font-weight:900;flex:0 0 auto;}
+  .curriculum-note{text-align:center;font-size:12.5px;color:var(--text-soft);margin-top:30px;}
+  @media(max-width:900px){.unit-grid{grid-template-columns:1fr;}}
 
   /* ---------- AUDIENCE ---------- */
   .audience{padding:70px 24px;background:var(--wine-dark);color:#fff;}
@@ -193,6 +217,10 @@
     aspect-ratio:3/4;border-radius:14px;background:var(--white);
     border:1.5px dashed var(--wine-light);display:flex;align-items:center;justify-content:center;
     color:var(--wine-light);font-size:12px;text-align:center;padding:10px;
+  }
+  .g-photo{
+    width:100%;aspect-ratio:3/4;object-fit:cover;border-radius:14px;
+    box-shadow:var(--shadow-soft);
   }
   @media(max-width:760px){.gallery{grid-template-columns:repeat(2,1fr);}}
   .quotes{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
@@ -316,13 +344,24 @@
       <a class="btn btn-outline" href="https://instagram.com/chans.co" target="_blank" rel="noopener">看學員實際作品 →</a>
     </div>
     <div class="hero-stats">
-      <div class="stat"><b>6</b><span>大核心模組</span></div>
-      <div class="stat"><b>1:3</b><span>小班師生比</span></div>
-      <div class="stat"><b>2位</b><span>真人模特實作</span></div>
+      <div class="stat"><b>100+</b><span>位客人實戰成果</span></div>
+      <div class="stat"><b>3個月</b><span>創辦人實測紀錄</span></div>
+      <div class="stat"><b>15</b><span>大核心教學單元</span></div>
       <div class="stat"><b>終身</b><span>複訓無限次</span></div>
     </div>
   </div>
 </header>
+
+<section class="achievement">
+  <div class="wrap achievement-inner">
+    <div class="ach-num">100<span>+</span></div>
+    <div class="ach-text">
+      <div class="ach-label">真實市場驗證・非紙上談兵</div>
+      <h3>創辦人 3 個月內，親手完成 100+ 位客人霧唇</h3>
+      <p>這套課程教的不是理論推演，是 CHAN'S CO 創辦人在市場第一線跑出來的實戰成績——技術穩定度、接客效率與客訴應對能力，都經過真實客量淬鍊驗證。</p>
+    </div>
+  </div>
+</section>
 
 <section class="pain wrap">
   <div class="section-head">
@@ -350,41 +389,53 @@
     <div class="hl-card"><div class="hl-icon">03</div><h4>多種霧感技法</h4><p>漸層霧唇、奶茶唇、豆沙唇、咬唇妝，一次學會市場熱門風格。</p></div>
     <div class="hl-card"><div class="hl-icon">04</div><h4>感染控制 SOP</h4><p>正確消毒與耗材使用流程，安全衛生是專業的第一堂課。</p></div>
     <div class="hl-card"><div class="hl-icon">05</div><h4>術後修復與客訴</h4><p>掌握退冰期照護重點，妥善處理狀況，建立客人信任感。</p></div>
-    <div class="hl-card"><div class="hl-icon">06</div><h4>開業行銷與定價</h4><p>學會社群經營、定價策略與招生技巧，畢業即可接單變現。</p></div>
+    <div class="hl-card"><div class="hl-icon">06</div><h4>個人品牌與流量經營</h4><p>學會個人定位、社群內容策略與 CTA 設計，把追蹤者變成實際報名與預約。</p></div>
   </div>
 </section>
 
 <section class="curriculum wrap" id="curriculum">
   <div class="section-head">
     <span class="section-tag">課程大綱</span>
-    <h2 class="section-title">六大核心模組，從零到能接客</h2>
-    <p class="section-sub" style="margin:0 auto;">理論、實作、經營三階段循序漸進，每個模組都有老師全程一對一指導。</p>
+    <h2 class="section-title">15 堂核心單元，從零到能接客</h2>
+    <p class="section-sub" style="margin:0 auto;">理論、技術診斷、經營三大單元循序漸進，報名即附完整教案講義。</p>
   </div>
 
-  <div class="module">
-    <div class="m-label">MODULE<br>01<small>理論基礎</small></div>
-    <div><h4>唇部解剖結構與色彩學</h4><p>認識唇部肌肉與皮膚結構、色彩學三要素、膚況與代謝對掉色的影響，建立正確的專業知識地基。</p></div>
+  <div class="unit-grid">
+    <div class="unit-card">
+      <span class="u-tag">UNIT I</span>
+      <h4>理論基礎篇</h4>
+      <ul>
+        <li><b>01</b>霧唇原理</li>
+        <li><b>02</b>唇部肌膚特性</li>
+        <li><b>03</b>術前術後保養須知</li>
+        <li><b>04</b>唇形分區與設計</li>
+        <li><b>05</b>針具與工具規格</li>
+      </ul>
+    </div>
+    <div class="unit-card">
+      <span class="u-tag">UNIT II</span>
+      <h4>診斷與色彩技術篇</h4>
+      <ul>
+        <li><b>06</b>烏唇成因與矯正</li>
+        <li><b>07</b>唇況分類與判讀</li>
+        <li><b>08</b>烏唇轉色案例</li>
+        <li><b>09</b>色彩對衝學</li>
+        <li><b>10</b>正確上色判斷</li>
+      </ul>
+    </div>
+    <div class="unit-card">
+      <span class="u-tag">UNIT III</span>
+      <h4>操作規範與經營篇</h4>
+      <ul>
+        <li><b>11</b>操作注意事項</li>
+        <li><b>12</b>客人常見問題</li>
+        <li><b>13</b>禁忌症評估</li>
+        <li><b>14</b>耗材採購資源</li>
+        <li><b>15</b>個人品牌定位與流量經營</li>
+      </ul>
+    </div>
   </div>
-  <div class="module">
-    <div class="m-label">MODULE<br>02<small>工具耗材</small></div>
-    <div><h4>機器與耗材選用、感染控制</h4><p>機器與手工筆差異比較、針具與色料挑選原則，以及診所等級的消毒感控流程，安全是專業的前提。</p></div>
-  </div>
-  <div class="module">
-    <div class="m-label">MODULE<br>03<small>唇型設計</small></div>
-    <div><h4>黃金比例與術前溝通</h4><p>依臉型五官比例設計唇型、修飾大小唇不對稱，並學會術前需求溝通與版位標記技巧。</p></div>
-  </div>
-  <div class="module">
-    <div class="m-label">MODULE<br>04<small>上色實作</small></div>
-    <div><h4>多種霧感風格技法演練</h4><p>漸層霧唇、奶茶唇、豆沙唇、咬唇妝等各種市場熱門風格，老師示範後逐步帶做，抓穩下針力道與速度。</p></div>
-  </div>
-  <div class="module">
-    <div class="m-label">MODULE<br>05<small>活人實作</small></div>
-    <div><h4>真人模特兒實作演練</h4><p>小班制 1:3 師生比，安排 2 位真人模特兒實作，老師全程站台一對一糾正，實戰經驗現場累積。</p></div>
-  </div>
-  <div class="module">
-    <div class="m-label">MODULE<br>06<small>開業經營</small></div>
-    <div><h4>定價策略與社群招生</h4><p>術後修復與客訴應對、作品集拍攝與社群曝光技巧、定價策略與方案設計，畢業立即能上手接單。</p></div>
-  </div>
+  <p class="curriculum-note">完整教案講義將於報名後提供，內容持續更新維護</p>
 </section>
 
 <section class="audience">
@@ -409,12 +460,12 @@
       <span class="eyebrow">主理講師</span>
       <h3>CHAN 陳老師</h3>
       <div class="title">CHAN'S CO 創辦人 ｜ 霧唇 · 紋繡美學導師</div>
-      <p>深耕美業紋繡領域多年，累積大量實際操作經驗，擅長漸層霧唇、奶茶唇與術後修復處理。堅持小班制教學，親自把關每位學員的手法與作品品質，致力於培養真正能獨立接客的專業人才。</p>
+      <p>深耕美業紋繡領域，<b style="color:var(--wine);">3 個月內親手完成超過 100 位客人的霧唇施作</b>，是真正在市場第一線跑出來的實戰成績，而非紙上談兵的教學。擅長漸層霧唇、奶茶唇與術後修復處理，堅持小班制教學，親自把關每位學員的手法與作品品質，致力於培養真正能獨立接客的專業人才。</p>
       <div class="ins-tags">
+        <span>3個月100+位客人實戰</span>
         <span>漸層霧唇專長</span>
         <span>術後修復經驗</span>
         <span>小班制教學</span>
-        <span>開業輔導</span>
       </div>
     </div>
   </div>
@@ -428,10 +479,10 @@
       <p class="section-sub" style="margin:0 auto;">以下為預留版位，建議放上學員實際完成的前後對比照，增加信任感與說服力。</p>
     </div>
     <div class="gallery">
-      <div class="g-item">作品照片 01<br>（術前 / 術後）</div>
-      <div class="g-item">作品照片 02<br>（術前 / 術後）</div>
-      <div class="g-item">作品照片 03<br>（術前 / 術後）</div>
-      <div class="g-item">作品照片 04<br>（術前 / 術後）</div>
+      <img class="g-photo" src="assets/results/lip-result-01.jpg" alt="霧唇成品照 01" loading="lazy">
+      <img class="g-photo" src="assets/results/lip-result-02.jpg" alt="霧唇成品照 02" loading="lazy">
+      <img class="g-photo" src="assets/results/lip-result-03.jpg" alt="霧唇操作過程照 03" loading="lazy">
+      <img class="g-photo" src="assets/results/lip-result-04.jpg" alt="霧唇操作過程照 04" loading="lazy">
     </div>
     <div class="quotes">
       <div class="quote-card">
