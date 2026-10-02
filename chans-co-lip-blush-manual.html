@@ -114,6 +114,15 @@
     background:var(--blush);border:1.5px dashed var(--wine-soft);border-radius:14px;
     padding:38px 20px;text-align:center;color:var(--wine-mid);font-size:12.5px;margin:18px 0;
   }
+  .result-gallery{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:18px 0 6px;
+  }
+  .result-gallery img{
+    width:100%;height:100%;aspect-ratio:3/4;object-fit:cover;border-radius:12px;
+    box-shadow:0 8px 20px -10px rgba(60,13,23,.35);
+  }
+  .caption-note{font-size:11.5px;color:var(--text-soft);text-align:center;margin-bottom:18px;}
+  @media(max-width:640px){.result-gallery{grid-template-columns:repeat(2,1fr);}}
   table{width:100%;border-collapse:collapse;margin:16px 0;font-size:13.5px;}
   th,td{border:1px solid var(--line);padding:11px 14px;text-align:left;}
   th{background:var(--blush);color:var(--wine);font-weight:700;}
@@ -254,7 +263,13 @@
 
       <div class="callout"><b>重點提醒：</b>霧唇屬於半永久性彩妝，效果會隨新陳代謝逐漸變淺，一般建議每隔一段時間安排補色保養，以維持最佳呈色效果。務必於術前向客人清楚說明「半永久」的定義，避免客人誤解為永久不掉色。</div>
 
-      <div class="img-placeholder">〔圖片版位〕成品示意照／術前術後對比照<br>建議放置：唇色漸層特寫、多款色號試色照</div>
+      <div class="result-gallery">
+        <img src="assets/results/lip-result-01.jpg" alt="霧唇成品特寫 01" loading="lazy">
+        <img src="assets/results/lip-result-02.jpg" alt="霧唇成品特寫 02" loading="lazy">
+        <img src="assets/results/lip-result-03.jpg" alt="霧唇操作過程特寫 03" loading="lazy">
+        <img src="assets/results/lip-result-04.jpg" alt="霧唇操作過程特寫 04" loading="lazy">
+      </div>
+      <p class="caption-note">CHAN'S CO 霧唇成品實拍（已進行基礎修圖美化）</p>
 
       <div class="recap"><b>本節重點整理</b>
         <ul>
