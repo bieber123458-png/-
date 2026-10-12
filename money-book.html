@@ -8,37 +8,44 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="記帳本">
 <meta name="mobile-web-app-capable" content="yes">
-<meta name="theme-color" content="#F6F3EE">
+<meta name="theme-color" content="#EEF2F5">
 <link rel="icon" id="appIcon" href="">
 <link rel="apple-touch-icon" id="appTouchIcon" href="">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Chiron+GoRound+TC:wght@400;500;700&family=Huninn&display=swap" rel="stylesheet">
 <style>
-/* 版面：單欄手機 App，底部分頁列 + 浮動記帳鈕；卡片只用在可點的物件上 */
+/* 版面：單欄手機 App，底部分頁列 + 浮動記帳鈕；摩蘭迪寶寶藍、圓體字、吉祥物「小霧」 */
 :root{
-  --bg:#F6F3EE; --card:#FFFFFF; --ink:#2F2C28; --muted:#8A847B; --line:#E7E1D7;
-  --accent:#A6916B; --accent-soft:#EFE7D8; --on-accent:#FFFFFF;
-  --exp:#C0605A; --exp-soft:#F7E4E2; --inc:#4E8B6A; --inc-soft:#DEEFE5;
-  --warn:#B07A22; --warn-soft:#F6EBD3;
-  --radius:18px; --shadow:0 4px 18px rgba(80,64,40,.08);
-  --font:'Noto Sans TC',-apple-system,'PingFang TC','Microsoft JhengHei',sans-serif;
+  --bg:#EEF2F5; --card:#FBFCFD; --ink:#3E4A57; --muted:#8C98A4; --line:#DDE4EA;
+  --accent:#8FAAC3; --accent-deep:#6F8CA8; --accent-soft:#E2EAF1; --on-accent:#FFFFFF;
+  --exp:#C48E8E; --exp-soft:#F4E7E7; --inc:#86A797; --inc-soft:#E3EEE8;
+  --warn:#C2A273; --warn-soft:#F4EDE1;
+  --mascot:#AFC6DA; --mascot-ear:#97B3CB; --blush:#EEC5C5; --eye:#3E4A57;
+  --face:#FCFDFE; --r-n:#A9B7C4; --r-r:#93B8B2; --r-sr:#AFA2C6; --r-ssr:#CDB48A;
+  --radius:20px; --shadow:0 6px 20px rgba(80,110,140,.10);
+  --font:'Chiron GoRound TC','PingFang TC','Microsoft JhengHei',sans-serif;
+  --font-d:'Huninn','Chiron GoRound TC','PingFang TC',sans-serif;
 }
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
-    --bg:#1B1A18; --card:#262421; --ink:#EEE9E1; --muted:#9C958A; --line:#3A3632;
-    --accent:#C9B48C; --accent-soft:#3A3428; --on-accent:#1B1A18;
-    --exp:#E08A82; --exp-soft:#3D2725; --inc:#7DC09A; --inc-soft:#21352A;
-    --warn:#E0B565; --warn-soft:#3A311F;
-    --shadow:0 4px 18px rgba(0,0,0,.3); color-scheme:dark;
+    --bg:#1E242B; --card:#28303A; --ink:#E6ECF1; --muted:#93A0AD; --line:#36404B;
+    --accent:#A9C1D6; --accent-deep:#BFD2E2; --accent-soft:#33404D; --on-accent:#1E242B;
+    --exp:#D9A3A3; --exp-soft:#3E2F33; --inc:#A3C2B3; --inc-soft:#2A3A35;
+    --warn:#D8BC90; --warn-soft:#3D3628;
+    --mascot:#9DB8CF; --mascot-ear:#87A5BF; --blush:#D9A9A9;
+    --face:#2C3540;
+    --shadow:0 6px 20px rgba(0,0,0,.35); color-scheme:dark;
   }
 }
 :root[data-theme="dark"]{
-  --bg:#1B1A18; --card:#262421; --ink:#EEE9E1; --muted:#9C958A; --line:#3A3632;
-  --accent:#C9B48C; --accent-soft:#3A3428; --on-accent:#1B1A18;
-  --exp:#E08A82; --exp-soft:#3D2725; --inc:#7DC09A; --inc-soft:#21352A;
-  --warn:#E0B565; --warn-soft:#3A311F;
-  --shadow:0 4px 18px rgba(0,0,0,.3); color-scheme:dark;
+  --bg:#1E242B; --card:#28303A; --ink:#E6ECF1; --muted:#93A0AD; --line:#36404B;
+  --accent:#A9C1D6; --accent-deep:#BFD2E2; --accent-soft:#33404D; --on-accent:#1E242B;
+  --exp:#D9A3A3; --exp-soft:#3E2F33; --inc:#A3C2B3; --inc-soft:#2A3A35;
+  --warn:#D8BC90; --warn-soft:#3D3628;
+  --mascot:#9DB8CF; --mascot-ear:#87A5BF; --blush:#D9A9A9;
+  --face:#2C3540;
+  --shadow:0 6px 20px rgba(0,0,0,.35); color-scheme:dark;
 }
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
 html,body{margin:0;padding:0;}
@@ -55,7 +62,7 @@ input,select,textarea{font-family:inherit;font-size:16px;color:var(--ink);}
 
 /* header */
 .top{display:flex;align-items:center;justify-content:space-between;padding:calc(14px + env(safe-area-inset-top)) 0 4px;}
-.top h1{font-size:22px;font-weight:900;margin:0;letter-spacing:.02em;}
+.top h1{font-family:var(--font-d);font-size:24px;font-weight:400;margin:0;letter-spacing:.04em;}
 .icon-btn{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;font-size:17px;background:var(--card);box-shadow:var(--shadow);}
 .month-nav{display:flex;align-items:center;justify-content:space-between;margin-top:8px;}
 .month-nav button.m{font-size:17px;font-weight:700;padding:6px 12px;border-radius:10px;}
@@ -87,7 +94,7 @@ input,select,textarea{font-family:inherit;font-size:16px;color:var(--ink);}
 /* summary */
 .summary{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px;margin-top:12px;}
 .summary .label{font-size:13px;color:var(--muted);}
-.summary .big-v{font-size:32px;font-weight:900;margin:2px 0 12px;}
+.summary .big-v{font-family:var(--font-d);font-size:34px;font-weight:400;margin:2px 0 12px;}
 .pills{display:flex;gap:10px;}
 .pill{flex:1;border-radius:12px;padding:10px 12px;min-width:0;}
 .pill.exp{background:var(--exp-soft);} .pill.inc{background:var(--inc-soft);}
@@ -125,6 +132,82 @@ input,select,textarea{font-family:inherit;font-size:16px;color:var(--ink);}
 .rank .bar{height:6px;margin-top:5px;}
 .chart svg{width:100%;height:auto;display:block;}
 
+/* mascot + greeting */
+.mascot svg{display:block;}
+.greet{display:flex;align-items:flex-end;gap:10px;margin-top:10px;}
+.greet .mascot{flex:none;animation:bob 3.2s ease-in-out infinite;}
+.bubble{position:relative;background:var(--card);border-radius:16px 16px 16px 4px;padding:9px 13px;box-shadow:var(--shadow);font-family:var(--font-d);font-size:14px;line-height:1.5;min-width:0;}
+.bubble small{display:block;font-family:var(--font);font-size:12px;color:var(--muted);}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+
+/* daily card widget */
+.daily{display:flex;align-items:center;gap:14px;width:100%;text-align:left;margin-top:14px;padding:14px;border-radius:var(--radius);
+  background:linear-gradient(135deg,var(--accent-soft),var(--card));box-shadow:var(--shadow);}
+.daily .mini-back{width:46px;height:64px;border-radius:9px;flex:none;display:grid;place-items:center;font-size:20px;color:#fff;
+  background:radial-gradient(circle at 30% 25%,rgba(255,255,255,.45) 0 6%,transparent 7%),linear-gradient(150deg,var(--mascot),var(--accent-deep));box-shadow:0 4px 10px rgba(111,140,168,.35);}
+.daily.ready .mini-back{animation:wiggle 1.6s ease-in-out infinite;}
+.daily.locked .mini-back{filter:grayscale(.5);opacity:.6;}
+.daily .mini-face{width:46px;height:64px;border-radius:9px;flex:none;display:grid;place-items:center;font-size:26px;background:var(--face);border:2px solid var(--rc,var(--r-n));}
+.daily .tx1{font-family:var(--font-d);font-size:16px;}
+.daily .tx2{font-size:12px;color:var(--muted);margin-top:2px;line-height:1.5;}
+.daily .go{margin-left:auto;flex:none;}
+@keyframes wiggle{0%,100%{transform:rotate(0)}20%{transform:rotate(-6deg)}40%{transform:rotate(5deg)}60%{transform:rotate(-3deg)}}
+
+/* draw overlay */
+.draw-ov{position:fixed;inset:0;z-index:80;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;
+  padding:calc(20px + env(safe-area-inset-top)) 16px calc(20px + env(safe-area-inset-bottom));
+  background:rgba(40,55,70,.55);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);overflow-y:auto;}
+.draw-ov .hint{color:#fff;font-family:var(--font-d);font-size:16px;text-align:center;text-shadow:0 1px 6px rgba(0,0,0,.25);}
+.flip{perspective:1200px;width:min(310px,86vw);}
+.flip-in{display:grid;transition:transform .9s cubic-bezier(.3,1.3,.5,1);transform-style:preserve-3d;}
+.flip-in.flipped{transform:rotateY(180deg);}
+.flip-in > *{grid-area:1/1;-webkit-backface-visibility:hidden;backface-visibility:hidden;}
+.flip-in .tcard{transform:rotateY(180deg);}
+.flip.idle .flip-in{animation:float 3s ease-in-out infinite;}
+@keyframes float{0%,100%{transform:translateY(0) rotate(-1deg)}50%{transform:translateY(-10px) rotate(1deg)}}
+.cback{border-radius:22px;min-height:440px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;cursor:pointer;color:#fff;
+  background:radial-gradient(circle,rgba(255,255,255,.22) 1.5px,transparent 2px) 0 0/18px 18px,linear-gradient(155deg,#B7CCDD,#8FAAC3 55%,#7896B3);
+  box-shadow:0 18px 40px rgba(30,50,70,.35),inset 0 0 0 8px rgba(255,255,255,.25);font-family:var(--font-d);}
+.cback .ring{width:150px;height:150px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.22);box-shadow:0 0 0 2px rgba(255,255,255,.5),0 0 0 12px rgba(255,255,255,.12);}
+.cback .t{font-size:20px;letter-spacing:.2em;}
+.cback .s{font-size:13px;opacity:.85;letter-spacing:.1em;}
+.tcard{border-radius:22px;background:var(--face);color:var(--ink);padding:16px 18px 18px;box-shadow:0 18px 40px rgba(30,50,70,.35),inset 0 0 0 3px var(--rc);min-height:440px;
+  display:flex;flex-direction:column;gap:10px;position:relative;overflow:hidden;}
+.tcard.SSR{box-shadow:0 18px 40px rgba(30,50,70,.35),inset 0 0 0 3px var(--rc),0 0 30px rgba(205,180,138,.6);}
+.tcard.SSR::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(115deg,transparent 30%,rgba(255,255,255,.55) 45%,transparent 60%);background-size:250% 100%;animation:shine 3.5s ease-in-out infinite;}
+@keyframes shine{0%{background-position:150% 0}100%{background-position:-100% 0}}
+.tc-top{display:flex;justify-content:space-between;align-items:center;font-size:12px;color:var(--muted);}
+.rar{font-weight:700;color:#fff;background:var(--rc);padding:3px 10px;border-radius:99px;letter-spacing:.05em;}
+.tc-art{position:relative;height:120px;border-radius:16px;display:grid;place-items:center;
+  background:radial-gradient(circle at 50% 60%,color-mix(in srgb,var(--rc) 35%,transparent),transparent 65%),var(--accent-soft);}
+.tc-art .em{font-size:64px;filter:drop-shadow(0 6px 8px rgba(0,0,0,.12));animation:bob 3s ease-in-out infinite;}
+.tc-art .sp{position:absolute;color:var(--rc);font-size:14px;animation:twinkle 2.4s ease-in-out infinite;}
+@keyframes twinkle{0%,100%{opacity:.3;transform:scale(.8)}50%{opacity:1;transform:scale(1.15)}}
+.tc-title{font-family:var(--font-d);font-size:22px;text-align:center;letter-spacing:.06em;}
+.tc-msg{font-family:var(--font-d);font-size:15px;line-height:1.75;margin:0;text-align:center;}
+.tc-read{background:var(--accent-soft);border-radius:14px;padding:10px 12px;font-size:13px;line-height:1.7;}
+.tc-read b{display:block;font-size:12px;color:var(--accent-deep);margin-bottom:2px;letter-spacing:.1em;}
+.tc-foot{display:flex;justify-content:space-between;gap:8px;font-size:12px;color:var(--muted);align-items:center;flex-wrap:wrap;}
+.tc-foot i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:4px;vertical-align:-1px;box-shadow:0 0 0 1px rgba(0,0,0,.08);}
+.tc-task{font-size:13px;}
+.burst{position:fixed;left:50%;top:50%;width:0;height:0;pointer-events:none;z-index:81;}
+.burst span{position:absolute;font-size:16px;color:#fff;animation:pop 1s ease-out forwards;}
+@keyframes pop{0%{transform:translate(0,0) scale(.4);opacity:1}100%{transform:translate(var(--dx),var(--dy)) scale(1.1);opacity:0}}
+.draw-ov .acts{display:flex;gap:10px;}
+.draw-ov .btn{background:rgba(255,255,255,.9);color:#3E4A57;}
+.draw-ov .btn.primary{background:#fff;}
+
+/* album */
+.album{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}
+.mc{aspect-ratio:3/4;max-width:100%;border-radius:14px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;padding:6px;
+  background:var(--face);box-shadow:var(--shadow),inset 0 0 0 2px var(--rc);font-size:12px;text-align:center;}
+.mc .e{font-size:30px;}
+.mc .n{font-family:var(--font-d);font-size:13px;line-height:1.3;}
+.mc .r{font-size:10px;font-weight:700;color:var(--rc);}
+.mc.lock{background:var(--accent-soft);box-shadow:none;color:var(--muted);}
+.mc.lock .e{font-size:22px;opacity:.5;}
+@media (prefers-reduced-motion: reduce){ .greet .mascot,.flip.idle .flip-in,.tc-art .em,.tc-art .sp,.daily.ready .mini-back,.tcard.SSR::after{animation:none !important;} .flip-in{transition:none;} }
+
 /* assets page */
 .eq{font-size:13px;color:var(--muted);margin:-6px 0 12px;}
 .ratio{display:flex;height:10px;border-radius:99px;overflow:hidden;background:var(--line);gap:2px;}
@@ -133,7 +216,7 @@ input,select,textarea{font-family:inherit;font-size:16px;color:var(--ink);}
 .ratio-meta{display:flex;justify-content:space-between;font-size:12px;margin-top:6px;font-weight:700;}
 .block-head{display:flex;align-items:baseline;justify-content:space-between;gap:8px;margin:26px 4px 8px;}
 .block-head h2{font-size:16px;margin:0;}
-.block-head b{font-size:20px;font-weight:900;}
+.block-head b{font-family:var(--font-d);font-size:21px;font-weight:400;}
 .block-head .add{font-size:13px;font-weight:700;color:var(--accent);padding:4px 0;}
 .comp{padding:14px 14px 4px;}
 .comp .ratio{height:12px;}
@@ -195,11 +278,11 @@ nav.tabs{position:fixed;left:0;right:0;bottom:0;background:var(--card);border-to
   padding:6px 0 calc(6px + env(safe-area-inset-bottom));z-index:20;}
 nav.tabs .in{max-width:560px;margin:0 auto;display:flex;align-items:center;}
 nav.tabs button{flex:1;display:flex;flex-direction:column;align-items:center;font-size:11px;color:var(--muted);padding:4px 0;gap:2px;}
-nav.tabs button .e{font-size:20px;filter:grayscale(1);opacity:.6;}
+nav.tabs button .e{font-size:20px;filter:grayscale(.6);opacity:.55;transition:transform .2s;}
 nav.tabs button.on{color:var(--ink);font-weight:700;}
-nav.tabs button.on .e{filter:none;opacity:1;}
+nav.tabs button.on .e{filter:none;opacity:1;transform:translateY(-2px) scale(1.08);}
 nav.tabs .fab{width:56px;height:56px;border-radius:50%;background:var(--accent);display:grid;place-items:center;padding:0;flex:none;
-  margin:-26px 6px 0;box-shadow:0 6px 18px rgba(166,145,107,.45);}
+  margin:-26px 6px 0;background:linear-gradient(145deg,var(--mascot),var(--accent-deep));box-shadow:0 8px 20px rgba(111,140,168,.45);}
 nav.tabs .fab path{stroke:var(--on-accent);}
 
 /* sheets */
@@ -217,7 +300,7 @@ nav.tabs .fab path{stroke:var(--on-accent);}
 .sheet-head .grab{margin:0;}
 .sheet-head .link{font-size:14px;font-weight:700;color:var(--muted);padding:4px 2px;justify-self:start;}
 .sheet-head .del{justify-self:end;color:var(--exp);}
-.amt-disp{flex:1;min-width:0;font-size:34px;font-weight:900;text-align:right;white-space:nowrap;overflow-x:auto;min-height:46px;line-height:46px;}
+.amt-disp{flex:1;min-width:0;font-family:var(--font-d);font-size:36px;font-weight:400;text-align:right;white-space:nowrap;overflow-x:auto;min-height:46px;line-height:46px;}
 .amt-disp.ph{color:var(--muted);}
 .amt-disp.exp{color:var(--exp);} .amt-disp.inc{color:var(--inc);}
 .keypad{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:50px;gap:6px;margin-top:12px;}
@@ -270,6 +353,7 @@ nav.tabs .fab path{stroke:var(--on-accent);}
 
   <!-- 明細 -->
   <section id="page-list">
+    <div class="greet"><span class="mascot" id="greetMascot"></span><div class="bubble" id="greetText"></div></div>
     <div class="summary">
       <div class="label">本月結餘</div>
       <div class="big-v num" id="sumBal">0</div>
@@ -282,6 +366,7 @@ nav.tabs .fab path{stroke:var(--on-accent);}
         <div class="bar"><i id="budgetBar"></i></div>
       </div>
     </div>
+    <button class="daily" id="daily"></button>
     <input class="search" id="search" type="search" placeholder="🔍 搜尋備註、分類、帳戶…">
     <div id="txList"></div>
   </section>
@@ -325,6 +410,7 @@ nav.tabs .fab path{stroke:var(--on-accent);}
     <div class="seg" id="planSeg">
       <button data-v="goals" class="on">目標追蹤</button>
       <button data-v="wishes">願望清單</button>
+      <button data-v="album">療癒卡冊</button>
     </div>
     <div id="planBody"></div>
   </section>
@@ -423,13 +509,14 @@ nav.tabs .fab path{stroke:var(--on-accent);}
 <!-- 通用表單 / 確認視窗 -->
 <div class="sheet" id="esheet"><div class="in" id="esheetIn"></div></div>
 
+<div class="draw-ov hidden" id="drawOv" role="dialog" aria-modal="true" aria-label="今日療癒卡"></div>
 <div class="toast" id="toast"></div>
 
 <script>
 (function(){
 'use strict';
 const KEY = 'moneybook.v1';
-const PALETTE = ['#C9875E','#6F9FB8','#8FB07E','#D4A84B','#A889C2','#D27C8E','#5FA79B','#B39A7A'];
+const PALETTE = ['#8FAAC3','#D1A7A3','#A3B89C','#D5BC92','#AFA2C6','#93B8B2','#C9AE97','#A0AABF'];
 const COOL_DAYS = 30;
 const ASSET_TYPES = {cash:'現金', bank:'活存', saving:'存款', stock:'股票投資', biz:'創業', other:'其他資產'};
 const LIAB_TYPES = {card:'信用卡', mortgage:'房貸', car:'車貸', student:'學貸', loan:'信貸', personal:'親友借款', other:'其他負債'};
@@ -460,6 +547,7 @@ const DEFAULT = {
     {id:'card',name:'信用卡',icon:'💳',kind:'liability',type:'card',init:0}
   ],
   goals: [],
+  cards: {},
   wishes: [],
   budget: 0,
   theme: 'auto'
@@ -575,9 +663,13 @@ function makeIcon(){
   try {
     const c = document.createElement('canvas'); c.width = c.height = 180;
     const x = c.getContext('2d');
-    x.fillStyle = '#A6916B'; x.fillRect(0,0,180,180);
-    x.font = '110px sans-serif'; x.textAlign = 'center'; x.textBaseline = 'middle';
-    x.fillText('📒', 90, 98);
+    const circ = (cx, cy, r, c) => { x.fillStyle = c; x.beginPath(); x.arc(cx, cy, r, 0, Math.PI * 2); x.fill(); };
+    x.fillStyle = '#E2EAF1'; x.fillRect(0,0,180,180);
+    circ(52, 58, 24, '#97B3CB'); circ(128, 58, 24, '#97B3CB');
+    x.fillStyle = '#AFC6DA'; x.beginPath(); x.ellipse(90, 100, 68, 56, 0, 0, Math.PI * 2); x.fill();
+    circ(70, 96, 7, '#3E4A57'); circ(110, 96, 7, '#3E4A57');
+    x.fillStyle = '#EEC5C5'; x.beginPath(); x.ellipse(54, 114, 11, 7, 0, 0, Math.PI * 2); x.ellipse(126, 114, 11, 7, 0, 0, Math.PI * 2); x.fill();
+    x.strokeStyle = '#3E4A57'; x.lineWidth = 4; x.lineCap = 'round'; x.beginPath(); x.moveTo(82, 112); x.quadraticCurveTo(90, 120, 98, 112); x.stroke();
     const url = c.toDataURL('image/png');
     $('appIcon').href = url; $('appTouchIcon').href = url;
   } catch(e) {}
@@ -613,6 +705,7 @@ function txRow(t){
 }
 
 function renderList(){
+  renderGreet(); renderDaily();
   let txs = txsOfMonth(view.y, view.m);
   const {exp, inc} = sums(txs);
   $('sumExp').textContent = money(exp);
@@ -639,7 +732,7 @@ function renderList(){
   if (!txs.length) {
     $('txList').innerHTML = q
       ? '<div class="empty"><div class="big">🔍</div>找不到符合的紀錄</div>'
-      : '<div class="empty"><div class="big">🌱</div>這個月還沒有紀錄<br>按下方 ＋ 記下第一筆吧</div>';
+      : '<div class="empty"><div class="mascot" style="display:inline-block">' + mascotSVG(80, 'normal') + '</div><br>這個月還沒有紀錄<br>按下方 ＋ 記下第一筆吧</div>';
     return;
   }
   const groups = {}, order = [];
@@ -654,7 +747,7 @@ function renderList(){
 }
 
 /* ----- 資產 ----- */
-const TYPE_COLORS = {cash:'#C9875E', bank:'#6F9FB8', saving:'#8FB07E', stock:'#D4A84B', biz:'#A889C2', other:'#B39A7A'};
+const TYPE_COLORS = {cash:'#D5BC92', bank:'#8FAAC3', saving:'#A3B89C', stock:'#D1A7A3', biz:'#AFA2C6', other:'#C9AE97'};
 function renderAssets(){
   const w = worth();
   $('netWorth').textContent = smoney(w.net);
@@ -802,7 +895,7 @@ function lineChart(pts){
 function goalSaved(g){ return g.acct ? Math.max(0, bal(findAcct(g.acct))) : (g.saved || 0); }
 function renderPlan(){
   document.querySelectorAll('#planSeg button').forEach(b => b.classList.toggle('on', b.dataset.v === view.plan));
-  view.plan === 'goals' ? renderGoals() : renderWishes();
+  view.plan === 'goals' ? renderGoals() : view.plan === 'wishes' ? renderWishes() : renderAlbum();
 }
 function renderGoals(){
   const goals = db.goals.slice().sort((a,b) => (goalSaved(a) >= a.target) - (goalSaved(b) >= b.target));
@@ -1185,6 +1278,7 @@ function submitTx(){
     toast('已更新');
   } else {
     rec.id = uid(); rec.ts = Date.now();
+    var firstToday = rec.date === todayStr() && !db.txs.some(x => x.date === rec.date) && !db.cards[rec.date];
     db.txs.push(rec);
     toast(rec.type === 'transfer' ? '已記下轉帳 $' + money(amt) : (rec.type === 'expense' ? '已記下支出 $' : '已記下收入 $') + money(amt));
   }
@@ -1192,6 +1286,7 @@ function submitTx(){
   save();
   if (view.page === 'list') { const d = parseD(rec.date); view.y = d.getFullYear(); view.m = d.getMonth(); }
   hideSheet('sheet'); render();
+  if (firstToday) setTimeout(openDraw, 450);
 }
 
 /* ----- 帳戶 / 負債編輯 ----- */
@@ -1313,6 +1408,241 @@ async function buyWish(w){
     onSaved: rec => { w.bought = rec.date; setTimeout(() => toast('願望實現 ✨ 已記下 $' + money(rec.amount)), 0); }});
 }
 
+/* ---------- 小霧 & 療癒卡 ---------- */
+function mascotSVG(size, mood){
+  const mouth = mood === 'wow' ? '<ellipse cx="50" cy="63" rx="4" ry="4.5" style="fill:var(--eye)"/>' : '<path d="M44 60 Q50 66 56 60" style="fill:none;stroke:var(--eye)" stroke-width="2.6" stroke-linecap="round"/>';
+  const eyes = mood === 'happy'
+    ? '<path d="M33 51 Q37 46 41 51 M59 51 Q63 46 67 51" style="fill:none;stroke:var(--eye)" stroke-width="2.8" stroke-linecap="round"/>'
+    : '<circle cx="37" cy="50" r="4.2" style="fill:var(--eye)"/><circle cx="63" cy="50" r="4.2" style="fill:var(--eye)"/><circle cx="38.5" cy="48.5" r="1.3" fill="#fff"/><circle cx="64.5" cy="48.5" r="1.3" fill="#fff"/>';
+  return '<svg width="' + size + '" height="' + Math.round(size * .9) + '" viewBox="0 0 100 90" aria-hidden="true">'
+    + '<circle cx="24" cy="22" r="13" style="fill:var(--mascot-ear)"/><circle cx="76" cy="22" r="13" style="fill:var(--mascot-ear)"/>'
+    + '<circle cx="24" cy="22" r="6" style="fill:var(--blush)"/><circle cx="76" cy="22" r="6" style="fill:var(--blush)"/>'
+    + '<ellipse cx="50" cy="53" rx="41" ry="34" style="fill:var(--mascot)"/>'
+    + eyes + '<ellipse cx="27" cy="61" rx="6.5" ry="3.8" style="fill:var(--blush)"/><ellipse cx="73" cy="61" rx="6.5" ry="3.8" style="fill:var(--blush)"/>' + mouth + '</svg>';
+}
+
+const RARITY = {N:{name:'日常', w:10, c:'var(--r-n)'}, R:{name:'溫柔', w:6, c:'var(--r-r)'}, SR:{name:'閃耀', w:3, c:'var(--r-sr)'}, SSR:{name:'奇蹟', w:1, c:'var(--r-ssr)'}};
+const LUCKY = [['霧藍','#A9C1D6'],['奶茶','#D9C3AE'],['燕麥','#E6DCC8'],['鼠尾草綠','#B5C4B1'],['乾燥玫瑰','#D7B2B0'],['薰衣草灰','#C3BBD3'],['雲朵白','#F2F2EE'],['杏仁','#E9D3BC']];
+// tags：any 通用｜save 花得剛好｜over 花多了｜nospend 零支出｜treat 犒賞自己｜small 小確幸｜saving 存錢｜debt 還款｜income 收入｜streak 連續 3 天｜streak7 連續 7 天｜goal 目標快達成｜first 第一天｜weekend 週末｜night 深夜
+const CARDS = [
+  {id:'c01', e:'🌤️', t:'慢慢來也沒關係', r:'N', tags:['any'], m:'錢包和心情一樣，都需要被溫柔地整理。你願意打開這裡，就已經在照顧自己了。', k:'喝一杯溫水，深呼吸三次'},
+  {id:'c02', e:'🧸', t:'小熊抱抱', r:'N', tags:['any','over'], m:'今天不管花了多少，都不代表你不夠好。記帳是在認識自己，不是在審判自己。', k:'對鏡子裡的自己說一句「辛苦了」'},
+  {id:'c03', e:'☁️', t:'輕輕的雲', r:'N', tags:['any'], m:'像雲一樣輕輕的就好。把今天的帳記下來，心裡的重量也跟著放下來。', k:'睡前把手機放遠一點'},
+  {id:'c04', e:'🍵', t:'一杯熱茶', r:'N', tags:['any','save'], m:'生活不需要每天都很精彩，平平穩穩的一天，也是很珍貴的一天。', k:'找 5 分鐘，什麼都不做'},
+  {id:'c05', e:'🌱', t:'悄悄發芽', r:'R', tags:['any','streak'], m:'每一筆紀錄都像一顆小種子。現在看不出差別，但它們正在土裡悄悄長大。', k:'看一眼這個月的存錢進度'},
+  {id:'c06', e:'🐚', t:'海邊的貝殼', r:'N', tags:['any'], m:'把注意力放在你已經擁有的東西上，你會發現，其實已經很多了。', k:'寫下今天一件值得感謝的小事'},
+  {id:'c07', e:'🌙', t:'晚安月亮', r:'R', tags:['night'], m:'這麼晚了還記得記帳，真的辛苦了。剩下的事明天再說，今天的你已經做得很好。', k:'現在就去休息吧'},
+  {id:'c08', e:'🧺', t:'週末野餐', r:'N', tags:['weekend'], m:'週末是拿來充電的。花錢讓自己快樂沒有錯，只要記得留一點給未來的自己。', k:'去曬十分鐘太陽'},
+  {id:'c09', e:'🍃', t:'微風', r:'N', tags:['any'], m:'不必和別人比較，你的步調，就是最適合你的步調。', k:'今天少滑一次社群'},
+  {id:'c10', e:'🐿️', t:'松鼠存糧', r:'R', tags:['save'], m:'你今天花得剛剛好，像小松鼠一樣把餘裕悄悄存起來。這份踏實，會一點一點變成安全感。', k:'把今天省下的零頭轉進存款帳戶'},
+  {id:'c11', e:'🎐', t:'風鈴', r:'N', tags:['save'], m:'收支平衡的聲音，聽起來就像風鈴一樣清脆。今天的你很穩。', k:'明天也來記一筆'},
+  {id:'c12', e:'💎', t:'小鑽石', r:'SR', tags:['save'], m:'節制不是委屈自己，而是把錢留給真正重要的事。今天你做到了。', k:'想想最近最想完成的一個願望'},
+  {id:'c13', e:'🫖', t:'暖暖茶壺', r:'R', tags:['over'], m:'今天花得比較多，沒關係的。偶爾的放縱也是生活的一部分，重要的是你有看見它。', k:'明天試著過一個「低消費日」'},
+  {id:'c14', e:'🌧️', t:'小雨過後', r:'N', tags:['over'], m:'下雨之後，總會有放晴的時候。這個月還很長，慢慢調整就好。', k:'看一下這個月剩下的預算'},
+  {id:'c15', e:'🧣', t:'溫暖圍巾', r:'R', tags:['over','treat'], m:'先別急著責怪自己。把帳記下來的你，已經比昨天更清楚錢都去了哪裡。', k:'把下一個想買的東西先放進願望清單'},
+  {id:'c16', e:'🕊️', t:'白鴿', r:'SR', tags:['nospend'], m:'零支出的一天！不是因為匱乏，而是因為你知道自己已經足夠。', k:'把今天想成存下了一杯咖啡'},
+  {id:'c17', e:'🌸', t:'安靜的花開', r:'R', tags:['nospend'], m:'什麼都沒花的日子，像花開一樣安靜又美好。', k:'送自己一個免費的小確幸：散步或聽一首歌'},
+  {id:'c18', e:'🎀', t:'蝴蝶結', r:'R', tags:['treat'], m:'你值得被好好寵愛，包括被你自己。買下它的同時，也謝謝那個努力賺錢的自己。', k:'好好使用今天帶回家的東西'},
+  {id:'c19', e:'🎈', t:'氣球', r:'N', tags:['treat'], m:'快樂很容易飄走，所以要好好抓住此刻。真正喜歡的東西，才值得帶回家。', k:'想想它會陪你多久'},
+  {id:'c20', e:'🧋', t:'甜甜的一杯', r:'N', tags:['small'], m:'一杯飲料的甜，是今天給自己的小獎勵。小確幸很好，只要不是每天都需要它就好。', k:'明天試試自己泡一杯茶'},
+  {id:'c21', e:'🍪', t:'小餅乾', r:'N', tags:['small'], m:'小小的花費加起來會變成大大的數字，但小小的快樂也是。找到你的平衡點吧。', k:'看一下這個月小額消費一共多少'},
+  {id:'c22', e:'🐷', t:'小豬撲滿', r:'SR', tags:['saving'], m:'今天你把錢存進了未來。未來的你，一定會想回來抱抱現在的你。', k:'幫存款帳戶取一個可愛的名字'},
+  {id:'c23', e:'🌻', t:'向日葵', r:'R', tags:['saving','goal'], m:'投資自己、存下未來，你正在慢慢長成一株會開花的向日葵。', k:'看看離目標還差多少'},
+  {id:'c24', e:'🔑', t:'自由的鑰匙', r:'SR', tags:['debt'], m:'每還一筆，身上的重量就少一點。你正在一步一步把自由拿回來。', k:'算算離還清還有幾個月'},
+  {id:'c25', e:'🪁', t:'風箏', r:'R', tags:['debt'], m:'還債的路也許很長，但你已經在往上飛了。', k:'為還清的那天想一個慶祝方式'},
+  {id:'c26', e:'🍀', t:'幸運草', r:'R', tags:['income'], m:'錢進來的日子，先謝謝自己的努力，再決定它要去哪裡。', k:'先把收入的 10% 存起來'},
+  {id:'c27', e:'🌈', t:'彩虹', r:'SR', tags:['income'], m:'你的付出都有被看見，這筆收入就是最好的證明。', k:'吃一頓好吃的，剩下的好好安排'},
+  {id:'c28', e:'🔥', t:'小火苗', r:'R', tags:['streak'], m:'連續記帳 {streak} 天了！這份持續，比任何數字都了不起。', k:'明天也來報到吧'},
+  {id:'c29', e:'🏆', t:'小小獎盃', r:'SSR', tags:['streak7'], m:'連續 {streak} 天的你，已經把記帳變成習慣了。這是最難的一步，而你做到了。', k:'截圖這張卡，記住現在的自己'},
+  {id:'c30', e:'🦄', t:'獨角獸', r:'SSR', tags:['streak7'], m:'堅持本身就是一種魔法。{streak} 天的紀錄，正悄悄改變你未來的方向。', k:'今晚早點睡，獎勵這麼棒的自己'},
+  {id:'c31', e:'⭐', t:'摘星星', r:'SSR', tags:['goal'], m:'「{goal}」已經完成 {goalPct}%！再往前一點點，就能摸到星星了。', k:'想像達成那天的畫面'},
+  {id:'c32', e:'🐣', t:'破殼而出', r:'SR', tags:['first'], m:'歡迎開始記帳旅程！每個理財高手，都是從記下第一筆開始的。', k:'明天再來記一筆，開始累積連續天數'},
+  {id:'c33', e:'🛁', t:'泡泡浴', r:'N', tags:['weekend'], m:'週末的心情很重要。允許自己放鬆，也別忘了週一的你需要一點預算。', k:'今晚泡個熱水澡'},
+  {id:'c34', e:'🌠', t:'流星', r:'SSR', tags:['any'], m:'你剛好抽到最稀有的一張。宇宙想告訴你：你正走在對的路上。', k:'許一個關於錢的小願望'},
+  {id:'c35', e:'🫧', t:'泡泡', r:'R', tags:['any','over'], m:'煩惱就像泡泡，靠近看很大，輕輕一碰就消失了。', k:'把一件擔心的事寫下來，然後放下'},
+  {id:'c36', e:'🍓', t:'酸酸甜甜', r:'N', tags:['any','small'], m:'日子酸酸甜甜的才好吃。今天也辛苦了。', k:'吃一點喜歡的水果'}
+];
+const PRIORITY = {streak7:8, goal:6, first:8, nospend:5, saving:5, debt:5, over:4, save:3, treat:4, small:3, income:4, streak:3, night:3, weekend:2};
+
+function streakDays(){
+  const days = new Set(db.txs.map(t => t.date));
+  let d = new Date(), n = 0;
+  if (!days.has(ymd(d))) d.setDate(d.getDate() - 1);
+  while (days.has(ymd(d))) { n++; d.setDate(d.getDate() - 1); }
+  return n;
+}
+// 讀取「今天」真實的紀錄，整理成卡片要用的線索
+function todayContext(){
+  const td = todayStr(), t = new Date(), hr = t.getHours(), dow = t.getDay();
+  const list = db.txs.filter(x => x.date === td);
+  const ex = list.filter(x => x.type === 'expense'), exp = ex.reduce((s,x) => s + x.amount, 0);
+  const inc = list.filter(x => x.type === 'income').reduce((s,x) => s + x.amount, 0);
+  const trs = list.filter(x => x.type === 'transfer');
+  const sv = trs.filter(x => { const b = findAcct(x.to); return b.kind !== 'liability' && (b.type === 'saving' || b.type === 'stock'); });
+  const dt = trs.filter(x => findAcct(x.to).kind === 'liability');
+  const dim = new Date(t.getFullYear(), t.getMonth() + 1, 0).getDate(), day = t.getDate();
+  const mk = td.slice(0,7);
+  const before = db.txs.filter(x => x.type === 'expense' && x.date.slice(0,7) === mk && x.date < td).reduce((s,x) => s + x.amount, 0);
+  const allow = db.budget > 0 ? Math.max(0, db.budget - before) / (dim - day + 1) : null;
+  const pastDays = db.txs.filter(x => x.type === 'expense' && x.date < td && x.date >= ymd(new Date(Date.now() - 60 * 86400000)));
+  const firstPast = pastDays.reduce((m,x) => x.date < m ? x.date : m, td);
+  const avg = pastDays.length ? pastDays.reduce((s,x) => s + x.amount, 0) / Math.max(7, daysBetween(firstPast, td)) : 0;
+  const byCat = {}; ex.forEach(x => byCat[x.cat] = (byCat[x.cat] || 0) + x.amount);
+  const topK = Object.keys(byCat).sort((a,b) => byCat[b] - byCat[a])[0];
+  const streak = streakDays();
+  const goal = db.goals.map(g => ({g, p: goalSaved(g) / g.target})).filter(o => o.p >= .7 && o.p < 1).sort((a,b) => b.p - a.p)[0];
+  const over = exp > 0 && (allow !== null ? exp > allow : avg > 0 && exp > avg * 1.5 && exp > 300);
+  const tags = new Set(['any']);
+  if (!ex.length) tags.add('nospend');
+  else if (over) tags.add('over'); else tags.add('save');
+  if (ex.some(x => (x.cat === 'shop' || x.cat === 'fun') && x.amount >= 1000)) tags.add('treat');
+  if (ex.some(x => x.cat === 'drink') || ex.filter(x => x.amount < 150).length >= 2) tags.add('small');
+  if (sv.length) tags.add('saving');
+  if (dt.length) tags.add('debt');
+  if (inc > 0) tags.add('income');
+  if (streak >= 3) tags.add('streak');
+  if (streak >= 7) tags.add('streak7');
+  if (goal) tags.add('goal');
+  if (db.txs.every(x => x.date === td)) tags.add('first');
+  if (dow === 0 || dow === 6) tags.add('weekend');
+  if (hr >= 22 || hr < 4) tags.add('night');
+  return {td, list, ex, exp, inc, sv, dt, allow, avg, byCat, topK, streak, goal, over, tags, dim, day};
+}
+function readingFor(c){
+  const out = [];
+  if (c.ex.length) {
+    const tc = findCat('expense', c.topK);
+    out.push('今天記了 ' + c.list.length + ' 筆，' + tc.icon + tc.name + '花最多（$' + money(c.byCat[c.topK]) + '）。');
+    if (c.allow !== null) {
+      if (c.exp <= c.allow) out.push('今天的可用額度是 $' + money(c.allow) + '，你只用了 $' + money(c.exp) + '，比自己想像的更有分寸。');
+      else {
+        const left = c.dim - c.day, rest = Math.max(0, db.budget - (txsOfMonth(new Date().getFullYear(), new Date().getMonth()).filter(x => x.type === 'expense').reduce((s,x) => s + x.amount, 0)));
+        out.push('比今天的可用額度多了 $' + money(c.exp - c.allow) + '。' + (left > 0 ? '接下來 ' + left + ' 天每天 $' + money(rest / left) + ' 以內，就能溫柔地拉回來。' : ''));
+      }
+    } else if (c.avg > 0) {
+      const r = c.exp / c.avg - 1;
+      out.push(Math.abs(r) < .15 ? '和你平常一天差不多（約 $' + money(c.avg) + '），很穩定。' : '比你平常一天的 $' + money(c.avg) + (r > 0 ? '多了 ' : '少了 ') + Math.round(Math.abs(r) * 100) + '%。');
+    }
+  } else out.push('今天沒有任何支出，錢包也一起放了一天假。');
+  if (c.inc > 0) out.push('還有 $' + money(c.inc) + ' 的收入入帳。');
+  if (c.sv.length) out.push('存了 $' + money(c.sv.reduce((s,x) => s + x.amount, 0)) + ' 到' + findAcct(c.sv[0].to).name + '。');
+  if (c.dt.length) out.push('還了 $' + money(c.dt.reduce((s,x) => s + x.amount, 0)) + ' 的' + findAcct(c.dt[0].to).name + '。');
+  if (c.streak >= 2) out.push('這是你連續記帳的第 ' + c.streak + ' 天。');
+  return out.join('');
+}
+function drawCard(){
+  const c = todayContext();
+  const recent = new Set(Object.keys(db.cards).filter(k => daysBetween(k, c.td) <= 7).map(k => db.cards[k].id));
+  const pool = [];
+  CARDS.forEach(card => {
+    const hit = card.tags.filter(tg => tg !== 'any' && c.tags.has(tg));
+    if (!hit.length && card.tags.indexOf('any') < 0) return;
+    let w = RARITY[card.r].w * (hit.length ? Math.max.apply(null, hit.map(tg => PRIORITY[tg] || 2)) : 1);
+    if (recent.has(card.id)) w *= .15;
+    pool.push([card, w]);
+  });
+  let x = Math.random() * pool.reduce((s,p) => s + p[1], 0), pick = pool[0][0];
+  for (const [card, w] of pool) { x -= w; if (x <= 0) { pick = card; break; } }
+  const msg = pick.m.replace(/\{streak\}/g, c.streak).replace(/\{goal\}/g, c.goal ? c.goal.g.name : '你的目標').replace(/\{goalPct\}/g, c.goal ? Math.round(c.goal.p * 100) : 80);
+  return {id: pick.id, msg, reading: readingFor(c), luck: Math.floor(Math.random() * LUCKY.length), at: Date.now()};
+}
+function cardById(id){ return CARDS.find(c => c.id === id) || CARDS[0]; }
+function cardFace(rec, date){
+  const c = cardById(rec.id), R = RARITY[c.r], L = LUCKY[rec.luck % LUCKY.length], no = CARDS.indexOf(c) + 1;
+  const d = parseD(date);
+  return '<div class="tcard ' + c.r + '" style="--rc:' + R.c + '">'
+    + '<div class="tc-top"><span class="rar">' + c.r + '・' + R.name + '</span><span>No.' + pad(no) + ' · ' + (d.getMonth()+1) + '/' + d.getDate() + '</span></div>'
+    + '<div class="tc-art"><span class="sp" style="left:18%;top:20%">✦</span><span class="sp" style="right:16%;top:28%;animation-delay:.8s">✧</span><span class="sp" style="left:28%;bottom:16%;animation-delay:1.4s">✧</span><span class="em">' + c.e + '</span></div>'
+    + '<div class="tc-title">' + esc(c.t) + '</div>'
+    + '<p class="tc-msg">' + esc(rec.msg || c.m) + '</p>'
+    + '<div class="tc-read"><b>✦ 今日解讀</b>' + esc(rec.reading) + '</div>'
+    + '<div class="tc-task">🫶 小任務：' + esc(c.k) + '</div>'
+    + '<div class="tc-foot"><span><i style="background:' + L[1] + '"></i>幸運色：' + L[0] + '</span><span>小霧的療癒卡</span></div>'
+    + '</div>';
+}
+function burst(){
+  if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const b = document.createElement('div'); b.className = 'burst';
+  const chars = ['✦','✧','♡','✿','⋆'];
+  for (let i = 0; i < 18; i++) {
+    const a = Math.random() * Math.PI * 2, r = 120 + Math.random() * 110, sp = document.createElement('span');
+    sp.textContent = chars[i % chars.length];
+    sp.style.setProperty('--dx', Math.cos(a) * r + 'px'); sp.style.setProperty('--dy', Math.sin(a) * r + 'px');
+    sp.style.animationDelay = Math.random() * .15 + 's';
+    b.appendChild(sp);
+  }
+  document.body.appendChild(b); setTimeout(() => b.remove(), 1300);
+}
+function openDraw(){
+  const td = todayStr();
+  if (db.cards[td]) return showCard(db.cards[td], td);
+  if (!db.txs.some(t => t.date === td)) { toast('今天記一筆，就能抽今日療癒卡'); return; }
+  const ov = $('drawOv');
+  ov.innerHTML = '<div class="hint">今天也有好好記帳，給你一張療癒卡 ♡<br><small style="font-size:13px;opacity:.85">點一下卡片翻開</small></div>'
+    + '<div class="flip idle" id="flip"><div class="flip-in" id="flipIn"><div class="cback" id="cback"><div class="ring">' + mascotSVG(96, 'happy') + '</div><div class="t">今日療癒卡</div><div class="s">TAP TO OPEN</div></div><div id="cfront" style="pointer-events:none"></div></div></div>'
+    + '<div class="acts hidden" id="drawActs"><button class="btn primary" id="drawDone">收進卡冊 ♡</button></div>';
+  ov.classList.remove('hidden');
+  let opened = false;
+  const open = () => {
+    if (opened) return; opened = true;
+    const rec = drawCard(); db.cards[td] = rec; save();
+    $('cfront').outerHTML = cardFace(rec, td);
+    $('flip').classList.remove('idle');
+    requestAnimationFrame(() => $('flipIn').classList.add('flipped'));
+    setTimeout(() => { burst(); $('drawActs').classList.remove('hidden'); ov.querySelector('.hint').innerHTML = cardById(rec.id).r === 'SSR' ? '✨ 抽到奇蹟卡了！✨' : '這是小霧今天想對你說的話'; }, 650);
+  };
+  $('flip').onclick = open;
+  $('drawDone').onclick = () => { closeDraw(); toast('已收進療癒卡冊 ♡'); };
+}
+function showCard(rec, date){
+  const ov = $('drawOv');
+  ov.innerHTML = '<div class="flip">' + cardFace(rec, date).replace('class="tcard', 'style="width:100%" class="tcard') + '</div><div class="acts"><button class="btn primary" id="drawDone">關閉</button></div>';
+  ov.querySelector('.tcard').style.transform = 'none';
+  ov.classList.remove('hidden');
+  $('drawDone').onclick = closeDraw;
+}
+function closeDraw(){ $('drawOv').classList.add('hidden'); $('drawOv').innerHTML = ''; render(); }
+$('drawOv').addEventListener('click', e => { if (e.target.id === 'drawOv' && $('drawActs') === null) closeDraw(); });
+
+function renderGreet(){
+  const h = new Date().getHours(), st = streakDays();
+  const g = h < 5 ? '夜深了，記完帳就早點睡吧' : h < 11 ? '早安！今天也一起好好生活' : h < 14 ? '午安～記得吃飯和喝水喔' : h < 18 ? '下午好，休息一下再繼續' : h < 22 ? '晚上好，今天辛苦了' : '夜深了，記完帳就早點睡吧';
+  const recorded = db.txs.some(t => t.date === todayStr());
+  $('greetMascot').innerHTML = mascotSVG(52, recorded ? 'happy' : 'normal');
+  $('greetText').innerHTML = esc(g) + '<small>' + (st ? '連續記帳 ' + st + ' 天 🔥' + (recorded ? '' : '，今天也來記一筆吧') : '記下今天的第一筆，就能抽療癒卡') + '</small>';
+}
+function renderDaily(){
+  const td = todayStr(), rec = db.cards[td], has = db.txs.some(t => t.date === td), el = $('daily');
+  const total = new Set(Object.values(db.cards).map(c => c.id)).size;
+  if (rec) {
+    const c = cardById(rec.id);
+    el.className = 'daily done';
+    el.innerHTML = '<span class="mini-face" style="--rc:' + RARITY[c.r].c + '">' + c.e + '</span><span class="main"><div class="tx1">今日卡片：' + esc(c.t) + '</div><div class="tx2">' + c.r + '・' + RARITY[c.r].name + '　點開再看一次 · 卡冊 ' + total + '/' + CARDS.length + '</div></span>';
+  } else if (has) {
+    el.className = 'daily ready';
+    el.innerHTML = '<span class="mini-back">✦</span><span class="main"><div class="tx1">今日療癒卡已解鎖！</div><div class="tx2">點我抽卡，看看小霧想對你說什麼</div></span><span class="btn sm primary go">抽卡</span>';
+  } else {
+    el.className = 'daily locked';
+    el.innerHTML = '<span class="mini-back">🔒</span><span class="main"><div class="tx1">今日療癒卡</div><div class="tx2">記下今天的第一筆，就能抽一張卡</div></span><span class="btn sm go">記一筆</span>';
+  }
+}
+function renderAlbum(){
+  const got = {}; Object.keys(db.cards).sort().forEach(k => { got[db.cards[k].id] = k; });
+  const n = Object.keys(got).length;
+  const recent = Object.keys(db.cards).sort().reverse().slice(0, 5);
+  let h = '<div class="sec-head"><h2>療癒卡冊</h2><span class="muted num">已收集 ' + n + ' / ' + CARDS.length + '</span></div>'
+    + '<div class="bar" style="margin:0 4px 14px"><i style="width:' + (n / CARDS.length * 100) + '%"></i></div>'
+    + '<p class="muted" style="margin:0 4px 12px;line-height:1.6">每天記下第一筆就能抽一張。卡片會依照你當天真實的花費、存錢、還款和連續記帳天數來挑選。</p>'
+    + '<div class="album">' + CARDS.map(c => got[c.id]
+      ? '<button class="mc" data-card="' + c.id + '" style="--rc:' + RARITY[c.r].c + '"><span class="e">' + c.e + '</span><span class="n">' + esc(c.t) + '</span><span class="r">' + c.r + '</span></button>'
+      : '<div class="mc lock" style="--rc:var(--line)"><span class="e">？</span><span class="n">' + (c.r === 'SSR' || c.r === 'SR' ? c.r : '???') + '</span></div>').join('') + '</div>';
+  if (recent.length) h += '<div class="sec-head"><h2>最近抽到</h2></div><div class="card">' + recent.map(k => {
+    const c = cardById(db.cards[k].id);
+    return '<button class="row" data-card="' + c.id + '"><span class="ic">' + c.e + '</span><span class="main"><div class="t">' + esc(c.t) + '</div><div class="s">' + esc(k) + ' · ' + c.r + '・' + RARITY[c.r].name + '</div></span></button>';
+  }).join('') + '</div>';
+  $('planBody').innerHTML = h;
+}
+
 /* ---------- export / import ---------- */
 async function offerFile(name, text, mime){
   try {
@@ -1350,6 +1680,12 @@ $('txList').addEventListener('click', e => {
 $('statType').addEventListener('click', e => { const b = e.target.closest('button'); if (b) { view.statType = b.dataset.v; renderStats(); } });
 $('anaSeg').addEventListener('click', e => { const b = e.target.closest('button'); if (b) { view.ana = b.dataset.v; renderAna(); } });
 $('planSeg').addEventListener('click', e => { const b = e.target.closest('button'); if (b) { view.plan = b.dataset.v; renderPlan(); } });
+$('daily').addEventListener('click', () => {
+  const td = todayStr();
+  if (db.cards[td]) return showCard(db.cards[td], td);
+  if (!db.txs.some(t => t.date === td)) return openTx(null);
+  openDraw();
+});
 
 $('page-assets').addEventListener('click', e => {
   if (e.target.closest('#toGoals')) { view.page = 'plan'; view.plan = 'goals'; render(); window.scrollTo(0,0); return; }
@@ -1371,6 +1707,7 @@ $('planBody').addEventListener('click', e => {
   if (d.goal) return editGoal(db.goals.find(g => g.id === d.goal));
   if (d.wish) return editWish(db.wishes.find(w => w.id === d.wish));
   if (d.buy) return buyWish(db.wishes.find(w => w.id === d.buy));
+  if (d.card) { const k = Object.keys(db.cards).filter(x => db.cards[x].id === d.card).sort().pop(); if (k) showCard(db.cards[k], k); return; }
   if (d.wgoal) {
     const w = db.wishes.find(x => x.id === d.wgoal);
     return editGoal(null, {icon:'✨', name: w.name, target: w.price});
@@ -1397,7 +1734,7 @@ $('fDelete').onclick = async () => {
   db.txs = db.txs.filter(t => t.id !== form.id);
   save(); hideSheet('sheet'); render(); toast('已刪除');
 };
-document.addEventListener('keydown', e => { if (e.key === 'Escape') closeTop(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') { if (!$('drawOv').classList.contains('hidden')) closeDraw(); else closeTop(); } });
 
 $('saveBudget').onclick = () => {
   const v = num($('budgetInput').value);
